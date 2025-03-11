@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AI Governance Handbook - A comprehensive guide to AI regulation and governance">
+    <title>Techne.AI - AI Governance Handbook</title>
+    <style>
+        /* Global Variables */
+        :root {
+            --primary-color: #67247d;
+            --secondary-color: #bd47e6;
+            --dark-purple: #270d37;
+            --black: #040101;
+            --white: #ffffff;
+            --light-gray: #afafaf;
+            --medium-gray: #7d7d7d;
+            --gray: #969696;
+            --background-gray: #f5f7f9;
+            --font-main: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            --font-heading: Georgia, 'Times New Roman', Times, serif;
+        }
+        
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-main);
+            color: var(--black);
+            line-height: 1.6;
+            background-color: var(--white);
+        }
+        
+        a {
+            text-decoration: none;
+            color: var(--primary-color);
+            transition: color 0.2s ease;
+        }
+        
+        a:hover {
+            color: var(--secondary-color);
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-heading);
+            margin-bottom: 1rem;
+            line-height: 1.3;
+            color: var(--black);
+        }
+        
+        p {
+            margin-bottom: 1.5rem;
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: var(--white);
+            border-bottom: 1px solid var(--light-gray);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .site-logo {
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: bold;
+            font-size: 1.25rem;
+        }
+        
+        .header-actions {
+            display: flex;
+            align-items: center;
+        }
+        
+        .download-btn {
+            background-color: var(--white);
+            color: var(--black);
+            border: 1px solid var(--black);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+        
+        .download-btn:hover {
+            background-color: var(--black);
+            color: var(--white);
+        }
+        
+        .download-btn svg {
+            margin-left: 0.5rem;
+        }
+        
+        /* Main Container Styles */
+        .container {
+            display: flex;
+            max-width: 1600px;
+            margin: 0 auto;
+            min-height: calc(100vh - 130px); /* Account for header and footer */
+        }
+        
+        /* Sidebar Styles */
+        .sidebar {
+            width: 310px;
+            background-color: var(--background-gray);
+            border-right: 1px solid var(--light-gray);
+            padding: 0;
+            flex-shrink: 0;
+            height: calc(100vh - 65px);
+            overflow-y: auto;
+            position: sticky;
+            top: 65px;
+        }
+        
+        .sidebar-title {
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 1rem 1.5rem;
+            font-size: 1rem;
+            font-weight: bold;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        .nav-menu {
+            list-style: none;
+        }
+        
+        .nav-item {
+            border-bottom: 1px solid var(--light-gray);
+        }
+        
+        .nav-link {
+            display: flex;
+            align-items: center;
+            padding: 1rem 1.5rem;
+            color: var(--black);
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            background-color: rgba(189, 71, 230, 0.05);
+        }
+        
+        .nav-link.active {
+            background-color: var(--white);
+            font-weight: 500;
+        }
+        
+        .nav-link span.number {
+            margin-right: 1rem;
+            opacity: 0.6;
+            min-width: 20px;
+        }
+        
+        .nav-link .dropdown {
+            margin-left: auto;
+            opacity: 0.6;
+            font-size: 0.8rem;
+        }
+        
+        .part-title {
+            font-weight: 600;
+            padding: 1rem 1.5rem;
+            background-color: rgba(0, 0, 0, 0.03);
+            border-bottom: 1px solid var(--light-gray);
+            font-size: 0.9rem;
+        }
+        
+        .chapter-list {
+            list-style: none;
+        }
+        
+        .chapter-link {
+            display: block;
+            padding: 0.75rem 1.5rem 0.75rem 2.5rem;
+            color: var(--black);
+            border-bottom: 1px solid var(--light-gray);
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+        
+        .chapter-link:hover {
+            background-color: rgba(189, 71, 230, 0.05);
+        }
+        
+        .chapter-link.active {
+            background-color: var(--white);
+            font-weight: 500;
+        }
+        
+        /* Main Content Styles */
+        .main-content {
+            flex: 1;
+            padding: 3rem 5rem;
+            max-width: 1100px;
+        }
+        
+        .content-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .content-title {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            color: var(--black);
+            line-height: 1.2;
+            font-weight: 400;
+        }
+        
+        .authors {
+            margin-bottom: 2rem;
+            color: var(--medium-gray);
+        }
+        
+        .section-divider {
+            display: flex;
+            align-items: center;
+            margin: 3rem 0 2rem;
+        }
+        
+        .section-divider-title {
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.9rem;
+            margin-right: 1rem;
+            color: var(--medium-gray);
+        }
+        
+        .section-divider hr {
+            flex: 1;
+            border: none;
+            height: 1px;
+            background-color: var(--light-gray);
+        }
+        
+        .abstract {
+            margin-bottom: 3rem;
+        }
+        
+        .abstract p {
+            font-size: 1.15rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            color: var(--black);
+        }
+        
+        .abstract p:first-of-type:first-letter {
+            font-size: 3.5rem;
+            line-height: 0.8;
+            float: left;
+            margin-right: 0.5rem;
+            color: var(--black);
+            font-weight: bold;
+            padding-top: 4px;
+        }
+        
+        .content-text {
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+        
+        /* Strategy Icons */
+        .strategy-icons {
+            display: flex;
+            justify-content: space-between;
+            margin: 3rem 0;
+            gap: 2rem;
+        }
+        
+        .strategy-icon {
+            text-align: center;
+            flex: 1;
+        }
+        
+        .strategy-icon img {
+            max-width: 80%;
+            height: auto;
+        }
+        
+        /* Figures & Images */
+        .figure {
+            margin: 2rem 0;
+            text-align: center;
+        }
+        
+        .figure img {
+            max-width: 100%;
+            border-radius: 4px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .figure-caption {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: var(--medium-gray);
+            font-style: italic;
+        }
+        
+        /* Supporting Sections Container */
+        .supporting-sections {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            border-top: 1px solid var(--light-gray);
+        }
+        
+        /* Author Profiles */
+        .author-profiles {
+            margin-bottom: 4rem;
+        }
+        
+        .author-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .author-card {
+            background-color: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+        
+        .author-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .author-image-container {
+            height: 200px;
+            background-color: var(--background-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .author-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        
+        .author-info {
+            padding: 1.5rem;
+        }
+        
+        .author-info h3 {
+            margin-bottom: 0.5rem;
+        }
+        
+        .author-title {
+            color: var(--medium-gray);
+            margin-bottom: 1rem;
+            font-style: italic;
+            font-size: 0.9rem;
+        }
+        
+        .author-bio {
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+        
+        .author-links a {
+            margin-right: 1rem;
+            font-size: 0.9rem;
+        }
+        
+        /* Media Section */
+        .media-section {
+            margin-bottom: 4rem;
+        }
+        
+        .media-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .media-card {
+            border: 1px solid var(--light-gray);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .media-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .media-image {
+            height: 180px;
+            background-color: var(--background-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--medium-gray);
+            font-size: 0.9rem;
+        }
+        
+        .media-content {
+            padding: 1.5rem;
+        }
+        
+        .media-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .media-source {
+            font-size: 0.85rem;
+            color: var(--medium-gray);
+            margin-bottom: 1rem;
+        }
+        
+        .media-excerpt {
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+        
+        /* Audio Section */
+        .audio-section {
+            margin-bottom: 4rem;
+        }
+        
+        .audio-player {
+            margin-bottom: 2rem;
+            background-color: var(--background-gray);
+            border-radius: 8px;
+            padding: 1.5rem;
+        }
+        
+        .audio-player-title {
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+        
+        .audio-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .audio-play-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: background-color 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .audio-play-btn:hover {
+            background-color: var(--secondary-color);
+        }
+        
+        .audio-progress {
+            flex: 1;
+            height: 8px;
+            background-color: var(--light-gray);
+            border-radius: 4px;
+            position: relative;
+        }
+        
+        .audio-progress-bar {
+            position: absolute;
+            height: 100%;
+            width: 30%;
+            background-color: var(--primary-color);
+            border-radius: 4px;
+        }
+        
+        .audio-time {
+            font-size: 0.9rem;
+            color: var(--medium-gray);
+        }
+        
+        .audio-list {
+            list-style: none;
+        }
+        
+        .audio-item {
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--light-gray);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .audio-item-play {
+            background-color: var(--background-gray);
+            color: var(--primary-color);
+            border: none;
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+        
+        .audio-item-info {
+            flex: 1;
+        }
+        
+        .audio-item-title {
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+        }
+        
+        .audio-item-meta {
+            font-size: 0.85rem;
+            color: var(--medium-gray);
+        }
+        
+        .audio-item-download {
+            color: var(--primary-color);
+            font-size: 0.9rem;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--black);
+            color: white;
+            padding: 3rem 0;
+        }
+        
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+        }
+        
+        .footer-column h3 {
+            color: white;
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+        
+        .footer-links a {
+            color: var(--light-gray);
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--secondary-color);
+        }
+        
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .footer-social a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            transition: background-color 0.3s ease;
+        }
+        
+        .footer-social a:hover {
+            background-color: var(--secondary-color);
+        }
+        
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 2rem auto 0;
+            padding: 2rem 2rem 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .footer-copyright {
+            color: var(--light-gray);
+            font-size: 0.9rem;
+        }
+        
+        .footer-bottom-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+        
+        .footer-bottom-links a {
+            color: var(--light-gray);
+            font-size: 0.9rem;
+        }
+        
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+        
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            background-color: var(--secondary-color);
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 1200px) {
+            .main-content {
+                padding: 3rem;
+            }
+            
+            .content-title {
+                font-size: 3rem;
+            }
+        }
+        
+        @media (max-width: 1024px) {
+            .container {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: static;
+                border-right: none;
+                border-bottom: 1px solid var(--light-gray);
+                padding: 0;
+            }
+            
+            .main-content {
+                padding: 2rem;
+            }
+            
+            .strategy-icons {
+                flex-direction: column;
+            }
+            
+            .strategy-icon {
+                max-width: 400px;
+                margin: 0 auto 2rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-container {
+                padding: 0 1rem;
+            }
+            
+            .main-content {
+                padding: 1.5rem;
+            }
+            
+            .content-title {
+                font-size: 2.5rem;
+            }
+            
+            .abstract p:first-of-type:first-letter {
+                font-size: 3rem;
+            }
+            
+            .author-grid,
+            .media-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .footer-bottom-links {
+                justify-content: center;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .content-title {
+                font-size: 2rem;
+            }
+            
+            .abstract p {
+                font-size: 1rem;
+            }
+            
+            .abstract p:first-of-type:first-letter {
+                font-size: 2.5rem;
+            }
+            
+            .audio-controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .audio-play-btn {
+                align-self: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="site-logo">
+                TECHNE.AI
+            </div>
+            <div class="header-actions">
+                <a href="#" class="download-btn">
+                    Download PDF
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M8 12L3 7L4.4 5.55L7 8.15V0H9V8.15L11.6 5.55L13 7L8 12ZM0 16V11H2V14H14V11H16V16H0Z" fill="currentColor"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Sidebar / Table of Contents -->
+        <aside class="sidebar">
+            <h3 class="sidebar-title">AI GOVERNANCE HANDBOOK</h3>
+            
+            <div class="part-title">Part 1: Foundational Perspectives on AI Regulation and Governance</div>
+            <ul class="chapter-list">
+                <li><a href="#introduction" class="chapter-link active">Introduction</a></li>
+                <li><a href="#chapter1" class="chapter-link">Chapter 1: Colorado SB21-169</a></li>
+                <li><a href="#chapter2" class="chapter-link">Chapter 2: EU AI Act Readiness</a></li>
+                <li><a href="#chapter3" class="chapter-link">Chapter 3: ISO/IEC 42001</a></li>
+                <li><a href="#chapter4" class="chapter-link">Chapter 4: NIST AI RMF</a></li>
+                <li><a href="#chapter5" class="chapter-link">Chapter 5: NYC Local Law No. 144</a></li>
+                <li><a href="#chapter6" class="chapter-link">Chapter 6: UNESCO Recommendation on the Ethics of AI</a></li>
+                <li><a href="#chapter7" class="chapter-link">Chapter 7: The UK AI White Paper and Its Regulatory Approach</a></li>
+                <li><a href="#chapter8" class="chapter-link">Chapter 8: U.S. Federal Regulatory Trends and the Role of the FTC in AI Governance</a></li>
+                <li><a href="#chapter9" class="chapter-link">Chapter 9: Industry-Specific Guidelines: Healthcare, Finance, and Beyond</a></li>
+            </ul>
+            
+            <div class="part-title">Part 2: Internal Policies and Governance for Non-AI Companies</div>
+            <ul class="chapter-list">
+                <li><a href="#chapter10" class="chapter-link">Chapter 10: Building AI Governance Literacy Among Executives and Teams</a></li>
+                <li><a href="#chapter11" class="chapter-link">Chapter 11: Developing Internal Compliance Programs for AI Usage</a></li>
+                <li><a href="#chapter12" class="chapter-link">Chapter 12: Procurement, Vendor Management, and Due Diligence for AI Tools</a></li>
+                <li><a href="#chapter13" class="chapter-link">Chapter 13: Establishing Transparent Internal Communications and Reporting Structures</a></li>
+                <li><a href="#chapter14" class="chapter-link">Chapter 14: Integrating AI Risk Management into Existing Corporate Governance Frameworks</a></li>
+                <li><a href="#chapter15" class="chapter-link">Chapter 15: Aligning AI Governance with ESG Goals and Corporate Social Responsibility</a></li>
+                <li><a href="#chapter16" class="chapter-link">Chapter 16: Training and Development Programs for Continuous AI Literacy</a></li>
+                <li><a href="#chapter17" class="chapter-link">Chapter 17: Balancing Innovation and Compliance in Non-AI Enterprises</a></li>
+            </ul>
+            
+            <div class="part-title">Part 3: Governance and Risk Mitigation as a Competitive Advantage</div>
+            <ul class="chapter-list">
+                <li><a href="#chapter18" class="chapter-link">Chapter 18: AI Governance and Risk Mitigation as a Core Value Proposition</a></li>
+                <li><a href="#chapter19" class="chapter-link">Chapter 19: Operationalizing Compliance-by-Design in Product Development</a></li>
+                <li><a href="#chapter20" class="chapter-link">Chapter 20: Ethical Product Management, Model Cards, and Data Sheets</a></li>
+                <li><a href="#chapter21" class="chapter-link">Chapter 21: Using Compliance Credentials and Certifications in Sales and Marketing</a></li>
+                <li><a href="#chapter22" class="chapter-link">Chapter 22: Strategic Partnerships, Alliances, and Thought Leadership in Responsible AI</a></li>
+                <li><a href="#chapter23" class="chapter-link">Chapter 23: Navigating International Supply Chains and Global Vendor Networks</a></li>
+                <li><a href="#chapter24" class="chapter-link">Chapter 24: The Role of M&A and Due Diligence in AI Governance</a></li>
+                <li><a href="#chapter25" class="chapter-link">Chapter 25: Scaling from Startup to Enterprise: Governance at Different Stages of Growth</a></li>
+                <li><a href="#chapter26" class="chapter-link">Chapter 26: Customizing AI Governance for Vertical Markets: Retail, Manufacturing, and Logistics</a></li>
+            </ul>
+            
+            <div class="part-title">Part 4: Advanced Topics in AI Governance</div>
+            <ul class="chapter-list">
+                <li><a href="#chapter27" class="chapter-link">Chapter 27: The Intersection of AI Governance and Data Privacy</a></li>
+                <li><a href="#chapter28" class="chapter-link">Chapter 28: AI Governance and Cybersecurity: Protecting Integrity of Models and Data</a></li>
+                <li><a href="#chapter29" class="chapter-link">Chapter 29: Beyond Compliance: Developing AI Ethics Committees and Boards</a></li>
+                <li><a href="#chapter30" class="chapter-link">Chapter 30: Leveraging AI to Improve AI Governance: Meta-Governance Tools</a></li>
+                <li><a href="#chapter31" class="chapter-link">Chapter 31: Future Trends: Quantum Computing, Neuromorphic AI, and the Next Frontier of Regulation</a></li>
+            </ul>
+            
+            <div class="part-title">Part 5: Sector-Specific Case Studies and Practical Frameworks</div>
+            <ul class="chapter-list">
+                <li><a href="#chapter32" class="chapter-link">Chapter 32: Case Study – AI in Healthcare: Meeting Ethical and Regulatory Challenges</a></li>
+                <li><a href="#chapter33" class="chapter-link">Chapter 33: Case Study – Financial Services: Aligning With Global Regulatory Expectations</a></li>
+                <li><a href="#chapter34" class="chapter-link">Chapter 34: Case Study – Energy and Utilities: Ensuring Reliability and Equity</a></li>
+                <li><a href="#chapter35" class="chapter-link">Chapter 35: Case Study – Retail and E-Commerce: Personalization Without Discrimination</a></li>
+                <li><a href="#chapter36" class="chapter-link">Chapter 36: AI Governance Playbook: Practical Templates, Checklists, and Roadmaps</a></li>
+            </ul>
+            
+            <div class="part-title">Conclusion</div>
+            <ul class="chapter-list">
+                <li><a href="#conclusion" class="chapter-link">Conclusion</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="content-header">
+                <h1 class="content-title">AI Governance Handbook</h1>
+                <p class="authors">By Techne.AI Research Team</p>
+            </div>
+            
+            <div class="section-divider">
+                <span class="section-divider-title">ABSTRACT</span>
+                <hr>
+            </div>
+            
+            <div id="introduction" class="abstract">
+                <p>
+                    Artificial Intelligence (AI) is rapidly transforming multiple facets of society, with advances arriving at a pace and scale that few anticipated. These developments compel policymakers, technologists, and strategists to address a widening spectrum of issues, from economic shifts driven by automation to strategic concerns about global competition. As with any transformative technology, AI presents both significant opportunities and formidable risks.
+                </p>
+                
+                <p>
+                    Among these challenges, the dual-use nature of AI—its capacity for both civilian and military applications—emerges as a critical factor. Unlike specialized technological tools, AI spans virtually every sector, including finance, healthcare, and defense. This broad applicability, coupled with its rapid evolution, creates a risk landscape that is expansive and difficult to predict. Strategic actors must contend with potential misuse, risks of geopolitical escalation, and the need for frameworks to govern systems whose capabilities may surpass human oversight.
+                </p>
+                
+                <p>
+                    To navigate these complexities, many have turned to analogies. AI has been compared to electricity for its general-purpose nature, to traditional software for its economic importance, or to the printing press for its cultural impact. While
