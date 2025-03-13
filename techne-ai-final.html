@@ -1,874 +1,1072 @@
+Okay, here's the complete updated HTML file with the integrated suggestions and improvements.  I've made the changes directly to the code.
+
+```html
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="AI Governance Handbook - A comprehensive guide to AI regulation and governance">
-    <title>Techne.AI - AI Governance Handbook</title>
-    <style>
-        /* Global Variables */
-        :root {
-            --primary-color: #67247d;
-            --secondary-color: #bd47e6;
-            --dark-purple: #270d37;
-            --black: #040101;
-            --white: #ffffff;
-            --light-gray: #afafaf;
-            --medium-gray: #7d7d7d;
-            --gray: #969696;
-            --background-gray: #f5f7f9;
-            --font-main: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-            --font-heading: Georgia, 'Times New Roman', Times, serif;
-        }
-        
-        /* Reset and Base Styles */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: var(--font-main);
-            color: var(--black);
-            line-height: 1.6;
-            background-color: var(--white);
-        }
-        
-        a {
-            text-decoration: none;
-            color: var(--primary-color);
-            transition: color 0.2s ease;
-        }
-        
-        a:hover {
-            color: var(--secondary-color);
-        }
-        
-        h1, h2, h3, h4, h5, h6 {
-            font-family: var(--font-heading);
-            margin-bottom: 1rem;
-            line-height: 1.3;
-            color: var(--black);
-        }
-        
-        p {
-            margin-bottom: 1.5rem;
-        }
-        
-        img {
-            max-width: 100%;
-            height: auto;
-        }
-        
-        /* Header Styles */
-        header {
-            background-color: var(--white);
-            border-bottom: 1px solid var(--light-gray);
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-        
-        .header-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1600px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-        
-        .site-logo {
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: bold;
-            font-size: 1.25rem;
-        }
-        
-        .header-actions {
-            display: flex;
-            align-items: center;
-        }
-        
-        .download-btn {
-            background-color: var(--white);
-            color: var(--black);
-            border: 1px solid var(--black);
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
-            display: flex;
-            align-items: center;
-            transition: all 0.3s ease;
-            font-size: 0.9rem;
-        }
-        
-        .download-btn:hover {
-            background-color: var(--black);
-            color: var(--white);
-        }
-        
-        .download-btn svg {
-            margin-left: 0.5rem;
-        }
-        
-        /* Main Container Styles */
-        .container {
-            display: flex;
-            max-width: 1600px;
-            margin: 0 auto;
-            min-height: calc(100vh - 130px); /* Account for header and footer */
-        }
-        
-        /* Sidebar Styles */
-        .sidebar {
-            width: 310px;
-            background-color: var(--background-gray);
-            border-right: 1px solid var(--light-gray);
-            padding: 0;
-            flex-shrink: 0;
-            height: calc(100vh - 65px);
-            overflow-y: auto;
-            position: sticky;
-            top: 65px;
-        }
-        
-        .sidebar-title {
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            padding: 1rem 1.5rem;
-            font-size: 1rem;
-            font-weight: bold;
-            border-bottom: 1px solid var(--light-gray);
-        }
-        
-        .nav-menu {
-            list-style: none;
-        }
-        
-        .nav-item {
-            border-bottom: 1px solid var(--light-gray);
-        }
-        
-        .nav-link {
-            display: flex;
-            align-items: center;
-            padding: 1rem 1.5rem;
-            color: var(--black);
-            transition: all 0.3s ease;
-        }
-        
-        .nav-link:hover {
-            background-color: rgba(189, 71, 230, 0.05);
-        }
-        
-        .nav-link.active {
-            background-color: var(--white);
-            font-weight: 500;
-        }
-        
-        .nav-link span.number {
-            margin-right: 1rem;
-            opacity: 0.6;
-            min-width: 20px;
-        }
-        
-        .nav-link .dropdown {
-            margin-left: auto;
-            opacity: 0.6;
-            font-size: 0.8rem;
-        }
-        
-        .part-title {
-            font-weight: 600;
-            padding: 1rem 1.5rem;
-            background-color: rgba(0, 0, 0, 0.03);
-            border-bottom: 1px solid var(--light-gray);
-            font-size: 0.9rem;
-        }
-        
-        .chapter-list {
-            list-style: none;
-        }
-        
-        .chapter-link {
-            display: block;
-            padding: 0.75rem 1.5rem 0.75rem 2.5rem;
-            color: var(--black);
-            border-bottom: 1px solid var(--light-gray);
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
-        }
-        
-        .chapter-link:hover {
-            background-color: rgba(189, 71, 230, 0.05);
-        }
-        
-        .chapter-link.active {
-            background-color: var(--white);
-            font-weight: 500;
-        }
-        
-        /* Main Content Styles */
-        .main-content {
-            flex: 1;
-            padding: 3rem 5rem;
-            max-width: 1100px;
-        }
-        
-        .content-header {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-        
-        .content-title {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            color: var(--black);
-            line-height: 1.2;
-            font-weight: 400;
-        }
-        
-        .authors {
-            margin-bottom: 2rem;
-            color: var(--medium-gray);
-        }
-        
-        .section-divider {
-            display: flex;
-            align-items: center;
-            margin: 3rem 0 2rem;
-        }
-        
-        .section-divider-title {
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-size: 0.9rem;
-            margin-right: 1rem;
-            color: var(--medium-gray);
-        }
-        
-        .section-divider hr {
-            flex: 1;
-            border: none;
-            height: 1px;
-            background-color: var(--light-gray);
-        }
-        
-        .abstract {
-            margin-bottom: 3rem;
-        }
-        
-        .abstract p {
-            font-size: 1.15rem;
-            line-height: 1.8;
-            margin-bottom: 1.5rem;
-            color: var(--black);
-        }
-        
-        .abstract p:first-of-type:first-letter {
-            font-size: 3.5rem;
-            line-height: 0.8;
-            float: left;
-            margin-right: 0.5rem;
-            color: var(--black);
-            font-weight: bold;
-            padding-top: 4px;
-        }
-        
-        .content-text {
-            font-size: 1.05rem;
-            line-height: 1.8;
-        }
-        
-        /* Strategy Icons */
-        .strategy-icons {
-            display: flex;
-            justify-content: space-between;
-            margin: 3rem 0;
-            gap: 2rem;
-        }
-        
-        .strategy-icon {
-            text-align: center;
-            flex: 1;
-        }
-        
-        .strategy-icon img {
-            max-width: 80%;
-            height: auto;
-        }
-        
-        /* Figures & Images */
-        .figure {
-            margin: 2rem 0;
-            text-align: center;
-        }
-        
-        .figure img {
-            max-width: 100%;
-            border-radius: 4px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-        
-        .figure-caption {
-            margin-top: 1rem;
-            font-size: 0.9rem;
-            color: var(--medium-gray);
-            font-style: italic;
-        }
-        
-        /* Supporting Sections Container */
-        .supporting-sections {
-            max-width: 1600px;
-            margin: 0 auto;
-            padding: 3rem 2rem;
-            border-top: 1px solid var(--light-gray);
-        }
-        
-        /* Author Profiles */
-        .author-profiles {
-            margin-bottom: 4rem;
-        }
-        
-        .author-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-        
-        .author-card {
-            background-color: var(--white);
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
-        }
-        
-        .author-card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .author-image-container {
-            height: 200px;
-            background-color: var(--background-gray);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .author-image {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            object-fit: cover;
-        }
-        
-        .author-info {
-            padding: 1.5rem;
-        }
-        
-        .author-info h3 {
-            margin-bottom: 0.5rem;
-        }
-        
-        .author-title {
-            color: var(--medium-gray);
-            margin-bottom: 1rem;
-            font-style: italic;
-            font-size: 0.9rem;
-        }
-        
-        .author-bio {
-            font-size: 0.95rem;
-            margin-bottom: 1rem;
-        }
-        
-        .author-links a {
-            margin-right: 1rem;
-            font-size: 0.9rem;
-        }
-        
-        /* Media Section */
-        .media-section {
-            margin-bottom: 4rem;
-        }
-        
-        .media-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-        
-        .media-card {
-            border: 1px solid var(--light-gray);
-            border-radius: 8px;
-            overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        
-        .media-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-        
-        .media-image {
-            height: 180px;
-            background-color: var(--background-gray);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--medium-gray);
-            font-size: 0.9rem;
-        }
-        
-        .media-content {
-            padding: 1.5rem;
-        }
-        
-        .media-title {
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-        }
-        
-        .media-source {
-            font-size: 0.85rem;
-            color: var(--medium-gray);
-            margin-bottom: 1rem;
-        }
-        
-        .media-excerpt {
-            font-size: 0.95rem;
-            margin-bottom: 1rem;
-        }
-        
-        /* Audio Section */
-        .audio-section {
-            margin-bottom: 4rem;
-        }
-        
-        .audio-player {
-            margin-bottom: 2rem;
-            background-color: var(--background-gray);
-            border-radius: 8px;
-            padding: 1.5rem;
-        }
-        
-        .audio-player-title {
-            margin-bottom: 1rem;
-            font-size: 1.2rem;
-        }
-        
-        .audio-controls {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-        
-        .audio-play-btn {
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            transition: background-color 0.3s ease;
-            cursor: pointer;
-        }
-        
-        .audio-play-btn:hover {
-            background-color: var(--secondary-color);
-        }
-        
-        .audio-progress {
-            flex: 1;
-            height: 8px;
-            background-color: var(--light-gray);
-            border-radius: 4px;
-            position: relative;
-        }
-        
-        .audio-progress-bar {
-            position: absolute;
-            height: 100%;
-            width: 30%;
-            background-color: var(--primary-color);
-            border-radius: 4px;
-        }
-        
-        .audio-time {
-            font-size: 0.9rem;
-            color: var(--medium-gray);
-        }
-        
-        .audio-list {
-            list-style: none;
-        }
-        
-        .audio-item {
-            padding: 1rem 0;
-            border-bottom: 1px solid var(--light-gray);
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-        
-        .audio-item-play {
-            background-color: var(--background-gray);
-            color: var(--primary-color);
-            border: none;
-            border-radius: 50%;
-            width: 36px;
-            height: 36px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.9rem;
-            cursor: pointer;
-        }
-        
-        .audio-item-info {
-            flex: 1;
-        }
-        
-        .audio-item-title {
-            font-weight: 500;
-            margin-bottom: 0.25rem;
-        }
-        
-        .audio-item-meta {
-            font-size: 0.85rem;
-            color: var(--medium-gray);
-        }
-        
-        .audio-item-download {
-            color: var(--primary-color);
-            font-size: 0.9rem;
-        }
-        
-        /* Footer */
-        footer {
-            background-color: var(--black);
-            color: white;
-            padding: 3rem 0;
-        }
-        
-        .footer-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 3rem;
-        }
-        
-        .footer-column h3 {
-            color: white;
-            margin-bottom: 1.5rem;
-            font-size: 1.2rem;
-        }
-        
-        .footer-links {
-            list-style: none;
-        }
-        
-        .footer-links li {
-            margin-bottom: 0.75rem;
-        }
-        
-        .footer-links a {
-            color: var(--light-gray);
-            transition: color 0.3s ease;
-        }
-        
-        .footer-links a:hover {
-            color: var(--secondary-color);
-        }
-        
-        .footer-social {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-        
-        .footer-social a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            background-color: rgba(255, 255, 255, 0.1);
-            color: white;
-            transition: background-color 0.3s ease;
-        }
-        
-        .footer-social a:hover {
-            background-color: var(--secondary-color);
-        }
-        
-        .footer-bottom {
-            max-width: 1400px;
-            margin: 2rem auto 0;
-            padding: 2rem 2rem 0;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-        
-        .footer-copyright {
-            color: var(--light-gray);
-            font-size: 0.9rem;
-        }
-        
-        .footer-bottom-links {
-            display: flex;
-            gap: 1.5rem;
-        }
-        
-        .footer-bottom-links a {
-            color: var(--light-gray);
-            font-size: 0.9rem;
-        }
-        
-        /* Back to Top Button */
-        .back-to-top {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background-color: var(--primary-color);
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-            z-index: 100;
-        }
-        
-        .back-to-top.visible {
-            opacity: 1;
-            visibility: visible;
-        }
-        
-        .back-to-top:hover {
-            background-color: var(--secondary-color);
-        }
-        
-        /* Responsive Styles */
-        @media (max-width: 1200px) {
-            .main-content {
-                padding: 3rem;
-            }
-            
-            .content-title {
-                font-size: 3rem;
-            }
-        }
-        
-        @media (max-width: 1024px) {
-            .container {
-                flex-direction: column;
-            }
-            
-            .sidebar {
-                width: 100%;
-                height: auto;
-                position: static;
-                border-right: none;
-                border-bottom: 1px solid var(--light-gray);
-                padding: 0;
-            }
-            
-            .main-content {
-                padding: 2rem;
-            }
-            
-            .strategy-icons {
-                flex-direction: column;
-            }
-            
-            .strategy-icon {
-                max-width: 400px;
-                margin: 0 auto 2rem;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .header-container {
-                padding: 0 1rem;
-            }
-            
-            .main-content {
-                padding: 1.5rem;
-            }
-            
-            .content-title {
-                font-size: 2.5rem;
-            }
-            
-            .abstract p:first-of-type:first-letter {
-                font-size: 3rem;
-            }
-            
-            .author-grid,
-            .media-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .footer-bottom {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .footer-bottom-links {
-                justify-content: center;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .content-title {
-                font-size: 2rem;
-            }
-            
-            .abstract p {
-                font-size: 1rem;
-            }
-            
-            .abstract p:first-of-type:first-letter {
-                font-size: 2.5rem;
-            }
-            
-            .audio-controls {
-                flex-direction: column;
-                align-items: stretch;
-            }
-            
-            .audio-play-btn {
-                align-self: center;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="AI Governance Handbook - A comprehensive guide to AI regulation, governance, safety, and compliance" />
+  <title>Techne.AI - AI Governance Handbook</title>
+  <style>
+    /* Global Variables */
+    :root {
+      --primary-color: #67247d;
+      --secondary-color: #bd47e6;
+      --dark-purple: #270d37;
+      --black: #040101;
+      --white: #ffffff;
+      --light-gray: #afafaf;
+      --medium-gray: #7d7d7d;
+      --gray: #969696;
+      --background-gray: #f5f7f9;
+      --font-main: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans',
+        'Helvetica Neue', sans-serif;
+      --font-heading: Georgia, 'Times New Roman', Times, serif;
+    }
+
+    /* Reset and Base Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-main);
+      color: var(--black);
+      line-height: 1.6;
+      background-color: var(--white);
+    }
+
+    a {
+      text-decoration: none;
+      color: var(--primary-color);
+      transition: color 0.2s ease;
+    }
+
+    a:hover {
+      color: var(--secondary-color);
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-family: var(--font-heading);
+      margin-bottom: 1rem;
+      line-height: 1.3;
+      color: var(--black);
+    }
+
+    p {
+      margin-bottom: 1.5rem;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    /* Header Styles */
+    header {
+      background-color: var(--white);
+      border-bottom: 1px solid var(--light-gray);
+      padding: 1rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .header-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1600px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .site-logo {
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: bold;
+      font-size: 1.25rem;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+    }
+
+    .download-btn {
+      background-color: var(--white);
+      color: var(--black);
+      border: 1px solid var(--black);
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      transition: all 0.3s ease;
+      font-size: 0.9rem;
+    }
+
+    .download-btn:hover {
+      background-color: var(--black);
+      color: var(--white);
+    }
+
+    .download-btn svg {
+      margin-left: 0.5rem;
+    }
+
+    /* Main Container Styles */
+    .container {
+      display: flex;
+      max-width: 1600px;
+      margin: 0 auto;
+      min-height: calc(100vh - 130px);
+      /* Account for header and footer */
+    }
+
+    /* Sidebar Styles */
+    .sidebar {
+      width: 310px;
+      background-color: var(--background-gray);
+      border-right: 1px solid var(--light-gray);
+      padding: 0;
+      flex-shrink: 0;
+      height: calc(100vh - 65px);
+      overflow-y: auto;
+      position: sticky;
+      top: 65px;
+    }
+
+    .sidebar-title {
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 1rem 1.5rem;
+      font-size: 1rem;
+      font-weight: bold;
+      border-bottom: 1px solid var(--light-gray);
+    }
+
+    .nav-menu {
+      list-style: none;
+    }
+
+    .nav-item {
+      border-bottom: 1px solid var(--light-gray);
+    }
+
+    .nav-link {
+      display: flex;
+      align-items: center;
+      padding: 1rem 1.5rem;
+      color: var(--black);
+      transition: all 0.3s ease;
+    }
+
+    .nav-link:hover {
+      background-color: rgba(189, 71, 230, 0.05);
+    }
+
+    .nav-link.active {
+      background-color: var(--white);
+      font-weight: 500;
+    }
+
+    .nav-link span.number {
+      margin-right: 1rem;
+      opacity: 0.6;
+      min-width: 20px;
+    }
+
+    .nav-link .dropdown {
+      margin-left: auto;
+      opacity: 0.6;
+      font-size: 0.8rem;
+    }
+
+    /* Main Content Styles */
+    .main-content {
+      flex: 1;
+      padding: 3rem 5rem;
+      max-width: 1100px;
+    }
+
+    .content-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .content-title {
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+      color: var(--black);
+      line-height: 1.2;
+      font-weight: 400;
+    }
+
+    .authors {
+      margin-bottom: 2rem;
+      color: var(--medium-gray);
+    }
+
+    .section-divider {
+      display: flex;
+      align-items: center;
+      margin: 3rem 0 2rem;
+    }
+
+    .section-divider-title {
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: 0.9rem;
+      margin-right: 1rem;
+      color: var(--medium-gray);
+    }
+
+    .section-divider hr {
+      flex: 1;
+      border: none;
+      height: 1px;
+      background-color: var(--light-gray);
+    }
+
+    .content-text {
+      font-size: 1.05rem;
+      line-height: 1.8;
+    }
+
+    /* Term definition styles */
+    .term-block {
+      background-color: var(--background-gray);
+      border-left: 4px solid var(--primary-color);
+      padding: 1.5rem;
+      margin: 2rem 0;
+      border-radius: 0 4px 4px 0;
+    }
+
+    .term-title {
+      font-weight: 600;
+      color: var(--primary-color);
+      margin-bottom: 0.5rem;
+    }
+
+    /* Maturity tables and figures */
+    .maturity-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 2rem 0;
+      font-size: 0.9rem;
+    }
+
+    .maturity-table th,
+    .maturity-table td {
+      border: 1px solid var(--light-gray);
+      padding: 0.75rem;
+    }
+
+    .maturity-table th {
+      background-color: var(--background-gray);
+      text-align: left;
+    }
+
+    .maturity-table tr:nth-child(even) {
+      background-color: var(--background-gray);
+    }
+
+    .figure {
+      margin: 2rem 0;
+      text-align: center;
+    }
+
+    .figure img {
+      max-width: 100%;
+      border-radius: 4px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .figure-caption {
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      color: var(--medium-gray);
+      font-style: italic;
+    }
+
+    /* Audience Cards */
+    .audience-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2rem;
+      margin: 3rem 0;
+    }
+
+    .audience-card {
+      background-color: var(--white);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      border: 1px solid var(--light-gray);
+    }
+
+    .audience-card-header {
+      background-color: var(--primary-color);
+      color: var(--white);
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    .audience-card-content {
+      padding: 1.5rem;
+    }
+
+    .audience-card ul {
+      padding-left: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .audience-card li {
+      margin-bottom: 0.5rem;
+    }
+
+    /* Footer */
+    footer {
+      background-color: var(--black);
+      color: white;
+      padding: 3rem 0;
+    }
+
+    .footer-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 3rem;
+    }
+
+    .footer-column h3 {
+      color: white;
+      margin-bottom: 1.5rem;
+      font-size: 1.2rem;
+    }
+
+    .footer-links {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 0.75rem;
+    }
+
+    .footer-links a {
+      color: var(--light-gray);
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--secondary-color);
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .footer-social a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.1);
+      color: white;
+      transition: background-color 0.3s ease;
+    }
+
+    .footer-social a:hover {
+      background-color: var(--secondary-color);
+    }
+
+    .footer-bottom {
+      max-width: 1400px;
+      margin: 2rem auto 0;
+      padding: 2rem 2rem 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-copyright {
+      color: var(--light-gray);
+      font-size: 0.9rem;
+    }
+
+    .footer-bottom-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .footer-bottom-links a {
+      color: var(--light-gray);
+      font-size: 0.9rem;
+    }
+
+    /* Back to Top Button */
+    .back-to-top {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background-color: var(--primary-color);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      z-index: 100;
+    }
+
+    .back-to-top.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .back-to-top:hover {
+      background-color: var(--secondary-color);
+    }
+
+    /* Footnotes */
+    .footnotes {
+      font-size: 0.8rem;
+      color: var(--medium-gray);
+      margin-top: 2rem;
+    }
+
+    .footnotes ol {
+      list-style: decimal;
+      padding-left: 1.5rem;
+    }
+
+    .footnotes li {
+      margin-bottom: 0.5rem;
+    }
+
+    /* Larger Screen Styles */
+    @media (min-width: 768px) {
+
+      /* Container tweaks */
+      .container {
+        flex-direction: row;
+        /* Restore flex layout */
+      }
+
+      .sidebar {
+        width: 310px;
+        height: calc(100vh - 65px);
+        position: sticky;
+        border-right: 1px solid var(--light-gray);
+        border-bottom: none;
+      }
+
+      .main-content {
+        padding: 3rem 5rem;
+        /* Restore larger padding */
+      }
+
+      .audience-cards {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        /* Restore grid layout */
+      }
+
+      .footer-container {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      }
+    }
+
+    /* Even larger screens */
+    @media (min-width: 1200px) {
+      .main-content {
+        padding: 4rem 6rem;
+        /* Further refine padding on larger screens */
+      }
+    }
+
+    /* Mobile Specific overrides */
+    @media (max-width: 767px) {
+      .header-container {
+        flex-direction: column;
+        align-items: center;
+        /* Center items on mobile */
+        text-align: center;
+        /* Center logo and actions */
+      }
+
+      .site-logo {
+        margin-bottom: 1rem;
+        /* Add space below the logo */
+      }
+
+      /* Make Sidebar a collapsable menu */
+      .sidebar {
+        position: static;
+        width: 100%;
+        border-bottom: 1px solid var(--light-gray);
+        padding-bottom: 1rem;
+      }
+
+      .sidebar-title {
+        text-align: center;
+        cursor: pointer;
+        padding: 1rem;
+      }
+
+      .nav-menu {
+        display: none;
+        /* Hide initially on mobile */
+      }
+
+      .nav-menu.active {
+        display: block;
+        /* Show when active (toggled by JS) */
+      }
+
+      /* Adjust Footer */
+      .footer-container {
+        grid-template-columns: 1fr;
+        /* Stack columns */
+        text-align: center;
+      }
+
+      .footer-column {
+        margin-bottom: 2rem;
+        /* Add space between columns */
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        /* Stack copyright/links */
+        text-align: center;
+      }
+
+      .footer-bottom-links {
+        margin-top: 1rem;
+        flex-direction: column;
+        /* Stack links */
+      }
+    }
+  </style>
 </head>
+
 <body>
-    <!-- Header -->
-    <header>
-        <div class="header-container">
-            <div class="site-logo">
-                TECHNE.AI
-            </div>
-            <div class="header-actions">
-                <a href="#" class="download-btn">
-                    Download PDF
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M8 12L3 7L4.4 5.55L7 8.15V0H9V8.15L11.6 5.55L13 7L8 12ZM0 16V11H2V14H14V11H16V16H0Z" fill="currentColor"/>
-                    </svg>
-                </a>
-            </div>
+  <header>
+    <div class="header-container">
+      <div class="site-logo">Techne.AI</div>
+      <div class="header-actions">
+        <a href="path/to/your/handbook.pdf" class="download-btn" download="AI_Governance_Handbook.pdf">
+          Download Handbook
+          <svg width="16" height="16" viewBox="0 0 24 24">
+            <path d="M12 16l-6-6h4V4h4v6h4z" />
+            <path d="M0 20h24v2H0z" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    <aside class="sidebar">
+      <div class="sidebar-title">Contents</div>
+      <nav>
+        <ul class="nav-menu">
+          <li class="nav-item"><a href="#introduction" class="nav-link">Introduction</a></li>
+          <li class="nav-item"><a href="#legal-frameworks" class="nav-link">Legal & Regulatory Frameworks</a></li>
+          <li class="nav-item"><a href="#privacy-security" class="nav-link">Privacy, Data & Security</a></li>
+          <li class="nav-item"><a href="#technical-safety" class="nav-link">Technical Aspects of AI Safety</a></li>
+          <li class="nav-item"><a href="#audience-guidance" class="nav-link">Audience Guidance</a></li>
+          <li class="nav-item"><a href="#maturity-models" class="nav-link">AI Maturity Models</a></li>
+          <li class="nav-item"><a href="#glossary" class="nav-link">Glossary</a></li>
+          <li class="nav-item"><a href="#conclusion" class="nav-link">Conclusion</a></li>
+          <li class="nav-item"><a href="#resources" class="nav-link">Additional Resources</a></li>
+          <li class="nav-item"><a href="#about" class="nav-link">About the Author</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <main class="main-content">
+      <!-- Introduction Section -->
+      <section id="introduction">
+        <div class="content-header">
+          <h1 class="content-title">AI Governance Handbook</h1>
+          <p class="authors">By Khullani M. Abdullahi, J.D.</p>
         </div>
-    </header>
+        <div class="content-text">
+          <h2>Introduction</h2>
+          <p>Artificial Intelligence (AI) is transforming industries and society, but its rapid adoption raises concerns about
+            ethics, safety, and compliance. AI Governance refers to the frameworks and processes ensuring AI is developed
+            and used responsibly and in alignment with laws and values. This primer provides a comprehensive overview of AI
+            Governance, AI Safety, Trustworthy AI, Responsible AI practices, and risk management. It is structured by
+            audience – offering tailored insights for AI practitioners, compliance officers, executives, and policymakers –
+            to address their specific concerns.</p>
+          <p>This handbook digs into key legal and regulatory frameworks (such as ISO/IEC 23894 and 42001, the EU AI Act, NIST
+            AI RMF, GDPR, CCPA, etc.), privacy and security standards, and technical aspects of AI safety. A glossary
+            clarifies core concepts and presents six AI Maturity Curve frameworks for Governance, Safety, Trust &
+            Transparency, Responsible AI, Risk Management, and Compliance. Visual frameworks and best practices at each
+            maturity stage help organizations benchmark and improve their AI governance efforts.</p>
+        </div>
+      </section>
 
-    <div class="container">
-        <!-- Sidebar / Table of Contents -->
-        <aside class="sidebar">
-            <h3 class="sidebar-title">AI GOVERNANCE HANDBOOK</h3>
-            
-            <div class="part-title">Part 1: Foundational Perspectives on AI Regulation and Governance</div>
-            <ul class="chapter-list">
-                <li><a href="#introduction" class="chapter-link active">Introduction</a></li>
-                <li><a href="#chapter1" class="chapter-link">Chapter 1: Colorado SB21-169</a></li>
-                <li><a href="#chapter2" class="chapter-link">Chapter 2: EU AI Act Readiness</a></li>
-                <li><a href="#chapter3" class="chapter-link">Chapter 3: ISO/IEC 42001</a></li>
-                <li><a href="#chapter4" class="chapter-link">Chapter 4: NIST AI RMF</a></li>
-                <li><a href="#chapter5" class="chapter-link">Chapter 5: NYC Local Law No. 144</a></li>
-                <li><a href="#chapter6" class="chapter-link">Chapter 6: UNESCO Recommendation on the Ethics of AI</a></li>
-                <li><a href="#chapter7" class="chapter-link">Chapter 7: The UK AI White Paper and Its Regulatory Approach</a></li>
-                <li><a href="#chapter8" class="chapter-link">Chapter 8: U.S. Federal Regulatory Trends and the Role of the FTC in AI Governance</a></li>
-                <li><a href="#chapter9" class="chapter-link">Chapter 9: Industry-Specific Guidelines: Healthcare, Finance, and Beyond</a></li>
-            </ul>
-            
-            <div class="part-title">Part 2: Internal Policies and Governance for Non-AI Companies</div>
-            <ul class="chapter-list">
-                <li><a href="#chapter10" class="chapter-link">Chapter 10: Building AI Governance Literacy Among Executives and Teams</a></li>
-                <li><a href="#chapter11" class="chapter-link">Chapter 11: Developing Internal Compliance Programs for AI Usage</a></li>
-                <li><a href="#chapter12" class="chapter-link">Chapter 12: Procurement, Vendor Management, and Due Diligence for AI Tools</a></li>
-                <li><a href="#chapter13" class="chapter-link">Chapter 13: Establishing Transparent Internal Communications and Reporting Structures</a></li>
-                <li><a href="#chapter14" class="chapter-link">Chapter 14: Integrating AI Risk Management into Existing Corporate Governance Frameworks</a></li>
-                <li><a href="#chapter15" class="chapter-link">Chapter 15: Aligning AI Governance with ESG Goals and Corporate Social Responsibility</a></li>
-                <li><a href="#chapter16" class="chapter-link">Chapter 16: Training and Development Programs for Continuous AI Literacy</a></li>
-                <li><a href="#chapter17" class="chapter-link">Chapter 17: Balancing Innovation and Compliance in Non-AI Enterprises</a></li>
-            </ul>
-            
-            <div class="part-title">Part 3: Governance and Risk Mitigation as a Competitive Advantage</div>
-            <ul class="chapter-list">
-                <li><a href="#chapter18" class="chapter-link">Chapter 18: AI Governance and Risk Mitigation as a Core Value Proposition</a></li>
-                <li><a href="#chapter19" class="chapter-link">Chapter 19: Operationalizing Compliance-by-Design in Product Development</a></li>
-                <li><a href="#chapter20" class="chapter-link">Chapter 20: Ethical Product Management, Model Cards, and Data Sheets</a></li>
-                <li><a href="#chapter21" class="chapter-link">Chapter 21: Using Compliance Credentials and Certifications in Sales and Marketing</a></li>
-                <li><a href="#chapter22" class="chapter-link">Chapter 22: Strategic Partnerships, Alliances, and Thought Leadership in Responsible AI</a></li>
-                <li><a href="#chapter23" class="chapter-link">Chapter 23: Navigating International Supply Chains and Global Vendor Networks</a></li>
-                <li><a href="#chapter24" class="chapter-link">Chapter 24: The Role of M&A and Due Diligence in AI Governance</a></li>
-                <li><a href="#chapter25" class="chapter-link">Chapter 25: Scaling from Startup to Enterprise: Governance at Different Stages of Growth</a></li>
-                <li><a href="#chapter26" class="chapter-link">Chapter 26: Customizing AI Governance for Vertical Markets: Retail, Manufacturing, and Logistics</a></li>
-            </ul>
-            
-            <div class="part-title">Part 4: Advanced Topics in AI Governance</div>
-            <ul class="chapter-list">
-                <li><a href="#chapter27" class="chapter-link">Chapter 27: The Intersection of AI Governance and Data Privacy</a></li>
-                <li><a href="#chapter28" class="chapter-link">Chapter 28: AI Governance and Cybersecurity: Protecting Integrity of Models and Data</a></li>
-                <li><a href="#chapter29" class="chapter-link">Chapter 29: Beyond Compliance: Developing AI Ethics Committees and Boards</a></li>
-                <li><a href="#chapter30" class="chapter-link">Chapter 30: Leveraging AI to Improve AI Governance: Meta-Governance Tools</a></li>
-                <li><a href="#chapter31" class="chapter-link">Chapter 31: Future Trends: Quantum Computing, Neuromorphic AI, and the Next Frontier of Regulation</a></li>
-            </ul>
-            
-            <div class="part-title">Part 5: Sector-Specific Case Studies and Practical Frameworks</div>
-            <ul class="chapter-list">
-                <li><a href="#chapter32" class="chapter-link">Chapter 32: Case Study – AI in Healthcare: Meeting Ethical and Regulatory Challenges</a></li>
-                <li><a href="#chapter33" class="chapter-link">Chapter 33: Case Study – Financial Services: Aligning With Global Regulatory Expectations</a></li>
-                <li><a href="#chapter34" class="chapter-link">Chapter 34: Case Study – Energy and Utilities: Ensuring Reliability and Equity</a></li>
-                <li><a href="#chapter35" class="chapter-link">Chapter 35: Case Study – Retail and E-Commerce: Personalization Without Discrimination</a></li>
-                <li><a href="#chapter36" class="chapter-link">Chapter 36: AI Governance Playbook: Practical Templates, Checklists, and Roadmaps</a></li>
-            </ul>
-            
-            <div class="part-title">Conclusion</div>
-            <ul class="chapter-list">
-                <li><a href="#conclusion" class="chapter-link">Conclusion</a></li>
-            </ul>
-        </aside>
+      <!-- Legal & Regulatory Frameworks Section -->
+      <section id="legal-frameworks" class="content-text">
+        <h2>Legal, Policy, and Regulatory Frameworks for AI Governance</h2>
+        <p>AI systems must comply with an evolving landscape of laws, regulations, and standards designed to address their
+          unique risks. Key frameworks include international standards (ISO/IEC), national and regional laws (like the EU AI
+          Act), and industry guidelines.</p>
+        <h3>ISO/IEC 42001 (AI Management System Standard)</h3>
+        <p>Published in December 2023, ISO/IEC 42001 is the first global standard for AI management systems. It provides a
+          certifiable framework for organizations to establish and continuously improve their AI governance processes,
+          focusing on ethics, transparency, accountability, bias mitigation, safety, and privacy. Implementing ISO 42001
+          creates an internal governance system ensuring AI projects are managed responsibly.</p>
+        <h3>ISO/IEC 23894 (AI Risk Management)</h3>
+        <p>This standard provides detailed guidance on managing AI risks by adapting generic risk management principles to the
+          AI context. It helps organizations integrate risk assessments into AI project lifecycles.</p>
+        <h3>EU AI Act</h3>
+        <p>The EU AI Act, expected to come into force in 2025–2026, is the first comprehensive AI law globally. It adopts a
+          risk-based approach, categorizing AI systems into four levels:</p>
+        <ul>
+          <li><strong>Unacceptable risk:</strong> Banned uses such as social scoring or manipulative applications.</li>
+          <li><strong>High risk:</strong> Systems (e.g., in healthcare, hiring, law enforcement) that face strict requirements
+            and conformity assessments.</li>
+          <li><strong>Limited risk:</strong> Systems with transparency obligations, such as notifying users when interacting
+            with AI chatbots.</li>
+          <li><strong>Minimal risk:</strong> Most AI applications, with few obligations.</li>
+        </ul>
+        <div class="figure">
+          <img src="https://github.com/Khullani/AI-Governance-Handbook/raw/main/EU%20AI%20Act%20Risk%20Pyramid.png"
+            alt="EU AI Act Risk Pyramid"
+            onerror="this.onerror=null; this.src='path/to/placeholder-image.png';" />
+          <p class="figure-caption">EU AI Act Risk Pyramid<sup>(16, 17)</sup></p>
+        </div>
+        <p>The Act will require high-risk AI applications to meet robust criteria for data quality, documentation, human
+          oversight, transparency, accuracy, and cybersecurity. It also establishes an EU AI Office for oversight.</p>
+        <h3>NIST AI Risk Management Framework (RMF)</h3>
+        <p>Published in January 2023, the NIST AI RMF 1.0 is a voluntary framework for managing AI risks and promoting
+          trustworthy AI. It is organized into four core functions: Govern, Map, Measure, and Manage.</p>
+        <div class="figure">
+          <img src="https://github.com/Khullani/AI-Governance-Handbook/raw/main/NIST%20AI%20Risk%20Management%20Framework%20Core%20Functions'%20Goals%20-%20visual%20selection.png"
+            alt="NIST AI Risk Management Framework"
+            onerror="this.onerror=null; this.src='path/to/placeholder-image.png';" />
+          <p class="figure-caption">NIST AI Risk Management Framework Core Functions<sup>(7)</sup></p>
+        </div>
+        <h3>Privacy and Data Protection Laws (GDPR, CCPA)</h3>
+        <p>Privacy regulations such as GDPR and CCPA impose strict requirements on processing personal data. GDPR mandates
+          principles like data minimization and purpose limitation and grants rights including human review of automated
+          decisions. Similarly, the CCPA gives California residents rights over their personal data.</p>
+      </section>
 
-        <!-- Main Content -->
-        <main class="main-content">
-            <div class="content-header">
-                <h1 class="content-title">AI Governance Handbook</h1>
-                <p class="authors">By Techne.AI Research Team</p>
+      <!-- Privacy, Data, and Security Section -->
+      <section id="privacy-security" class="content-text">
+        <h2>Privacy, Data Governance, and Security Considerations</h2>
+        <p>Effective AI governance requires robust data governance and security practices. AI systems often consume and generate
+          vast amounts of sensitive data, making data quality, minimization, and protection crucial.</p>
+        <h3>Data Quality & Lineage</h3>
+        <p>Tracking the provenance and quality of data ensures that AI models are built on representative datasets. Techniques
+          such as datasheets for datasets help document characteristics and limitations.</p>
+        <h3>Data Minimization & Access Control</h3>
+        <p>Collect only the minimum data necessary and employ methods like pseudonymization and encryption. Role-based access
+          control ensures that only authorized users access sensitive information.</p>
+        <h3>Privacy-Enhancing Technologies</h3>
+        <p>Techniques such as differential privacy and federated learning enable AI models to learn from data without
+          compromising individual privacy.</p>
+        <h3>Retention and Purpose Limitation</h3>
+        <p>Establish clear policies on data retention and ensure data is used only for its intended purpose.</p>
+        <h3>Model and Data Security</h3>
+        <p>Securing AI models and data pipelines against cyberattacks (such as adversarial attacks and data poisoning) is
+          critical. Regular monitoring, version control, and integrity checks help mitigate these risks.</p>
+        <h3>Third-Party and Supply Chain Risks</h3>
+        <p>Many AI solutions depend on external components. Assess the security and compliance of third-party tools and include
+          protective clauses in vendor contracts.</p>
+        <h3>Incident Response</h3>
+        <p>Develop AI-specific incident response plans that include protocols for swift system shutdown, stakeholder
+          communication, and forensics.</p>
+      </section>
+
+      <!-- Technical Aspects of AI Safety Section -->
+      <section id="technical-safety" class="content-text">
+        <h2>Technical Aspects of AI Safety and Governance</h2>
+        <p>In addition to high-level governance, technical measures ensure AI systems remain safe and reliable throughout their
+          lifecycle.</p>
+        <h3>Robustness and Reliability</h3>
+        <p>Thorough testing under diverse conditions—including stress testing and adversarial challenges—helps ensure that AI
+          systems can withstand errors and malicious inputs.</p>
+        <h3>Alignment with Human Values</h3>
+        <p>Techniques such as Reinforcement Learning from Human Feedback (RLHF) help align AI system behavior with human ethical
+          standards and intentions.</p>
+        <h3>Interpretability and Transparency Tools</h3>
+        <p>Explainable AI (XAI) methods (e.g., SHAP, LIME) make AI decision processes transparent. Producing model cards and
+          explanation reports builds trust with stakeholders.</p>
+        <h3>Bias and Fairness Mitigation</h3>
+        <p>Mitigating bias involves careful data curation, algorithmic adjustments, and post-processing corrections. Regular
+          audits and fairness checks ensure compliance with ethical standards.</p>
+        <h3>Performance Monitoring and Drift Detection</h3>
+        <p>Continuous monitoring of AI systems after deployment is essential. Detecting model drift early allows for timely
+          recalibration and retraining.</p>
+        <h3>Safety Constraints and Simulation Testing</h3>
+        <p>For AI systems interacting with the physical world, simulation testing and formal verification of safety constraints
+          are critical to ensure system reliability in real-world conditions.</p>
+      </section>
+
+      <!-- Audience-Specific Guidance Section -->
+      <section id="audience-guidance" class="content-text">
+        <h2>Audience-Specific Guidance: Focus and Concerns</h2>
+        <div class="audience-cards">
+          <div id="ai-practitioners" class="audience-card">
+            <div class="audience-card-header">
+              <h3>AI Practitioners</h3>
+              <p>Data Scientists, ML Engineers, AI Developers</p>
             </div>
-            
-            <div class="section-divider">
-                <span class="section-divider-title">ABSTRACT</span>
-                <hr>
+            <div class="audience-card-content">
+              <h4>Focus Areas:</h4>
+              <ul>
+                <li>Integrating ethical and technical governance into AI development</li>
+                <li>Data handling and privacy compliance</li>
+                <li>Rigorous testing and continuous monitoring</li>
+                <li>Collaboration with compliance teams</li>
+              </ul>
+              <h4>Key Responsibilities:</h4>
+              <p>Practitioners must build models that achieve high accuracy while meeting fairness, transparency, and safety
+                requirements. They document model performance, conduct bias tests, and work closely with legal teams to ensure
+                ethical standards are met.</p>
             </div>
-            
-            <div id="introduction" class="abstract">
-                <p>
-                    Artificial Intelligence (AI) is rapidly transforming multiple facets of society, with advances arriving at a pace and scale that few anticipated. These developments compel policymakers, technologists, and strategists to address a widening spectrum of issues, from economic shifts driven by automation to strategic concerns about global competition. As with any transformative technology, AI presents both significant opportunities and formidable risks.
-                </p>
-                
-                <p>
-                    Among these challenges, the dual-use nature of AI—its capacity for both civilian and military applications—emerges as a critical factor. Unlike specialized technological tools, AI spans virtually every sector, including finance, healthcare, and defense. This broad applicability, coupled with its rapid evolution, creates a risk landscape that is expansive and difficult to predict. Strategic actors must contend with potential misuse, risks of geopolitical escalation, and the need for frameworks to govern systems whose capabilities may surpass human oversight.
-                </p>
-                
-                <p>
-                    To navigate these complexities, many have turned to analogies. AI has been compared to electricity for its general-purpose nature, to traditional software for its economic importance, or to the printing press for its cultural impact. While
+          </div>
+
+          <div id="compliance-officers" class="audience-card">
+            <div class="audience-card-header">
+              <h3>Compliance Officers</h3>
+              <p>Legal, Regulatory, and Ethics Compliance Personnel</p>
+            </div>
+            <div class="audience-card-content">
+              <h4>Focus Areas:</h4>
+              <ul>
+                <li>Regulatory monitoring and interpretation</li>
+                <li>Policy development and implementation</li>
+                <li>Training and awareness programs</li>
+                <li>Risk assessment and auditing</li>
+                <li>Incident response and management</li>
+              </ul>
+              <h4>Key Responsibilities:</h4>
+              <p>They ensure AI systems comply with laws, translate regulatory requirements into actionable controls, and serve
+                as a bridge between technical teams and legal mandates.</p>
+            </div>
+          </div>
+
+          <div id="executives" class="audience-card">
+            <div class="audience-card-header">
+              <h3>Executives & Board Members</h3>
+              <p>C-Suite Executives and Board Directors</p>
+            </div>
+            <div class="audience-card-content">
+              <h4>Focus Areas:</h4>
+              <ul>
+                <li>Strategic oversight and resource allocation</li>
+                <li>Establishing governance structures and accountability</li>
+                <li>Setting the tone for responsible AI</li>
+                <li>Risk oversight and management</li>
+                <li>Regulatory compliance and industry leadership</li>
+              </ul>
+              <h4>Key Responsibilities:</h4>
+              <p>Executives integrate AI governance into business strategy, ensure sufficient resources are dedicated to
+                compliance, and monitor risk management practices to protect the organization’s reputation and stakeholder
+                trust.</p>
+            </div>
+          </div>
+
+          <div id="policymakers" class="audience-card">
+            <div class="audience-card-header">
+              <h3>Policymakers & Regulators</h3>
+              <p>Government Officials and Regulatory Authorities</p>
+            </div>
+            <div class="audience-card-content">
+              <h4>Focus Areas:</h4>
+              <ul>
+                <li>Developing balanced AI regulations and standards</li>
+                <li>International harmonization and cooperation</li>
+                <li>Effective enforcement and compliance verification</li>
+                <li>Addressing societal impacts and public concerns</li>
+                <li>Fostering innovation while protecting rights</li>
+              </ul>
+              <h4>Key Responsibilities:</h4>
+              <p>They create and enforce regulatory frameworks that protect public interests while enabling innovation. This
+                includes drafting laws like the EU AI Act and collaborating internationally to harmonize AI standards.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- AI Maturity Models Section -->
+      <section id="maturity-models" class="content-text">
+        <h2>AI Maturity Curve Frameworks</h2>
+        <p>To help organizations assess and improve their AI governance and responsible AI practices, this handbook presents
+          six AI Maturity Curve frameworks. Each framework is a seven-stage model describing the progression from rudimentary
+          capabilities to highly advanced and integrated practices in a specific domain.</p>
+        <ul>
+          <li><strong>AI Governance Maturity Curve</strong> – From Ad Hoc & Chaotic to Transformative & Industry Leader</li>
+          <li><strong>AI Safety Maturity Model</strong> – From Negligent to Safety as a Differentiator</li>
+          <li><strong>AI Trust & Transparency Maturity Model</strong> – From Opaque & Untrusted to Industry Transparency Leader
+          </li>
+          <li><strong>Responsible AI Maturity Model</strong> – From Unaware/Unprincipled to Social Stewardship and Advocacy</li>
+          <li><strong>AI Risk Management Maturity Model</strong> – From No AI-specific Risk Management to Adaptive and Resilient
+            Risk Posture</li>
+          <li><strong>AI Compliance Maturity Model</strong> – From Non-compliant to Thought Leader in AI Compliance</li>
+        </ul>
+        <div class="figure">
+          <img src="https://github.com/Khullani/AI-Governance-Handbook/raw/main/AI%20Governance%20Maturity%20Stages.png"
+            alt="AI Governance Maturity Stages"
+            onerror="this.onerror=null; this.src='path/to/placeholder-image.png';" />
+          <p class="figure-caption">AI Governance Maturity Stages<sup>(See details in the handbook)</sup></p>
+        </div>
+      </section>
+
+      <!-- Glossary Section -->
+      <section id="glossary" class="content-text">
+        <h2>Glossary of Key Terms</h2>
+        <p>This glossary defines the core terms essential for understanding AI Governance, covering concepts in governance, risk
+          management, compliance, safety, and ethical AI.</p>
+        <div class="term-block">
+          <h4 class="term-title">AI Governance</h4>
+          <p>The policies, oversight structures, and processes that ensure AI systems are developed and deployed responsibly,
+            in compliance with legal and ethical standards.</p>
+        </div>
+        <div class="term-block">
+          <h4 class="term-title">AI Risk Management</h4>
+          <p>A systematic approach to identifying, assessing, and mitigating risks associated with AI systems, including
+            technical, ethical, and legal risks.</p>
+        </div>
+        <div class="term-block">
+          <h4 class="term-title">AI Compliance</h4>
+          <p>The process of ensuring that AI systems meet all relevant laws, regulations, and ethical guidelines, such as GDPR,
+            CCPA, and emerging AI-specific standards.</p>
+        </div>
+        <div class="term-block">
+          <h4 class="term-title">Adversarial Attack</h4>
+          <p>A deliberate attempt by malicious actors to manipulate an AI model using deceptive inputs to produce incorrect or
+            harmful outputs.</p>
+        </div>
+        <div class="term-block">
+          <h4 class="term-title">Federated Learning</h4>
+          <p>A machine learning technique that allows multiple entities to collaboratively train a model without sharing their
+            raw data, thereby enhancing privacy.</p>
+        </div>
+        <div class="term-block">
+          <h4 class="term-title">Differential Privacy</h4>
+          <p>A framework for privacy-preserving data analysis that adds statistical noise to protect individual data points
+            while revealing group-level insights.</p>
+        </div>
+      </section
+      ```html
+      <!-- Conclusion Section -->
+      <section id="conclusion" class="content-text">
+        <h2>Conclusion</h2>
+        <p>This handbook has provided a comprehensive overview of AI Governance—including legal frameworks, technical safety
+          measures, and tailored guidance for various stakeholders. As AI continues to evolve, robust governance is essential
+          to ensure that AI systems are safe, ethical, and aligned with societal values.</p>
+        <p>By following the maturity models and best practices outlined herein, organizations can steadily improve their AI
+          governance capabilities and build trust with regulators, customers, and the public.</p>
+      </section>
+
+      <!-- Additional Resources Section -->
+      <section id="resources" class="content-text">
+        <h2>Additional Resources</h2>
+        <h3>Organizations and Initiatives</h3>
+        <ul>
+          <li><a href="https://www.nist.gov/itl/ai-risk-management-framework" target="_blank"
+              rel="noopener noreferrer">NIST AI Risk Management Framework</a></li>
+          <li><a href="https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai" target="_blank"
+              rel="noopener noreferrer">EU AI Act Resources</a></li>
+          <li><a href="https://www.iso.org/standard/81230.html" target="_blank" rel="noopener noreferrer">ISO/IEC
+              42001</a></li>
+          <li><a href="https://www.partnershiponai.org/" target="_blank" rel="noopener noreferrer">Partnership on AI</a>
+          </li>
+          <li><a href="https://www.oecd.ai/" target="_blank" rel="noopener noreferrer">OECD AI Policy Observatory</a></li>
+        </ul>
+        <h3>Tools and Frameworks</h3>
+        <ul>
+          <li><a href="https://aif360.mybluemix.net/" target="_blank" rel="noopener noreferrer">IBM AI Fairness 360</a></li>
+          <li><a href="https://github.com/microsoft/responsible-ai-toolbox" target="_blank"
+              rel="noopener noreferrer">Microsoft Responsible AI Toolbox</a></li>
+          <li><a href="https://modelcards.withgoogle.com/about" target="_blank" rel="noopener noreferrer">Model Cards
+              (Google)</a></li>
+          <li><a href="https://datatracker.ietf.org/doc/html/draft-soilandreyes-dataset-description-00" target="_blank"
+              rel="noopener noreferrer">Dataset Documentation</a></li>
+        </ul>
+        <h3>Further Reading</h3>
+        <ul>
+          <li>Mitchell, M., et al. (2019). <em>Model Cards for Model Reporting</em>.</li>
+          <li>Gebru, T., et al. (2021). <em>Datasheets for Datasets</em>.</li>
+          <li>OECD (2019). <em>Recommendation of the Council on Artificial Intelligence</em>.</li>
+          <li>Arrieta, A.B., et al. (2020). <em>Explainable Artificial Intelligence (XAI)</em>.</li>
+        </ul>
+      </section>
+
+      <!-- About the Author Section -->
+      <section id="about" class="content-text">
+        <div class="author-grid">
+          <div class="author-card">
+            <div class="author-image-container">
+              <img src="https://github.com/Khullani/AI-Governance-Handbook/raw/main/Khullani_Headshot.jpeg"
+                alt="Khullani M. Abdullahi" loading="lazy"
+                onerror="this.onerror=null; this.src='path/to/placeholder-image.png';" />
+            </div>
+            <div class="author-info">
+              <h3>Khullani M. Abdullahi, J.D.</h3>
+              <p class="author-title">Founder of Techne AI</p>
+              <p class="author-bio">Khullani M. Abdullahi specializes in AI governance, compliance, and ethics. With a
+                background in law and technology, Khullani helps organizations navigate the complex landscape of AI regulation
+                and responsible implementation.</p>
+              <div class="author-links">
+                <a href="https://www.linkedin.com/in/khullani/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                <a href="https://techne.ai" target="_blank" rel="noopener noreferrer">Website</a>
+                <a href="https://insights.techne.ai/" target="_blank" rel="noopener noreferrer">Newsletter</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Footer Section -->
+  <div class="supporting-sections">
+    <footer>
+      <div class="footer-container">
+        <div class="footer-column">
+          <h3>About Techne AI</h3>
+          <p>Techne AI specializes in AI governance, compliance, and ethics, helping organizations navigate the complex
+            landscape of AI regulation and implementation.</p>
+          <div class="footer-social">
+            <a href="https://www.linkedin.com/in/khullani/" target="_blank" rel="noopener noreferrer">
+              <svg width="20" height="20" viewBox="0 0 24 24">
+                <path
+                  d="M16 8C17.5913 8 19.1174 8.63214 20.2426 9.75736C21.3679 10.8826 22 12.4087 22 14V21H18V14C18 13.4696 17.7893 12.9609 17.4142 12.5858C17.0391 12.2107 16.5304 12 16 12C15.4696 12 14.9609 12.2107 14.5858 12.5858C14.2107 12.9609 14 13.4696 14 14V21H10V14C10 12.4087 10.6321 10.8826 11.7574 9.75736C12.8826 8.63214 14.4087 8 16 8Z"
+                  fill="currentColor" />
+                <path d="M6 9H2V21H6V9Z" fill="currentColor" />
+                <path d="M4 6C5.10457 6 6 5.10457 6 4C6 2.89543 5.10457 2 4 2C2.89543 2 2 2.89543 2 4C2 5.10457 2.89543 6 4 6Z"
+                  fill="currentColor" />
+              </svg>
+            </a>
+            <a href="https://twitter.com/techne_ai" target="_blank" rel="noopener noreferrer">
+              <svg width="20" height="20" viewBox="0 0 24 24">
+                <path
+                  d="M22 5.92375C21.2563 6.25 20.4637 6.46625 19.6375 6.57125C20.4875 6.06375 21.1363 5.26625 21.4412 4.305C20.6488 4.7775 19.7738 5.11125 18.8412 5.2975C18.0887 4.49625 17.0162 4 15.8462 4C13.5763 4 11.7487 5.8425 11.7487 8.10125C11.7487 8.42625 11.7762 8.73875 11.8438 9.03625C8.435 8.87 5.41875 7.23625 3.3925 4.7475C3.03875 5.36125 2.83125 6.06375 2.83125 6.82C2.83125 8.24 3.5625 9.49875 4.6525 10.2275C3.99375 10.215 3.3475 10.0238 2.8 9.7225C2.8 9.735 2.8 9.75125 2.8 9.7675C2.8 11.76 4.22125 13.415 6.085 13.7962C5.75125 13.8875 5.3875 13.9312 5.01 13.9312C4.7475 13.9312 4.4825 13.9163 4.23375 13.8612C4.765 15.485 6.2725 16.6788 8.065 16.7175C6.67 17.8088 4.89875 18.4662 2.98125 18.4662C2.645 18.4662 2.3225 18.4513 2 18.41C3.81625 19.5813 5.96875 20.25 8.29 20.25C15.835 20.25 19.96 14 19.96 8.5825C19.96 8.40125 19.9538 8.22625 19.945 8.0525C20.7588 7.475 21.4425 6.75375 22 5.92375Z"
+                  fill="currentColor" />
+              </svg>
+            </a>
+          </div>
+        </div>
+        <div class="footer-column">
+          <h3>Resources</h3>
+          <ul class="footer-links">
+            <li><a href="https://insights.techne.ai/" target="_blank" rel="noopener noreferrer">Newsletter</a></li>
+            <li><a href="https://techne.ai/blog" target="_blank" rel="noopener noreferrer">Blog</a></li>
+            <li><a href="https://techne.ai/resources" target="_blank" rel="noopener noreferrer">Whitepapers</a></li>
+            <li><a href="https://techne.ai/case-studies" target="_blank" rel="noopener noreferrer">Case Studies</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h3>Legal</h3>
+          <ul class="footer-links">
+            <li><a href="https://techne.ai/privacy-policy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>
+            </li>
+            <li><a href="https://techne.ai/terms-of-service" target="_blank" rel="noopener noreferrer">Terms of
+                Service</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copyright">© 2025 Techne AI. All rights reserved.</p>
+        <div class="footer-bottom-links">
+          <a href="https://techne.ai/contact" target="_blank" rel="noopener noreferrer">Contact</a>
+          <a href="https://techne.ai/sitemap" target="_blank" rel="noopener noreferrer">Sitemap</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <div class="back-to-top" id="backToTop">
+    <svg width="24" height="24" viewBox="0 0 24 24">
+      <path d="M12 4L20 12L18.6 13.4L13 7.8V20H11V7.8L5.4 13.4L4 12L12 4Z" fill="currentColor" />
+    </svg>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // Back to Top Button
+      const backToTopButton = document.getElementById('backToTop');
+
+      window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 300) {
+          backToTopButton.classList.add('visible');
+        } else {
+          backToTopButton.classList.remove('visible');
+        }
+      });
+
+      backToTopButton.addEventListener('click', () => {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      });
+
+      // Mobile Menu Toggle
+      const sidebarTitle = document.querySelector('.sidebar-title');
+      const navMenu = document.querySelector('.nav-menu');
+
+      sidebarTitle.addEventListener('click', function () {
+        navMenu.classList.toggle('active'); // Toggle 'active' class
+      });
+
+      // Active State for Navigation Links (using Intersection Observer)
+      const sections = document.querySelectorAll('section');
+      const navLinks = document.querySelectorAll('.nav-link');
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const id = entry.target.id;
+              navLinks.forEach(link => {
+                link.classList.remove('active');
+              });
+              document.querySelector(`a[href="#${id}"]`).classList.add('active');
+            }
+          });
+        }, {
+        threshold: 0.5 // Adjust as needed - 0.5 means 50% of section visible
+      }
+      );
+
+      sections.forEach(section => {
+        observer.observe(section);
+      });
+    });
+  </script>
+</body>
+
+</html>
