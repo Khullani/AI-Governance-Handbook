@@ -31,11 +31,17 @@
       box-sizing: border-box;
     }
 
+    html {
+        scroll-behavior: smooth; /* Enable smooth scrolling */
+    }
+
     body {
       font-family: var(--font-main);
       color: var(--black);
       line-height: 1.6;
       background-color: var(--white);
+      scroll-padding-top: 80px; /* Offset for sticky header when jumping to anchors */
+      counter-reset: endnote glossary-endnote; /* Initialize counters */
     }
 
     a {
@@ -60,9 +66,9 @@
       color: var(--black);
     }
 
-    h2 { margin-top: 2.5rem; } /* Add some space before H2 headings */
-    h3 { margin-top: 2rem; } /* Add some space before H3 headings */
-    h4 { margin-top: 1.5rem; } /* Add some space before H4 headings */
+    h2 { margin-top: 2.5rem; }
+    h3 { margin-top: 2rem; }
+    h4 { margin-top: 1.5rem; }
 
 
     p {
@@ -80,6 +86,7 @@
     img {
       max-width: 100%;
       height: auto;
+      display: block;
     }
 
     /* Header Styles */
@@ -140,7 +147,6 @@
       max-width: 1600px;
       margin: 0 auto;
       min-height: calc(100vh - 130px);
-      /* Account for header and footer */
     }
 
     /* Sidebar Styles */
@@ -209,6 +215,10 @@
       max-width: 1100px;
     }
 
+    section[id] {
+        scroll-margin-top: 80px;
+    }
+
     .content-header {
       text-align: center;
       margin-bottom: 3rem;
@@ -274,7 +284,7 @@
       border-collapse: collapse;
       margin: 2rem 0;
       font-size: 0.9rem;
-      border: 1px solid var(--light-gray); /* Add border to table */
+      border: 1px solid var(--light-gray);
     }
 
     .maturity-table th,
@@ -282,16 +292,16 @@
       border: 1px solid var(--light-gray);
       padding: 0.75rem;
       text-align: left;
-      vertical-align: top; /* Align content to top */
+      vertical-align: top;
     }
 
     .maturity-table th {
       background-color: var(--background-gray);
-      font-weight: bold; /* Make headers bold */
+      font-weight: bold;
     }
 
     .maturity-table tr:nth-child(even) {
-      background-color: rgba(245, 247, 249, 0.5); /* Lighter alternating row color */
+      background-color: rgba(245, 247, 249, 0.5);
     }
 
     .figure {
@@ -303,7 +313,7 @@
       max-width: 100%;
       border-radius: 4px;
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-      border: 1px solid var(--light-gray); /* Add subtle border to images */
+      border: 1px solid var(--light-gray);
     }
 
     .figure-caption {
@@ -327,8 +337,8 @@
       overflow: hidden;
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
       border: 1px solid var(--light-gray);
-      display: flex; /* Use flexbox for card layout */
-      flex-direction: column; /* Stack header and content */
+      display: flex;
+      flex-direction: column;
     }
 
     .audience-card-header {
@@ -338,12 +348,12 @@
       text-align: center;
     }
     .audience-card-header h3 {
-        color: var(--white); /* Ensure header text is white */
+        color: var(--white);
     }
 
     .audience-card-content {
       padding: 1.5rem;
-      flex-grow: 1; /* Allow content to fill remaining space */
+      flex-grow: 1;
     }
 
     .audience-card ul {
@@ -360,6 +370,7 @@
       background-color: var(--black);
       color: white;
       padding: 3rem 0;
+      margin-top: 4rem;
     }
 
     .footer-container {
@@ -379,6 +390,7 @@
 
     .footer-links {
       list-style: none;
+      padding-left: 0;
     }
 
     .footer-links li {
@@ -472,23 +484,77 @@
       background-color: var(--secondary-color);
     }
 
-    /* Footnotes (if needed, currently not used) */
-    .footnotes {
-      font-size: 0.8rem;
-      color: var(--medium-gray);
-      margin-top: 2rem;
+    /* Endnote/Reference Styling */
+    #references, #glossary-references {
+      margin-top: 3rem;
+      padding-top: 2rem;
       border-top: 1px solid var(--light-gray);
-      padding-top: 1rem;
+      font-size: 0.9rem;
+      color: var(--medium-gray);
+    }
+    #references h2, #glossary-references h2 {
+        font-size: 1.5rem;
+        color: var(--black);
+        margin-bottom: 1.5rem;
+    }
+    #references ol, #glossary-references ol {
+      list-style: none;
+      padding-left: 0;
+    }
+    #references li, #glossary-references li {
+      margin-bottom: 1rem;
+      padding-left: 2.5em;
+      position: relative;
+      line-height: 1.5;
+    }
+    /* Main References numbering */
+    #references li::before {
+        content: "[" counter(endnote) "]";
+        counter-increment: endnote;
+        position: absolute;
+        left: 0;
+        top: 0;
+        font-weight: bold;
+        color: var(--primary-color);
+    }
+    /* Glossary References numbering */
+     #glossary-references li::before {
+        content: "[G" counter(glossary-endnote) "]";
+        counter-increment: glossary-endnote;
+        position: absolute;
+        left: 0;
+        top: 0;
+        font-weight: bold;
+        color: var(--primary-color);
     }
 
-    .footnotes ol {
-      list-style: decimal;
-      padding-left: 1.5rem;
+    /* Backlink styling */
+    #references li a.endnote-backlink,
+    #glossary-references li a.endnote-backlink {
+        margin-left: 0.5em;
+        text-decoration: none;
+        color: var(--secondary-color);
+        font-weight: bold;
+    }
+     #references li a.endnote-backlink:hover,
+     #glossary-references li a.endnote-backlink:hover {
+        text-decoration: underline;
     }
 
-    .footnotes li {
-      margin-bottom: 0.5rem;
+    /* Endnote markers in text */
+    sup a.endnote-link {
+        text-decoration: none;
+        color: var(--secondary-color);
+        padding: 0 0.1em;
+        font-weight: bold;
+        line-height: 0;
+        vertical-align: super;
+        font-size: 0.75em;
     }
+    sup a.endnote-link:hover {
+        text-decoration: underline;
+    }
+
 
     /* Collapsible Maturity Sections */
     details {
@@ -505,9 +571,28 @@
       color: var(--black);
       background-color: rgba(189, 71, 230, 0.05);
       border-radius: 4px 4px 0 0;
+      list-style: none;
+      position: relative;
     }
+     details summary::-webkit-details-marker { display: none; }
+     details summary::marker { display: none; }
+
+     details summary::after {
+         content: '►';
+         position: absolute;
+         right: 1.5rem;
+         top: 50%;
+         transform: translateY(-50%);
+         font-size: 0.8em;
+         color: var(--medium-gray);
+         transition: transform 0.2s ease-in-out;
+     }
+     details[open] summary::after {
+         transform: translateY(-50%) rotate(90deg);
+     }
+
     details summary h4 {
-        display: inline; /* Keep summary on one line */
+        display: inline;
         margin: 0;
     }
 
@@ -559,7 +644,7 @@
     }
 
     .author-info h3 {
-      margin-top: 0; /* Remove top margin for name */
+      margin-top: 0;
       color: var(--primary-color);
     }
 
@@ -583,13 +668,7 @@
 
     /* Larger Screen Styles */
     @media (min-width: 768px) {
-
-      /* Container tweaks */
-      .container {
-        flex-direction: row;
-        /* Restore flex layout */
-      }
-
+      .container { flex-direction: row; }
       .sidebar {
         width: 310px;
         height: calc(100vh - 65px);
@@ -597,130 +676,46 @@
         border-right: 1px solid var(--light-gray);
         border-bottom: none;
       }
-
-      .main-content {
-        padding: 3rem 5rem;
-        /* Restore larger padding */
-      }
-
-      .audience-cards {
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-        /* Restore grid layout */
-      }
-
-      .footer-container {
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      }
+      .main-content { padding: 3rem 5rem; }
+      .audience-cards { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
+      .footer-container { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
     }
 
-    /* Even larger screens */
     @media (min-width: 1200px) {
-      .main-content {
-        padding: 4rem 6rem;
-        /* Further refine padding on larger screens */
-      }
+      .main-content { padding: 4rem 6rem; }
     }
 
     /* Mobile Specific overrides */
     @media (max-width: 767px) {
-      .header-container {
-        flex-direction: column;
-        align-items: center;
-        /* Center items on mobile */
-        text-align: center;
-        /* Center logo and actions */
-      }
-
-      .site-logo {
-        margin-bottom: 1rem;
-        /* Add space below the logo */
-      }
-
-      .container {
-          flex-direction: column; /* Stack sidebar and content */
-      }
-
-      /* Make Sidebar a collapsable menu */
+      .header-container { flex-direction: column; align-items: center; text-align: center; }
+      .site-logo { margin-bottom: 1rem; }
+      .container { flex-direction: column; }
       .sidebar {
         position: static;
         width: 100%;
-        height: auto; /* Adjust height */
-        overflow-y: visible; /* Remove scroll */
-        border-right: none; /* Remove right border */
+        height: auto;
+        overflow-y: visible;
+        border-right: none;
         border-bottom: 1px solid var(--light-gray);
-        /* padding-bottom: 1rem; */ /* Removed padding */
+        top: 0;
       }
-
-      .sidebar-title {
-        text-align: center;
-        cursor: pointer;
-        padding: 1rem;
-        border-bottom: 1px solid var(--light-gray); /* Add border back */
-      }
-      .sidebar-title::after { /* Add indicator for collapsibility */
-          content: ' ▼';
-          font-size: 0.8em;
-          margin-left: 0.5rem;
-      }
-      .sidebar-title.open::after {
-          content: ' ▲';
-      }
-
-      .nav-menu {
-        display: none;
-        /* Hide initially on mobile */
-      }
-
-      .nav-menu.active {
-        display: block;
-        /* Show when active (toggled by JS) */
-      }
-
-      .main-content {
-          padding: 2rem 1.5rem; /* Reduce padding on mobile */
-      }
-
-      /* Adjust Footer */
-      .footer-container {
-        grid-template-columns: 1fr;
-        /* Stack columns */
-        text-align: center;
-      }
-
-      .footer-column {
-        margin-bottom: 2rem;
-        /* Add space between columns */
-      }
-      .footer-column .footer-social {
-          justify-content: center; /* Center social icons */
-      }
-
-      .footer-bottom {
-        flex-direction: column;
-        /* Stack copyright/links */
-        text-align: center;
-      }
-
-      .footer-bottom-links {
-        margin-top: 1rem;
-        flex-direction: column;
-        /* Stack links */
-      }
-
-      .author-card {
-        flex-direction: column; /* Stack image and info */
-        align-items: center; /* Center items */
-        text-align: center;
-      }
-      .author-links {
-          display: flex;
-          flex-wrap: wrap;
-          justify-content: center;
-          gap: 1rem;
-      }
-      .author-links a {
-          margin-right: 0;
-      }
+      .sidebar-title { text-align: center; cursor: pointer; padding: 1rem; border-bottom: none; }
+      .sidebar-title::after { content: ' ▼'; font-size: 0.8em; margin-left: 0.5rem; }
+      .sidebar-title.open::after { content: ' ▲'; }
+      .nav-menu { display: none; border-top: 1px solid var(--light-gray); }
+      .nav-menu.active { display: block; }
+      .main-content { padding: 2rem 1.5rem; }
+      .footer-container { grid-template-columns: 1fr; text-align: center; }
+      .footer-column { margin-bottom: 2rem; }
+      .footer-column .footer-social { justify-content: center; }
+      .footer-column .footer-links { padding-left: 0; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+      .footer-bottom-links { margin-top: 1rem; flex-direction: column; gap: 0.5rem; }
+      .author-card { flex-direction: column; align-items: center; text-align: center; }
+      .author-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; }
+      .author-links a { margin-right: 0; }
+      #references li, #glossary-references li { padding-left: 2em; } /* Adjust indent for mobile */
+      #references li::before, #glossary-references li::before { left: 0.2em; } /* Adjust number position */
     }
   </style>
 </head>
@@ -730,7 +725,6 @@
     <div class="header-container">
       <div class="site-logo">Techne.AI</div>
       <div class="header-actions">
-        <!-- Make sure 'path/to/your/handbook.pdf' points to the actual PDF file in your repository -->
         <a href="AI_Governance_Handbook.pdf" class="download-btn" download="AI_Governance_Handbook.pdf">
           Download Handbook
           <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
@@ -753,10 +747,12 @@
           <li class="nav-item"><a href="#technical-safety" class="nav-link">Technical Aspects of AI Safety</a></li>
           <li class="nav-item"><a href="#audience-guidance" class="nav-link">Audience Guidance</a></li>
           <li class="nav-item"><a href="#maturity-models" class="nav-link">AI Maturity Models</a></li>
-          <li class="nav-item"><a href="#glossary" class="nav-link">Glossary</a></li>
-          <li class="nav-item"><a href="#conclusion" class="nav-link">Conclusion</a></li>
           <li class="nav-item"><a href="#resources" class="nav-link">Additional Resources</a></li>
+          <li class="nav-item"><a href="#references" class="nav-link">References (Main)</a></li>
+          <li class="nav-item"><a href="#glossary" class="nav-link">Glossary</a></li>
+          <li class="nav-item"><a href="#glossary-references" class="nav-link">References (Glossary)</a></li>
           <li class="nav-item"><a href="#about" class="nav-link">About the Author</a></li>
+          <li class="nav-item"><a href="#conclusion" class="nav-link">Conclusion</a></li>
         </ul>
       </nav>
     </aside>
@@ -781,57 +777,55 @@
         <p>AI systems must comply with an evolving landscape of laws, regulations, and standards designed to address their unique risks. Key frameworks include international standards (ISO/IEC), national and regional laws (like the EU AI Act), and industry guidelines. Below we analyze some of the most relevant governance frameworks:</p>
 
         <h3>ISO/IEC 42001 (AI Management System Standard)</h3>
-        <p>Published in December 2023, ISO/IEC 42001 is the first global standard for AI management systems (The role of ISO/IEC 42001 in AI governance - Osler, Hoskin & Harcourt LLP). It provides a certifiable framework for organizations to establish and continuously improve their AI governance processes (The role of ISO/IEC 42001 in AI governance - Osler, Hoskin & Harcourt LLP). This standard is akin to ISO 9001 (quality management) or ISO 27001 (information security), but tailored to AI. ISO 42001 focuses on ethics, transparency, accountability, bias mitigation, safety, and privacy – covering the essential elements of trustworthy AI development and deployment (The role of ISO/IEC 42001 in AI governance - Osler, Hoskin & Harcourt LLP). By implementing ISO 42001, organizations create an internal governance system ensuring AI projects are managed responsibly. The standard calls for defining an AI governance policy, senior leadership commitment, risk management processes, resource allocation for AI oversight, and operational controls for responsible AI throughout the AI lifecycle (The role of ISO/IEC 42001 in AI governance - Osler, Hoskin & Harcourt LLP) (The role of ISO/IEC 42001 in AI governance - Osler, Hoskin & Harcourt LLP). Importantly, ISO 42001 is sector-agnostic and for organizations of all sizes, providing a holistic approach to manage AI-related risks and opportunities across an entire organization (The role of ISO/IEC 42001 in AI governance - Osler, Hoskin & Harcourt LLP) (The role of ISO/IEC 42001 in AI governance - Osler, Hoskin & Harcourt LLP). Achieving ISO 42001 compliance can also demonstrate to regulators and customers that an organization adheres to recognized AI governance best practices.</p>
+        <p>Published in December 2023, ISO/IEC 42001 is the first global standard for AI management systems<sup><a href="#ref-1" id="ref-marker-1" class="endnote-link">[1]</a></sup>. It provides a certifiable framework for organizations to establish and continuously improve their AI governance processes<sup><a href="#ref-1" id="ref-marker-1" class="endnote-link">[1]</a></sup>. This standard is akin to ISO 9001 (quality management) or ISO 27001 (information security), but tailored to AI. ISO 42001 focuses on ethics, transparency, accountability, bias mitigation, safety, and privacy – covering the essential elements of trustworthy AI development and deployment<sup><a href="#ref-1" id="ref-marker-1" class="endnote-link">[1]</a></sup>. By implementing ISO 42001, organizations create an internal governance system ensuring AI projects are managed responsibly. The standard calls for defining an AI governance policy, senior leadership commitment, risk management processes, resource allocation for AI oversight, and operational controls for responsible AI throughout the AI lifecycle<sup><a href="#ref-1" id="ref-marker-1" class="endnote-link">[1]</a></sup><sup><a href="#ref-1" id="ref-marker-1" class="endnote-link">[1]</a></sup>. Importantly, ISO 42001 is sector-agnostic and for organizations of all sizes, providing a holistic approach to manage AI-related risks and opportunities across an entire organization<sup><a href="#ref-1" id="ref-marker-1" class="endnote-link">[1]</a></sup><sup><a href="#ref-1" id="ref-marker-1" class="endnote-link">[1]</a></sup>. Achieving ISO 42001 compliance can also demonstrate to regulators and customers that an organization adheres to recognized AI governance best practices.</p>
 
         <h3>ISO/IEC 23894 (AI Risk Management)</h3>
-        <p>ISO/IEC 23894 is a companion standard providing detailed guidance on managing AI risks (The role of ISO/IEC 42001 in AI governance - Osler, Hoskin & Harcourt LLP). It essentially adapts the generic risk management principles of ISO 31000 to the AI context (Everything you need to know about the NIST AI Risk Management ...). ISO 23894 guides organizations in integrating AI risk assessment into their processes – identifying risks across the AI lifecycle (from data collection and model training to deployment), evaluating their severity, and treating them with appropriate controls (The role of ISO/IEC 42001 in AI governance - Osler, Hoskin & Harcourt LLP). For example, it covers processes to detect and mitigate bias or security vulnerabilities in AI models. Together, ISO 23894 (risk management) and ISO 42001 (management system) form a coherent toolkit: one establishes the governance structure, and the other provides risk-specific procedures. These ISO standards are international and voluntary, but they are likely to become baselines for compliance as regulators and customers increasingly expect organizations to follow them for AI governance consistency (The role of ISO/IEC 42001 in AI governance - Osler, Hoskin & Harcourt LLP) (The role of ISO/IEC 42001 in AI governance - Osler, Hoskin & Harcourt LLP).</p>
+        <p>ISO/IEC 23894 is a companion standard providing detailed guidance on managing AI risks<sup><a href="#ref-1" id="ref-marker-1" class="endnote-link">[1]</a></sup>. It essentially adapts the generic risk management principles of ISO 31000 to the AI context<sup><a href="#ref-2" id="ref-marker-2" class="endnote-link">[2]</a></sup>. ISO 23894 guides organizations in integrating AI risk assessment into their processes – identifying risks across the AI lifecycle (from data collection and model training to deployment), evaluating their severity, and treating them with appropriate controls<sup><a href="#ref-1" id="ref-marker-1" class="endnote-link">[1]</a></sup>. For example, it covers processes to detect and mitigate bias or security vulnerabilities in AI models. Together, ISO 23894 (risk management) and ISO 42001 (management system) form a coherent toolkit: one establishes the governance structure, and the other provides risk-specific procedures. These ISO standards are international and voluntary, but they are likely to become baselines for compliance as regulators and customers increasingly expect organizations to follow them for AI governance consistency<sup><a href="#ref-1" id="ref-marker-1" class="endnote-link">[1]</a></sup><sup><a href="#ref-1" id="ref-marker-1" class="endnote-link">[1]</a></sup>.</p>
 
         <h3>EU AI Act</h3>
-        <p>The European Union’s AI Act (likely entering force in 2025–2026) is a landmark regulation taking a risk-based approach to AI oversight (The role of ISO/IEC 42001 in AI governance - Osler, Hoskin & Harcourt LLP). It will be the first comprehensive AI law globally. The Act categorizes AI systems into four risk levels with corresponding requirements (The role of ISO/IEC 42001 in AI governance - Osler, Hoskin & Harcourt LLP):</p>
+        <p>The European Union’s AI Act (likely entering force in 2025–2026) is a landmark regulation taking a risk-based approach to AI oversight<sup><a href="#ref-1" id="ref-marker-1" class="endnote-link">[1]</a></sup>. It will be the first comprehensive AI law globally. The Act categorizes AI systems into four risk levels with corresponding requirements<sup><a href="#ref-1" id="ref-marker-1" class="endnote-link">[1]</a></sup>:</p>
         <ul>
             <li><strong>Unacceptable risk:</strong> Banned uses, such as social scoring by governments or AI that manipulates vulnerable groups.</li>
             <li><strong>High risk:</strong> Systems (e.g. AI in healthcare, hiring, law enforcement) which will face strict requirements and conformity assessments.</li>
             <li><strong>Limited risk:</strong> AI systems requiring transparency obligations, like notifying users they are interacting with AI chatbots.</li>
             <li><strong>Minimal risk:</strong> Most AI, which have few obligations.</li>
         </ul>
-        <p>The map of risk tiers means that higher-risk AI applications must meet robust criteria for data quality, documentation, human oversight, transparency, accuracy, and cybersecurity before they can be deployed (The role of ISO/IEC 42001 in AI governance - Osler, Hoskin & Harcourt LLP). For example, a high-risk AI system in recruitment must undergo testing to ensure it does not unlawfully discriminate, and its provider must implement risk management and log-keeping. The Act was finalized in 2024 and is expected to become enforceable after a transition period (Tools for Navigating the EU AI Act: (2) Visualisation Pyramid - MIAI) (Tools for Navigating the EU AI Act: (2) Visualisation Pyramid - MIAI). Companies worldwide will need to comply when operating in the EU market, similar to how GDPR set a global standard for data privacy. The EU AI Act represents a “landmark regulatory milestone” that will require organizations to treat AI governance seriously, performing AI impact assessments and possibly redesigning systems to meet the Act’s criteria (Tools for Navigating the EU AI Act: (2) Visualisation Pyramid - MIAI) (Tools for Navigating the EU AI Act: (2) Visualisation Pyramid - MIAI). It also establishes an EU AI Office for oversight. Notably, the AI Act complements existing laws like GDPR (for privacy) – AI systems that process personal data must obey both. For instance, the Act’s transparency and fairness requirements reinforce GDPR’s principles of data protection and “the right not to be subject to solely automated decisions” under GDPR Article 22 (What the GDPR Shows Us About the Future of AI Regulation | Visier) (What the GDPR Shows Us About the Future of AI Regulation | Visier).</p>
+        <p>The map of risk tiers means that higher-risk AI applications must meet robust criteria for data quality, documentation, human oversight, transparency, accuracy, and cybersecurity before they can be deployed<sup><a href="#ref-1" id="ref-marker-1" class="endnote-link">[1]</a></sup>. For example, a high-risk AI system in recruitment must undergo testing to ensure it does not unlawfully discriminate, and its provider must implement risk management and log-keeping. The Act was finalized in 2024 and is expected to become enforceable after a transition period<sup><a href="#ref-3" id="ref-marker-3" class="endnote-link">[3]</a></sup><sup><a href="#ref-3" id="ref-marker-3" class="endnote-link">[3]</a></sup>. Companies worldwide will need to comply when operating in the EU market, similar to how GDPR set a global standard for data privacy. The EU AI Act represents a “landmark regulatory milestone” that will require organizations to treat AI governance seriously, performing AI impact assessments and possibly redesigning systems to meet the Act’s criteria<sup><a href="#ref-3" id="ref-marker-3" class="endnote-link">[3]</a></sup><sup><a href="#ref-3" id="ref-marker-3" class="endnote-link">[3]</a></sup>. It also establishes an EU AI Office for oversight. Notably, the AI Act complements existing laws like GDPR (for privacy) – AI systems that process personal data must obey both. For instance, the Act’s transparency and fairness requirements reinforce GDPR’s principles of data protection and “the right not to be subject to solely automated decisions” under GDPR Article 22<sup><a href="#ref-4" id="ref-marker-4" class="endnote-link">[4]</a></sup><sup><a href="#ref-4" id="ref-marker-4" class="endnote-link">[4]</a></sup>.</p>
 
         <div class="figure">
-          <!-- Ensure image path is relative to index.html if storing locally -->
-          <img src="https://github.com/Khullani/AI-Governance-Handbook/blob/main/EUAIActRiskClassification.png"
+          <img src="https://github.com/Khullani/AI-Governance-Handbook/raw/main/EUAIActRiskClassification.png"
             alt="EU AI Act Risk Pyramid"
-            onerror="this.onerror=null; this.src='https://github.com/Khullani/AI-Governance-Handbook/blob/main/EUAIActRiskClassification.png';" />
-          <p class="figure-caption">Figure: The EU AI Act uses a risk-tier classification framework to classify AI systems into four categories – Unacceptable (red, e.g. social scoring), High (yellow, e.g. AI in education, employment, law enforcement), Limited (green, e.g. AI chatbots with transparency requirements), and Minimal risk (blue, e.g. AI in video games). Higher-risk categories face stricter governance and compliance obligations (The New EU Artificial Intelligence Act: Impact on the Biodiversity Information Community).</p>
+            onerror="this.src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=';" />
+          <p class="figure-caption">Figure: The EU AI Act uses a risk-tier classification framework to classify AI systems into four categories – Unacceptable (red, e.g. social scoring), High (yellow, e.g. AI in education, employment, law enforcement), Limited (green, e.g. AI chatbots with transparency requirements), and Minimal risk (blue, e.g. AI in video games). Higher-risk categories face stricter governance and compliance obligations<sup><a href="#ref-5" id="ref-marker-5" class="endnote-link">[5]</a></sup>.</p>
         </div>
 
         <h3>NIST AI Risk Management Framework (RMF)</h3>
-        <p>In the United States, a prominent non-regulatory framework is the NIST AI RMF 1.0, published in January 2023. Developed through a multi-stakeholder process, the NIST AI RMF is a voluntary guidance for organizations to manage AI risks and promote trustworthy AI (AI Risk Management Framework | NIST) (AI Risk Management Framework | NIST). It provides a structured approach organized into four core functions: Govern, Map, Measure, and Manage.</p>
+        <p>In the United States, a prominent non-regulatory framework is the NIST AI RMF 1.0, published in January 2023. Developed through a multi-stakeholder process, the NIST AI RMF is a voluntary guidance for organizations to manage AI risks and promote trustworthy AI<sup><a href="#ref-6" id="ref-marker-6" class="endnote-link">[6]</a></sup><sup><a href="#ref-6" id="ref-marker-6" class="endnote-link">[6]</a></sup>. It provides a structured approach organized into four core functions: Govern, Map, Measure, and Manage.</p>
         <ul>
-          <li><strong>Govern:</strong> Establish organizational governance processes to oversee AI risk management (cultivating a culture of risk awareness, accountability, and adherence to trustworthiness principles at all levels) (Robots and the NIST AI Risk Management Framework - Medill Spiegel Research Center). Governance is a cross-cutting function that informs all others.</li>
+          <li><strong>Govern:</strong> Establish organizational governance processes to oversee AI risk management (cultivating a culture of risk awareness, accountability, and adherence to trustworthiness principles at all levels)<sup><a href="#ref-7" id="ref-marker-7" class="endnote-link">[7]</a></sup>. Governance is a cross-cutting function that informs all others.</li>
           <li><strong>Map:</strong> Contextualize and identify risks – i.e. understand the AI system’s purpose, scope, and environment to recognize what risks might arise and who might be affected.</li>
-          <li><strong>Measure:</strong> Analyze, assess, and monitor AI risks – for example, measure the performance of mitigations, track metrics like bias or robustness, and audit the AI system to gauge if risk controls are effective (Understanding the NIST AI Risk Management Framework: A complete guide - Thoropass) (Understanding the NIST AI Risk Management Framework: A complete guide - Thoropass).</li>
-          <li><strong>Manage:</strong> Mitigate and respond – implement controls to address identified risks (e.g. retraining a model on more diverse data to reduce bias, or enforcing human review for certain AI decisions), and have processes to respond to incidents or adapt the AI system as its context changes (Understanding the NIST AI Risk Management Framework: A complete guide - Thoropass) (Understanding the NIST AI Risk Management Framework: A complete guide - Thoropass).</li>
+          <li><strong>Measure:</strong> Analyze, assess, and monitor AI risks – for example, measure the performance of mitigations, track metrics like bias or robustness, and audit the AI system to gauge if risk controls are effective<sup><a href="#ref-8" id="ref-marker-8" class="endnote-link">[8]</a></sup><sup><a href="#ref-8" id="ref-marker-8" class="endnote-link">[8]</a></sup>.</li>
+          <li><strong>Manage:</strong> Mitigate and respond – implement controls to address identified risks (e.g. retraining a model on more diverse data to reduce bias, or enforcing human review for certain AI decisions), and have processes to respond to incidents or adapt the AI system as its context changes<sup><a href="#ref-8" id="ref-marker-8" class="endnote-link">[8]</a></sup><sup><a href="#ref-8" id="ref-marker-8" class="endnote-link">[8]</a></sup>.</li>
         </ul>
-        <p>These functions operate in a continuous, iterative cycle (much like the cybersecurity framework’s identify/protect/detect/respond/recover). The NIST framework is technology-neutral and use-case agnostic, meaning it can be applied to any AI system to improve its trustworthiness. It emphasizes stakeholder engagement, transparency, fairness, and other “qualities of trustworthy AI” as cross-cutting principles. While not law, the NIST AI RMF has been influential globally – for example, companies might use it as a basis for internal AI policies, and it aligns with ISO 23894’s risk management approach (Everything you need to know about the NIST AI Risk Management ...) (The role of ISO/IEC 42001 in AI governance - Osler, Hoskin & Harcourt LLP). In practice, an organization using the NIST AI RMF would document the context of each AI application (Map), perform risk assessments and impact evaluations (Measure), apply safeguards and controls (Manage), and have an overarching governance program to tie these together (Govern). NIST has also released a companion AI RMF Playbook with actionable guidance and an AI RMF Crosswalk mapping its recommendations to other standards (AI Risk Management Framework | NIST). The goal is to help organizations “incorporate trustworthiness considerations into the design, development, use, and evaluation” of AI systems (AI Risk Management Framework | NIST), thereby reducing risks and harms.</p>
+        <p>These functions operate in a continuous, iterative cycle (much like the cybersecurity framework’s identify/protect/detect/respond/recover). The NIST framework is technology-neutral and use-case agnostic, meaning it can be applied to any AI system to improve its trustworthiness. It emphasizes stakeholder engagement, transparency, fairness, and other “qualities of trustworthy AI” as cross-cutting principles. While not law, the NIST AI RMF has been influential globally – for example, companies might use it as a basis for internal AI policies, and it aligns with ISO 23894’s risk management approach<sup><a href="#ref-2" id="ref-marker-2" class="endnote-link">[2]</a></sup><sup><a href="#ref-1" id="ref-marker-1" class="endnote-link">[1]</a></sup>. In practice, an organization using the NIST AI RMF would document the context of each AI application (Map), perform risk assessments and impact evaluations (Measure), apply safeguards and controls (Manage), and have an overarching governance program to tie these together (Govern). NIST has also released a companion AI RMF Playbook with actionable guidance and an AI RMF Crosswalk mapping its recommendations to other standards<sup><a href="#ref-6" id="ref-marker-6" class="endnote-link">[6]</a></sup>. The goal is to help organizations “incorporate trustworthiness considerations into the design, development, use, and evaluation” of AI systems<sup><a href="#ref-6" id="ref-marker-6" class="endnote-link">[6]</a></sup>, thereby reducing risks and harms.</p>
 
         <div class="figure">
-           <!-- Ensure image path is relative to index.html if storing locally -->
-          <img src="https://github.com/Khullani/AI-Governance-Handbook/blob/main/NIST%20AI%20Risk%20Management%20Framework%20Core%20Functions'%20Goals%20-%20visual%20selection.png"
+          <img src="https://github.com/Khullani/AI-Governance-Handbook/raw/main/NIST%20AI%20Risk%20Management%20Framework%20Core%20Functions'%20Goals%20-%20visual%20selection.png"
             alt="NIST AI Risk Management Framework"
-            onerror="this.onerror=null; this.src='https://github.com/Khullani/AI-Governance-Handbook/blob/main/NIST%20AI%20Risk%20Management%20Framework%20Core%20Functions'%20Goals%20-%20visual%20selection.png';" />
-          <p class="figure-caption">Figure: The NIST AI Risk Management Framework organizes AI risk management into four functions – Map (recognize context and identify risks), Measure (analyze and track risks), Manage (prioritize and mitigate risks), with Govern as an overarching function ensuring a risk culture and oversight (Robots and the NIST AI Risk Management Framework - Medill Spiegel Research Center). This iterative process helps organizations build trustworthy AI by systematically addressing risks across the AI lifecycle.</p>
+            onerror="this.src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=';" />
+          <p class="figure-caption">Figure: The NIST AI Risk Management Framework organizes AI risk management into four functions – Map (recognize context and identify risks), Measure (analyze and track risks), Manage (prioritize and mitigate risks), with Govern as an overarching function ensuring a risk culture and oversight<sup><a href="#ref-7" id="ref-marker-7" class="endnote-link">[7]</a></sup>. This iterative process helps organizations build trustworthy AI by systematically addressing risks across the AI lifecycle.</p>
         </div>
 
         <h3>Privacy and Data Protection Laws (GDPR, CCPA, etc.)</h3>
-        <p>Data is the lifeblood of AI, so privacy laws are highly relevant to AI governance. The EU’s General Data Protection Regulation (GDPR) imposes strict requirements on processing personal data, which many AI systems do (for instance, AI analyzing user behavior or personal attributes). GDPR mandates principles like data minimization, purpose limitation, and fairness in data processing (What the GDPR Shows Us About the Future of AI Regulation | Visier). It also provides individuals rights that affect AI – notably the right not to be subject to solely automated decisions with significant effects (Article 22 GDPR) in certain cases, or at least the right to human review and an explanation (Art. 22 GDPR – Automated individual decision-making, including profiling - General Data Protection Regulation (GDPR)) (Art. 22 GDPR – Automated individual decision-making, including profiling - General Data Protection Regulation (GDPR)). This means if a company uses an AI algorithm alone to decide something like a loan approval, an EU consumer may challenge it and request human intervention. AI governance programs must therefore incorporate GDPR compliance: ensuring lawful basis for AI data processing, conducting Data Protection Impact Assessments when deploying high-risk AI, and enabling transparency and recourse for individuals. GDPR’s emphasis on accountability requires organizations to be able to demonstrate compliance – in context of AI, this entails documenting how models were trained, how data was obtained and secured, and what measures prevent privacy violations (What the GDPR Shows Us About the Future of AI Regulation | Visier). Additionally, GDPR’s fines for non-compliance (up to 4% of global turnover) make privacy a board-level risk.</p>
-        <p>In the US, while there is no federal GDPR equivalent, state laws like the California Consumer Privacy Act (CCPA) grant consumers rights over personal information. The CCPA (amended by CPRA) gives California residents the right to know, delete, and opt-out of the sale of their personal data (What is the CCPA (California Consumer Privacy Act)? | Cloudflare), among other rights (like correct inaccurate data and not be discriminated against for exercising privacy rights) (What is the CCPA (California Consumer Privacy Act)? | Cloudflare) (What is the CCPA (California Consumer Privacy Act)? | Cloudflare). For AI, this means any models using California residents’ data need processes to delete that data upon request and to stop selling or sharing it if the consumer opts out. CCPA also requires transparency in privacy policies about data usage which extends to AI-driven data uses. Further, sector-specific privacy rules may apply (e.g. HIPAA for health data used in AI medical diagnostics, which mandates strict safeguards for Protected Health Information).</p>
+        <p>Data is the lifeblood of AI, so privacy laws are highly relevant to AI governance. The EU’s General Data Protection Regulation (GDPR) imposes strict requirements on processing personal data, which many AI systems do (for instance, AI analyzing user behavior or personal attributes). GDPR mandates principles like data minimization, purpose limitation, and fairness in data processing<sup><a href="#ref-4" id="ref-marker-4" class="endnote-link">[4]</a></sup>. It also provides individuals rights that affect AI – notably the right not to be subject to solely automated decisions with significant effects (Article 22 GDPR) in certain cases, or at least the right to human review and an explanation<sup><a href="#ref-9" id="ref-marker-9" class="endnote-link">[9]</a></sup><sup><a href="#ref-9" id="ref-marker-9" class="endnote-link">[9]</a></sup>. This means if a company uses an AI algorithm alone to decide something like a loan approval, an EU consumer may challenge it and request human intervention. AI governance programs must therefore incorporate GDPR compliance: ensuring lawful basis for AI data processing, conducting Data Protection Impact Assessments when deploying high-risk AI, and enabling transparency and recourse for individuals. GDPR’s emphasis on accountability requires organizations to be able to demonstrate compliance – in context of AI, this entails documenting how models were trained, how data was obtained and secured, and what measures prevent privacy violations<sup><a href="#ref-4" id="ref-marker-4" class="endnote-link">[4]</a></sup>. Additionally, GDPR’s fines for non-compliance (up to 4% of global turnover) make privacy a board-level risk.</p>
+        <p>In the US, while there is no federal GDPR equivalent, state laws like the California Consumer Privacy Act (CCPA) grant consumers rights over personal information. The CCPA (amended by CPRA) gives California residents the right to know, delete, and opt-out of the sale of their personal data<sup><a href="#ref-10" id="ref-marker-10" class="endnote-link">[10]</a></sup>, among other rights (like correct inaccurate data and not be discriminated against for exercising privacy rights)<sup><a href="#ref-10" id="ref-marker-10" class="endnote-link">[10]</a></sup><sup><a href="#ref-10" id="ref-marker-10" class="endnote-link">[10]</a></sup>. For AI, this means any models using California residents’ data need processes to delete that data upon request and to stop selling or sharing it if the consumer opts out. CCPA also requires transparency in privacy policies about data usage which extends to AI-driven data uses. Further, sector-specific privacy rules may apply (e.g. HIPAA for health data used in AI medical diagnostics, which mandates strict safeguards for Protected Health Information).</p>
 
         <h3>Security and AI-Specific Regulations</h3>
         <p>Beyond privacy, AI governance intersects with cybersecurity and domain-specific regulations. AI systems must be secured against breaches and adversarial attacks (which is part of AI safety). Laws like the EU’s Network and Information Security (NIS2) Directive or various national cybersecurity laws require organizations to protect systems (including AI) from cyber threats – failing to do so can cause data leaks or model manipulation. Moreover, industries have their own AI-related guidance. For example, the FDA in the US is developing regulatory guidance for AI/ML-based medical devices, requiring algorithm transparency and Good Machine Learning Practice for safety and effectiveness. In finance, regulators (like banking authorities) are examining algorithms for fairness and stability – the Federal Reserve’s SR 11-7 guidance on model risk management, while older, is now being interpreted to include AI models (requiring rigorous validation and audit of models that affect financial decisions). The EU’s draft AI Act explicitly covers AI in credit scoring, insurance, employment, etc. as high-risk, linking to existing financial regulations. Meanwhile, sectoral standards (like ISO 26262 for automotive functional safety) are relevant when AI is used in that sector (e.g. self-driving car AI must meet both AI governance standards and functional safety standards).</p>
 
         <h3>Ethical Frameworks and Global Principles</h3>
-        <p>Apart from hard law and formal standards, numerous ethical AI frameworks guide governance. The OECD AI Principles (2019) – adopted by 40+ countries – articulate high-level tenets: inclusive growth, human-centered values and fairness, transparency and explainability, robustness and safety, and accountability for AI (AI principles - OECD) (OECD Updates AI Principles - American National Standards Institute). These principles have informed regulations and corporate codes of conduct worldwide. Similarly, the UNESCO Recommendation on AI Ethics (2021) provides a global ethical framework emphasizing human dignity, environmental well-being, gender equality, and peaceful use of AI. While these are not directly enforceable, they shape policymaker and public expectations, and organizations often voluntarily align with them to demonstrate commitment to responsible AI. For example, a company might commit to the OECD principle of robustness by establishing rigorous testing and validation before deploying AI, or to accountability by providing appeal mechanisms for AI decisions. In the U.S., the White House’s Blueprint for an AI Bill of Rights (2022) lists principles echoing these themes (safe and effective systems, algorithmic discrimination protection, data privacy, notice & explanation, and human alternatives) (What Is Artificial Intelligence (AI) Governance?| Definition from TechTarget) (What Is Artificial Intelligence (AI) Governance?| Definition from TechTarget). Even though it’s guidance, it sets a benchmark for what citizens should expect from AI – and thus what companies should strive to implement.</p>
-        <p>In summary, the regulatory environment for AI is multifaceted: companies must navigate international standards (ISO/IEC), follow region-specific laws (like the EU AI Act’s risk-based rules and data protection laws such as GDPR/CCPA), and heed industry-specific requirements. Compliance will require cross-functional effort: lawyers and compliance officers to interpret laws, data scientists and engineers to implement technical controls, and executives to integrate these requirements into corporate governance. Many organizations are adopting AI governance frameworks that “ensure consistency and coherence” amidst this patchwork (The role of ISO/IEC 42001 in AI governance - Osler, Hoskin & Harcourt LLP) (The role of ISO/IEC 42001 in AI governance - Osler, Hoskin & Harcourt LLP), often using standards like NIST and ISO as foundational, then layering on the specific legal obligations for their industry and markets.</p>
+        <p>Apart from hard law and formal standards, numerous ethical AI frameworks guide governance. The OECD AI Principles (2019) – adopted by 40+ countries – articulate high-level tenets: inclusive growth, human-centered values and fairness, transparency and explainability, robustness and safety, and accountability for AI<sup><a href="#ref-11" id="ref-marker-11" class="endnote-link">[11]</a></sup><sup><a href="#ref-12" id="ref-marker-12" class="endnote-link">[12]</a></sup>. These principles have informed regulations and corporate codes of conduct worldwide. Similarly, the UNESCO Recommendation on AI Ethics (2021) provides a global ethical framework emphasizing human dignity, environmental well-being, gender equality, and peaceful use of AI. While these are not directly enforceable, they shape policymaker and public expectations, and organizations often voluntarily align with them to demonstrate commitment to responsible AI. For example, a company might commit to the OECD principle of robustness by establishing rigorous testing and validation before deploying AI, or to accountability by providing appeal mechanisms for AI decisions. In the U.S., the White House’s Blueprint for an AI Bill of Rights (2022) lists principles echoing these themes (safe and effective systems, algorithmic discrimination protection, data privacy, notice & explanation, and human alternatives)<sup><a href="#ref-13" id="ref-marker-13" class="endnote-link">[13]</a></sup><sup><a href="#ref-13" id="ref-marker-13" class="endnote-link">[13]</a></sup>. Even though it’s guidance, it sets a benchmark for what citizens should expect from AI – and thus what companies should strive to implement.</p>
+        <p>In summary, the regulatory environment for AI is multifaceted: companies must navigate international standards (ISO/IEC), follow region-specific laws (like the EU AI Act’s risk-based rules and data protection laws such as GDPR/CCPA), and heed industry-specific requirements. Compliance will require cross-functional effort: lawyers and compliance officers to interpret laws, data scientists and engineers to implement technical controls, and executives to integrate these requirements into corporate governance. Many organizations are adopting AI governance frameworks that “ensure consistency and coherence” amidst this patchwork<sup><a href="#ref-1" id="ref-marker-1" class="endnote-link">[1]</a></sup><sup><a href="#ref-1" id="ref-marker-1" class="endnote-link">[1]</a></sup>, often using standards like NIST and ISO as foundational, then layering on the specific legal obligations for their industry and markets.</p>
       </section>
 
       <!-- Privacy, Data, and Security Section -->
@@ -877,13 +871,13 @@
         <p>AI governance is not just about high-level policies; it also involves concrete technical measures and best practices to ensure AI systems are safe, reliable, and aligned with intended goals. We highlight key technical aspects and tools that AI practitioners and risk managers employ as part of governance:</p>
 
         <h3>Robustness and Reliability</h3>
-        <p>Technical AI safety begins with making models robust to errors and uncertainties. This involves rigorous validation of AI models on test data that simulates real-world variability and potential edge cases. Techniques like stress testing are used – e.g. testing a computer vision system in varying lighting conditions or with noise – to ensure the model still performs acceptably. Robustness research also addresses adversarial examples (What is technical AI safety?), which are inputs intentionally designed to fool AI (like subtly altering a stop sign image so an AI misreads it). To govern against this, organizations might incorporate adversarial training (training the model on adversarial samples so it learns to resist them) and incorporate redundancies (multiple sensors or ensemble models) so that one component catching an error can compensate for another. The goal is to avoid AI failures in deployment, especially for safety-critical systems (like AI in cars, medical diagnosis, or critical infrastructure). Governance frameworks often require documenting the operating domain of an AI and its known failure modes, and ensuring it’s only used under conditions it was designed for. For example, an AI model valid for English text shouldn’t be applied to French text without retraining – a governance check would prevent such misuse.</p>
+        <p>Technical AI safety begins with making models robust to errors and uncertainties. This involves rigorous validation of AI models on test data that simulates real-world variability and potential edge cases. Techniques like stress testing are used – e.g. testing a computer vision system in varying lighting conditions or with noise – to ensure the model still performs acceptably. Robustness research also addresses adversarial examples<sup><a href="#ref-14" id="ref-marker-14" class="endnote-link">[14]</a></sup>, which are inputs intentionally designed to fool AI (like subtly altering a stop sign image so an AI misreads it). To govern against this, organizations might incorporate adversarial training (training the model on adversarial samples so it learns to resist them) and incorporate redundancies (multiple sensors or ensemble models) so that one component catching an error can compensate for another. The goal is to avoid AI failures in deployment, especially for safety-critical systems (like AI in cars, medical diagnosis, or critical infrastructure). Governance frameworks often require documenting the operating domain of an AI and its known failure modes, and ensuring it’s only used under conditions it was designed for. For example, an AI model valid for English text shouldn’t be applied to French text without retraining – a governance check would prevent such misuse.</p>
 
         <h3>Alignment with Human Values</h3>
-        <p>Alignment is a technical AI safety field focused on ensuring that AI’s objectives and behavior remain in line with human intentions and values (What is technical AI safety?). For current AI systems, this can mean incorporating human feedback and ethical considerations during development. One approach is Reinforcement Learning from Human Feedback (RLHF), famously used to align large language models (like ChatGPT) with desirable behavior by training them on examples of good and bad responses. Alignment also involves specifying constraints – for instance, an AI scheduling tool might be aligned with fairness values by adding rules that it not systematically give one group the worst time slots. As AI systems become more autonomous or complex, alignment techniques become even more important to avoid “goal misalignment” where an AI optimizes something harmful because it misunderstands the human’s true intent. Even simple ML models benefit from alignment thinking: define the objective function carefully (not just optimizing profit, but profit subject to fairness constraints, for example). Technical governance includes peer review of model objectives and metrics to catch misalignment early. In research contexts, alignment also refers to preparing for future advanced AI (AGI) to ensure it remains beneficial – while that may be beyond the scope of most organizations today, it underlines the principle that AI should remain under meaningful human control.</p>
+        <p>Alignment is a technical AI safety field focused on ensuring that AI’s objectives and behavior remain in line with human intentions and values<sup><a href="#ref-14" id="ref-marker-14" class="endnote-link">[14]</a></sup>. For current AI systems, this can mean incorporating human feedback and ethical considerations during development. One approach is Reinforcement Learning from Human Feedback (RLHF), famously used to align large language models (like ChatGPT) with desirable behavior by training them on examples of good and bad responses. Alignment also involves specifying constraints – for instance, an AI scheduling tool might be aligned with fairness values by adding rules that it not systematically give one group the worst time slots. As AI systems become more autonomous or complex, alignment techniques become even more important to avoid “goal misalignment” where an AI optimizes something harmful because it misunderstands the human’s true intent. Even simple ML models benefit from alignment thinking: define the objective function carefully (not just optimizing profit, but profit subject to fairness constraints, for example). Technical governance includes peer review of model objectives and metrics to catch misalignment early. In research contexts, alignment also refers to preparing for future advanced AI (AGI) to ensure it remains beneficial – while that may be beyond the scope of most organizations today, it underlines the principle that AI should remain under meaningful human control.</p>
 
         <h3>Interpretability and Transparency Tools</h3>
-        <p>To build trust and enable oversight, technical teams use interpretability techniques that shed light on “black box” AI models (What is technical AI safety?). This includes explainable AI (XAI) methods like SHAP values or LIME that indicate which features of an input most influenced a model’s decision. For neural networks, visualization tools might highlight which parts of an image a convolutional network focused on. Interpretability is important for debugging models (ensuring they’re making decisions for the right reasons) and for explaining outcomes to stakeholders (like providing a reason for a loan denial). Some regulations (e.g. EU AI Act, GDPR’s notion of explanation) implicitly push for such capabilities. Governance programs often require that for high-impact AI, an explanation report or model card be produced. Model Cards are a documentation technique describing a model’s intended use, performance, and limitations in plain language – a practice recommended by Google and others to increase transparency. By using these tools, organizations can “understand what’s going on” inside AI (What is technical AI safety?), which aids accountability (engineers can justify that the model is making decisions based on legitimate factors rather than prohibited ones like race or gender, unless legally allowed and appropriate).</p>
+        <p>To build trust and enable oversight, technical teams use interpretability techniques that shed light on “black box” AI models<sup><a href="#ref-14" id="ref-marker-14" class="endnote-link">[14]</a></sup>. This includes explainable AI (XAI) methods like SHAP values or LIME that indicate which features of an input most influenced a model’s decision. For neural networks, visualization tools might highlight which parts of an image a convolutional network focused on. Interpretability is important for debugging models (ensuring they’re making decisions for the right reasons) and for explaining outcomes to stakeholders (like providing a reason for a loan denial). Some regulations (e.g. EU AI Act, GDPR’s notion of explanation) implicitly push for such capabilities. Governance programs often require that for high-impact AI, an explanation report or model card be produced. Model Cards are a documentation technique describing a model’s intended use, performance, and limitations in plain language – a practice recommended by Google and others to increase transparency. By using these tools, organizations can “understand what’s going on” inside AI<sup><a href="#ref-14" id="ref-marker-14" class="endnote-link">[14]</a></sup>, which aids accountability (engineers can justify that the model is making decisions based on legitimate factors rather than prohibited ones like race or gender, unless legally allowed and appropriate).</p>
 
         <h3>Bias and Fairness Mitigation</h3>
         <p>A major aspect of AI safety (in the societal sense) is ensuring AI does not unfairly discriminate or produce biased outcomes against protected groups. Technically, this involves measuring bias – e.g. checking model error rates or decision distributions across demographics – and then mitigating it. Techniques include pre-processing (ensuring training data is balanced or reweighted), in-processing (using algorithms that constrain the model to treat groups fairly, such as by adding fairness penalty terms in the objective), and post-processing (adjusting model outputs to reduce disparity). For instance, an HR resume screening AI might be audited for gender bias; if found, the team might retrain it without certain problematic features or use a fairness-aware learning method. Many organizations now use bias audit toolkits (some open-source, like IBM’s AI Fairness 360 or Microsoft’s Fairlearn) as part of model development and validation. AI governance can formalize this by mandating a “fairness check” before deployment of certain AI models, with documented results. In some jurisdictions, this is becoming law – e.g. New York City’s Local Law 144 requires bias audits for AI hiring tools. Thus, technical and compliance aspects meet: engineers must produce evidence (metrics, plots) that the model meets fairness thresholds, and compliance officers ensure those results pass legal muster.</p>
@@ -914,7 +908,7 @@
 
               <h4>Specific Concerns and Practices:</h4>
               <ul>
-                <li><strong>Implementing Ethical Guidelines:</strong> Practitioners should be familiar with their organization’s AI ethics or responsible AI guidelines and translate them into concrete actions. For example, if the guideline is to ensure fairness, the practitioner needs to choose appropriate algorithms or add bias mitigation steps (as discussed in the technical section) during model development. If transparency is a principle, they should incorporate explainability tools and be prepared to produce documentation like model cards. Essentially, they “translate principles into practice” ([2401.15229] Evolving AI Risk Management: A Maturity Model based on the NIST AI Risk Management Framework).</li>
+                <li><strong>Implementing Ethical Guidelines:</strong> Practitioners should be familiar with their organization’s AI ethics or responsible AI guidelines and translate them into concrete actions. For example, if the guideline is to ensure fairness, the practitioner needs to choose appropriate algorithms or add bias mitigation steps (as discussed in the technical section) during model development. If transparency is a principle, they should incorporate explainability tools and be prepared to produce documentation like model cards. Essentially, they “translate principles into practice”<sup><a href="#ref-15" id="ref-marker-15" class="endnote-link">[15]</a></sup>.</li>
                 <li><strong>Data Handling and Privacy:</strong> Practitioners often collect and preprocess data – they must ensure compliance with data governance rules. This includes anonymizing data when required, obtaining proper consent or legal basis for data use, and respecting opt-outs (e.g. filtering out data of users who withdrew consent). If using personal data, involving privacy experts and conducting privacy impact assessments is key. Also, practitioners should use secure data storage and coding practices to avoid leaks (security is part of their responsibility too).</li>
                 <li><strong>Testing and Validation:</strong> A core concern is releasing a model that later behaves unpredictably. Practitioners should therefore invest effort in exhaustive testing – not just standard train/test splits, but stress tests, adversarial tests, and corner-case analysis. Governance might require peer review of models; practitioners should be ready to have their models audited or reproduced by colleagues (ensuring code and data are well-managed for reproducibility). Maintaining an AI model inventory is useful – practitioners document each model’s purpose, training dataset, version, and outcomes of validation checks. This inventory, often mandated by governance, helps track compliance and performance over time.</li>
                 <li><strong>Continuous Monitoring:</strong> After deployment, practitioners might be responsible for monitoring AI in production (especially in smaller organizations without a separate ML-Ops team). They should set up dashboards or alerts for model performance and be proactive in retraining or tuning models when drift is detected. Their concern is to prevent “silent failures” where an AI’s accuracy degrades unnoticed, possibly causing harm or errors (like a loan approval model slowly becoming biased as demographics shift).</li>
@@ -989,7 +983,7 @@
                 <li><strong>Addressing Societal Concerns:</strong> They consider issues like job displacement, AI literacy, and might fund responsible AI innovation or set high standards for government AI use.</li>
               </ul>
               <h4>Concerns:</h4>
-              <p>Primary concerns include preventing harm, preserving fundamental rights (privacy, non-discrimination), ensuring national security, and maintaining AI transparency and accountability. They also balance these with fostering innovation, avoiding over-regulation that might stifle progress.</p>
+              <p>Primary concerns include preventing harm, preserving fundamental rights (privacy, non-discrimination), ensuring national security, and maintaining AI transparency and accountability<sup><a href="#ref-16" id="ref-marker-16" class="endnote-link">[16]</a></sup>. They also balance these with fostering innovation, avoiding over-regulation that might stifle progress.</p>
               <p>In conclusion, policymakers and regulators create the external requirements and incentives for AI governance, addressing macro-level issues to protect public interest and create a level playing field.</p>
             </div>
           </div>
@@ -1268,7 +1262,7 @@
                     <p><strong>Best Practice:</strong> Partner with academia, governments, and civil society on pilot programs (like testing fair AI in government services, or bringing AI education to underserved communities). Use corporate philanthropy or CSR funds to support research on AI ethics. Essentially, be a leader beyond the firm’s boundaries.</p>
                 </div>
             </details>
-        <p>This maturity model is inspired by general ethical governance maturity models (similar to those used in corporate social responsibility and the GSMA’s Responsible AI roadmap ([PDF] The GSMA Responsible AI Maturity Roadmap)). It helps an organization gauge its commitment to not just doing AI right, but doing the right AI. For example, a company at Stage 2 (principles on website) might have faced criticism that those aren’t in practice. To move to Stage 3 and 4, they’d start implementing oversight and integrating ethics into workflows. The higher stages (5-7) become relevant for large organizations that wish to maintain public trust at scale and influence the wider ecosystem.</p>
+        <p>This maturity model is inspired by general ethical governance maturity models (similar to those used in corporate social responsibility and the GSMA’s Responsible AI roadmap<sup><a href="#ref-17" id="ref-marker-17" class="endnote-link">[17]</a></sup>). It helps an organization gauge its commitment to not just doing AI right, but doing the right AI. For example, a company at Stage 2 (principles on website) might have faced criticism that those aren’t in practice. To move to Stage 3 and 4, they’d start implementing oversight and integrating ethics into workflows. The higher stages (5-7) become relevant for large organizations that wish to maintain public trust at scale and influence the wider ecosystem.</p>
 
 
         <h3>5. AI Risk Management Maturity Curve (Holistic Management of AI Risks)</h3>
@@ -1293,7 +1287,7 @@
             <details>
                 <summary><h4>Stage 3: Structured Risk Assessment Process</h4></summary>
                 <div class="maturity-details">
-                    <p>There is now a structured process to assess AI risks (drawing from frameworks like NIST’s “Map and Measure” functions). Each AI project undergoes a risk assessment phase where risks are identified, likelihood and impact estimated (even if qualitatively), and documented. The organization might use risk matrices or adopt some standard categories (like NIST’s trustworthiness characteristics: privacy risk, accuracy risk, etc.) (Everything you need to know about the NIST AI Risk Management ...).</p>
+                    <p>There is now a structured process to assess AI risks (drawing from frameworks like NIST’s “Map and Measure” functions). Each AI project undergoes a risk assessment phase where risks are identified, likelihood and impact estimated (even if qualitatively), and documented. The organization might use risk matrices or adopt some standard categories (like NIST’s trustworthiness characteristics: privacy risk, accuracy risk, etc.)<sup><a href="#ref-2" id="ref-marker-2" class="endnote-link">[2]</a></sup>.</p>
                     <p><strong>Assessment:</strong> Completed risk assessment documents for AI projects, risk ratings assigned (e.g. low/medium/high). Risk acceptance or mitigation decisions noted (e.g. we accept X risk or we will mitigate Y risk by doing Z).</p>
                     <p><strong>Challenge:</strong> Calibration of risk scoring can be hard (is the risk “high” or “medium”? How to compare a fairness risk vs. a security risk?). Also ensuring this doesn’t become a paperwork exercise but actually informs design.</p>
                     <p><strong>Best Practice:</strong> Involve multidisciplinary perspectives in the assessment (technical lead, business owner, risk manager). Perhaps adopt the NIST AI RMF categories to ensure completeness (governance, map context, measure issues). Train risk owners on AI nuances.</p>
@@ -1423,227 +1417,16 @@
         <p>One way to visualize these maturity curves is by using a seven-step ladder or pyramid, where each step corresponds to a stage with a brief descriptor (from Initial to Optimizing). For instance, a ladder for AI Governance could label steps as: 1) None, 2) Ad hoc, 3) Aware, 4) Defined, 5) Managed, 6) Integrated, 7) Transformative. Similar ladders/pyramids can be drawn for each domain. These visuals help communicate to stakeholders that maturity is a journey – you climb stages progressively. Often, color codes (red for low maturity to green for high) highlight the improvement.</p>
 
          <div class="figure">
-          <!-- Ensure image path is relative to index.html if storing locally -->
-          <img src="https://github.com/Khullani/AI-Governance-Handbook/blob/main/Al%20Governance%20Maturity%20Stages.png"
+          <img src="https://github.com/Khullani/AI-Governance-Handbook/raw/main/Al%20Governance%20Maturity%20Stages.png"
             alt="AI Governance Maturity Stages"
-            onerror="this.onerror=null; this.src='https://github.com/Khullani/AI-Governance-Handbook/blob/main/Al%20Governance%20Maturity%20Stages.png';" />
-          <p class="figure-caption">AI Governance Maturity Stages<sup>(See details above)</sup></p>
+            onerror="this.src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=';" />
+          <p class="figure-caption">AI Governance Maturity Stages</p>
         </div>
 
         <p>In implementing maturity models, organizations should also consider dependency between them: e.g. improving Responsible AI maturity might require improving Governance maturity since governance provides the oversight for ethics. In practice, progress in one area often drives progress in others. A holistic approach (perhaps an overall AI Capability Maturity model combining elements of all) can be developed, but dissecting by domain as we did allows focus on specific competencies and specialized teams (compliance team vs engineering team) to take ownership.</p>
       </section>
 
-      <!-- Glossary Section -->
-      <section id="glossary" class="content-text">
-        <h2>Glossary of AI Terms and Definitions</h2>
-
-        <h3>1. Introduction</h3>
-        <p>The rapid proliferation of artificial intelligence (AI) across diverse industries has ushered in an era of unprecedented technological advancement. However, this transformative power necessitates careful oversight and management to ensure its ethical, safe, and responsible deployment. For professionals navigating the complex landscape of AI governance, a clear and consistent understanding of the associated terminology is paramount <sup>(1)</sup>. The language surrounding AI can often feel like a high-speed train, leaving behind those who lack familiarity with its intricate lexicon <sup>(1)</sup>. Terms such as neural networks, explainable AI (XAI), and model drift are frequently used, sometimes without a shared understanding of their precise meanings <sup>(1)</sup>. Furthermore, the terminology within the field is in constant flux, with new concepts and acronyms emerging at a rapid pace, making it challenging for even seasoned professionals to stay abreast of the latest developments <sup>(1)</sup>.</p>
-        <p>Effective AI governance hinges on the ability of professionals from various backgrounds – including technology, law, ethics, and business – to communicate clearly and collaborate effectively <sup>(1)</sup>. A standardized glossary serves as a foundational tool in this endeavor, breaking down complex AI concepts into accessible and practical language <sup>(1)</sup>. This shared vocabulary enables business leaders to better align their strategies with technical teams, allows data science teams to articulate intricate concepts to non-technical stakeholders, and empowers AI enthusiasts and students to build a solid understanding of the field <sup>(1)</sup>. Therefore, this glossary aims to provide AI Governance Professionals with a comprehensive resource, elucidating key terms related to AI safety, fundamental machine learning concepts relevant to governance, and the evolving regulatory landscape <sup>(1)</sup>. By simplifying the complex lexicon of AI, this resource intends to foster confident participation in discussions, enhance understanding of critical issues, and facilitate informed decision-making in the realm of AI governance <sup>(1)</sup>.</p>
-
-        <h3>2. Glossary of Core AI Governance Terms</h3>
-        <div class="term-block">
-          <h4 class="term-title">AI Accountability</h4>
-          <p>This refers to the structured assignment of roles and responsibilities throughout the entire AI lifecycle. It ensures that there is clear ethical oversight, adherence to compliance requirements, and effective mitigation of potential risks associated with AI systems <sup>(1)</sup>. Accountability means that the actions, decisions, and ultimate outcomes of an AI system can be traced back to a specific entity or individuals responsible for its development and deployment <sup>(4)</sup>. This concept extends beyond mere legal responsibility, encompassing the broader ethical and societal implications of AI <sup>(4)</sup>.</p>
-        </div>
-        <div class="term-block">
-          <h4 class="term-title">AI Compliance</h4>
-          <p>This denotes the strict adherence of AI systems to all relevant legal, regulatory, and ethical mandates. It is crucial for ensuring the responsible and risk-mitigated design, development, and deployment of AI technologies <sup>(1)</sup>. AI compliance involves verifying that AI-powered systems do not contravene any laws or regulations and that the data used for training these systems is collected and utilized in a legal and ethical manner <sup>(7)</sup>. It also guarantees that AI systems are not employed for discriminatory or manipulative purposes and that they respect individual privacy and do not cause harm <sup>(7)</sup>.</p>
-        </div>
-        <div class="term-block">
-          <h4 class="term-title">AI Fairness</h4>
-          <p>This principle ensures that AI systems operate without bias, leading to equitable, just, and non-discriminatory outcomes across all their applications <sup>(1)</sup>. It prioritizes the relatively equal treatment of individuals or groups in the decisions and actions of AI systems, ensuring that these decisions do not disproportionately or negatively impact individuals based on sensitive attributes such as race, gender, or religion <sup>(4)</sup>.</p>
-        </div>
-        <div class="term-block">
-          <h4 class="term-title">AI Governance</h4>
-          <p>This encompasses the comprehensive system of policies, controls, and regulations established to ensure that AI is developed, deployed, and managed in an ethical, transparent, and safe manner <sup>(1)</sup>. It involves bringing together diverse stakeholders from data science, engineering, compliance, legal, and business teams to align AI systems with overarching business, legal, and ethical requirements throughout the entire lifecycle of machine learning models <sup>(15)</sup>. Effective AI governance applies rules, processes, and responsibilities to maximize the value derived from automated data products while simultaneously mitigating risks and adhering to legal requirements <sup>(12)</sup>. Ultimately, it directs AI research, development, and application to safeguard safety, promote fairness, and uphold respect for fundamental human rights <sup>(3)</sup>.</p>
-        </div>
-        <div class="term-block">
-          <h4 class="term-title">AI Governance Framework</h4>
-          <p>These are structured models that define the fundamental principles, compliance protocols, and risk management strategies necessary to ensure the ethical and transparent development and deployment of AI <sup>(1)</sup>. These frameworks provide guidance on a wide range of critical topics, including transparency, accountability, fairness, privacy, security, and overall safety <sup>(3)</sup>. Depending on an organization's specific needs and level of maturity in AI adoption, these frameworks can be implemented in informal ways based on organizational values, through ad hoc development of specific policies, or via the establishment of a comprehensive and formal governance structure <sup>(3)</sup>.</p>
-        </div>
-        <div class="term-block">
-          <h4 class="term-title">AI Risk Assessment</h4>
-          <p>This involves a systematic evaluation of potential risks associated with AI systems. These risks can include bias in algorithms, vulnerabilities to security threats, exposure to regulatory non-compliance, and potential operational failures <sup>(1)</sup>. The primary goal of an AI risk assessment is to identify and thoroughly map these potential risks and to subsequently develop effective mitigation strategies to address them <sup>(4)</sup>. For businesses processing consumer personal information, particularly when utilizing automated decision-making technologies, conducting comprehensive risk assessments is a crucial prerequisite <sup>(23)</sup>.</p>
-        </div>
-        <div class="term-block">
-          <h4 class="term-title">AI Transparency</h4>
-          <p>This refers to the ability to thoroughly document, readily access, clearly understand, and effectively explain the functional and architectural properties of an AI system. This includes the intricate processes involved in its decision-making and the nature of its outputs <sup>(1)</sup>. Achieving AI transparency is essential for fostering accountability, building trust among stakeholders, and ensuring compliance with relevant regulatory requirements <sup>(1)</sup>. It necessitates openness regarding the collection, utilization, and sharing of data, as well as the capacity to explain in understandable terms how the AI system arrives at its decisions <sup>(24)</sup>.</p>
-        </div>
-        <div class="term-block">
-          <h4 class="term-title">Responsible AI</h4>
-          <p>This represents a governance-driven approach to the development of AI that places a high priority on fundamental principles such as fairness, transparency, accountability, trust, safety, and overarching ethical integrity <sup>(1)</sup>. It involves actively steering the responsible development, careful deployment, and ethical use of AI technologies throughout their entire lifecycle <sup>(24)</sup>. This approach emphasizes the critical role of human oversight and the paramount importance of aligning AI systems with core human values <sup>(25)</sup>.</p>
-        </div>
-        <div class="term-block">
-          <h4 class="term-title">AI Audit</h4>
-          <p>This is a formal review and thorough assessment of an AI system conducted to verify that it operates as intended and that it fully complies with all relevant laws, applicable regulations, and established standards <sup>(4)</sup>. The primary purpose of an AI audit is to identify and map any potential risks associated with the system and to propose effective strategies for mitigating these risks <sup>(4)</sup>. Regular AI audits are essential for ensuring the continuous adherence of AI systems to evolving regulations and ethical guidelines <sup>(17)</sup>.</p>
-        </div>
-        <div class="term-block">
-          <h4 class="term-title">AI Assurance</h4>
-          <p>This encompasses a comprehensive combination of frameworks, established policies, well-defined processes, and robust controls that are implemented to measure, rigorously evaluate, and actively promote the safety, reliability, and overall trustworthiness of AI systems <sup>(4)</sup>. AI assurance schemes may include various components such as conformity assessments, thorough impact and risk evaluations, independent AI audits, formal certifications, rigorous testing and evaluation protocols, and verification of compliance with pertinent industry standards <sup>(4)</sup>.</p>
-        </div>
-        <p>The definitions of these core AI governance terms reveal a consistent emphasis on the interconnectedness of ethical considerations, legal compliance, and the practicalities of technical implementation. Effective governance in the realm of AI demands a holistic perspective that seamlessly integrates these crucial aspects throughout the entire AI lifecycle. The consistent highlighting of ethical principles, legal obligations, and the need for transparency and accountability across various definitions underscores that AI governance is not merely a checklist of regulatory requirements. Instead, it necessitates a fundamental commitment to the responsible development and deployment of AI technologies. This integrated approach ensures that AI systems are not only legally sound but also ethically justifiable, fostering trust and promoting the overall well-being of individuals and society.</p>
-
-
-        <h3>3. Glossary of AI Safety Terminology</h3>
-        <div class="term-block">
-          <h4 class="term-title">Adversarial Attack</h4>
-          <p>This represents a significant safety and security risk directed at an AI model. It is initiated by malicious actors who deliberately manipulate the model, often by introducing carefully crafted, deceptive input data <sup>(4)</sup>. These attacks are specifically designed to deceive AI systems, causing them to generate incorrect or unintended predictions or to make faulty decisions <sup>(26)</sup>. Adversarial attacks exploit inherent vulnerabilities and limitations within machine learning models, particularly those involving deep neural networks <sup>(26)</sup>. These attacks can be categorized based on the attacker's level of access to the model: white-box attacks occur when the attacker has complete access to the model's architecture and parameters, while black-box attacks are launched when the attacker can only interact with the model through its inputs and outputs <sup>(27)</sup>. Common types of adversarial attacks include evasion attacks, where inputs are modified to cause misclassification; data poisoning, which corrupts training data; inference attacks, aimed at revealing sensitive information; and model extraction, where attackers attempt to replicate the model's functionality <sup>(27)</sup>.</p>
-        </div>
-        <div class="term-block">
-          <h4 class="term-title">Data Poisoning</h4>
-          <p>This is a specific type of cyberattack where malicious individuals or groups intentionally manipulate or corrupt the training data used to develop artificial intelligence and machine learning models <sup>(27)</sup>. By injecting incorrect or biased data points into these training datasets, attackers can subtly or drastically alter a model's behavior, potentially leading to data misclassification or a significant reduction in the overall accuracy and effectiveness of the AI system <sup>(31)</sup>. Data poisoning attacks can be targeted, aiming to manipulate specific outputs of the model, or non-targeted, with the goal of degrading the general robustness and reliability of the model <sup>(31)</sup>. Various techniques are employed in data poisoning, including direct data injection of fabricated data, the introduction of subtle backdoor triggers within the data, and clean-label attacks where poisoned data appears correctly labeled, making detection particularly challenging <sup>(31)</sup>.</p>
-        </div>
-        <div class="term-block">
-          <h4 class="term-title">Model Drift</h4>
-          <p>This phenomenon refers to the gradual degradation of a machine learning model's performance over time. It occurs due to changes in the underlying data patterns or shifts in the relationships between the input variables and the target variable that the model is trying to predict <sup>(1)</sup>. Model drift, also known as model decay, can lead to increasingly inaccurate predictions and flawed decision-making based on the model's outputs <sup>(35)</sup>. Several types of model drift can occur, including concept drift, where the fundamental relationship between inputs and the target changes; data drift (or covariate shift), where the distribution of the input data itself changes; label drift, where the distribution of the target variable shifts; and feature drift, which involves changes in the distribution of individual input features <sup>(35)</sup>. Proactive monitoring and effective mitigation strategies to address model drift are essential components of a robust AI governance framework <sup>(35)</sup>.</p>
-        </div>
-        <p>AI safety constitutes a vital dimension of AI governance. Adversarial attacks and data poisoning represent deliberate and often sophisticated attempts to compromise the integrity and reliability of AI systems. These malicious activities highlight the critical need for robust security measures and vigilant monitoring. Simultaneously, the phenomenon of model drift underscores the inherent challenge of maintaining the performance and accuracy of AI systems in dynamic real-world environments where data distributions and underlying relationships can evolve over time. Recognizing and addressing these safety-related challenges is fundamental for ensuring the trustworthy and responsible deployment of AI technologies.</p>
-
-
-        <h3>4. Glossary of Machine Learning Concepts for AI Governance</h3>
-        <div class="term-block">
-          <h4 class="term-title">Algorithm</h4>
-          <p>In the context of AI and machine learning, an algorithm refers to a well-defined procedure or a set of specific instructions and rules designed to perform a particular task or solve a defined problem using a computer <sup>(4)</sup>. Algorithms form the fundamental logic that underpins the operation of AI and machine learning models, dictating how they process data and generate outputs.</p>
-        </div>
-        <div class="term-block">
-          <h4 class="term-title">Neural Networks</h4>
-          <p>These are a specific type of machine learning model that are particularly prevalent in the field of deep learning. They are structured to mimic the interconnected network of neurons in the human brain, comprising multiple layers of interconnected processing units, including at least one hidden layer <sup>(4)</sup>. This layered architecture enables neural networks to model highly complex, nonlinear relationships and intricate patterns that may exist within large datasets, making them suitable for a wide range of applications such as image recognition and natural language processing.</p>
-        </div>
-        <div class="term-block">
-          <h4 class="term-title">Supervised Learning</h4>
-          <p>This is a significant subset of machine learning where a model is trained using a dataset that includes labeled input data. Each input in the dataset is paired with a corresponding known desired output or target variable <sup>(4)</sup>. The model learns to map the inputs to the outputs based on this labeled training data. Supervised learning is particularly useful for tasks involving classification, where the goal is to assign data points to specific categories, and regression, where the objective is to predict continuous numerical values.</p>
-        </div>
-        <div class="term-block">
-          <h4 class="term-title">Unsupervised Learning</h4>
-          <p>In contrast to supervised learning, unsupervised learning is another key subset of machine learning where a model is trained on an unlabeled dataset. The primary goal here is for the model to discover inherent patterns, structures, or relationships within the data without any explicit guidance from labeled outputs <sup>(4)</sup>. This type of learning is valuable for various techniques such as clustering, where data points are grouped based on similarity; outlier detection, which identifies anomalous data points; dimensionality reduction, which aims to simplify the data by reducing the number of variables; and feature learning, where the model automatically discovers useful features from the data.</p>
-        </div>
-        <div class="term-block">
-          <h4 class="term-title">Explainable AI (XAI)</h4>
-          <p>This refers to the capability of AI models to provide clear and understandable explanations for how they generate their outputs or make decisions. It is a critical aspect of ensuring interpretability, facilitating compliance with regulations, and fostering trust among stakeholders who interact with or are affected by AI systems <sup>(1)</sup>. XAI encompasses a set of processes and methodologies that enable human users to comprehend and have confidence in the results produced by machine learning algorithms <sup>(42)</sup>. It plays a vital role in characterizing the accuracy, fairness, transparency, and overall outcomes of AI-powered decision-making processes, ultimately helping organizations adopt a responsible approach to AI development and deployment <sup>(42)</sup>.</p>
-        </div>
-        <div class="term-block">
-          <h4 class="term-title">Federated Learning</h4>
-          <p>This is a machine learning technique that enables multiple independent entities, often referred to as clients, to collaboratively train a shared model without the need to centralize their data. Instead of transferring raw data to a central server, each participating device or organization trains the model locally using its own data and only shares the updated model parameters <sup>(40)</sup>. This approach prioritizes data privacy and minimization by bringing the model to the data, rather than the other way around <sup>(48)</sup>.</p>
-        </div>
-        <div class="term-block">
-          <h4 class="term-title">Differential Privacy</h4>
-          <p>This is a mathematically rigorous definition that provides a robust framework for developing privacy-preserving technologies. It allows organizations to share valuable information about a dataset by describing statistical patterns of groups within the data while ensuring that all personal information about individual data subjects is withheld <sup>(52)</sup>. Differential privacy works by adding carefully calibrated statistical noise to the results of a query or analysis performed on the dataset. This noise makes it extremely difficult to discern whether any specific individual's data was included in the dataset or to infer any new information about a particular individual based on the analysis <sup>(54)</sup>. The goal is to ensure that the inclusion or exclusion of any single individual's data does not significantly alter the overall conclusions drawn from the analysis <sup>(54)</sup>.</p>
-        </div>
-        <p>A foundational understanding of these key machine learning concepts is increasingly necessary for AI Governance Professionals to effectively oversee and guide the development and deployment of AI systems. Terms like explainable AI, federated learning, and differential privacy are particularly relevant in the context of governance as they directly address critical concerns related to the transparency of AI decision-making, the privacy implications of data usage, and the overall security of AI systems. While a deep technical expertise in machine learning may not be required for all AI governance roles, a working knowledge of these fundamental principles enables professionals to ask informed questions, assess potential risks and benefits, and contribute meaningfully to the establishment of responsible AI practices within their organizations.</p>
-
-
-        <h3>5. Glossary of AI Ethics Terms</h3>
-        <div class="term-block">
-          <h4 class="term-title">AI Ethics</h4>
-          <p>This broad term encompasses a comprehensive set of values, fundamental principles, and practical techniques that employ widely accepted standards of right and wrong to guide moral conduct throughout the entire lifecycle of AI technologies, from their initial development to their eventual use and sale <sup>(1)</sup>. AI ethics addresses the potential moral, societal, and even legal implications that may arise from the deployment of AI systems, aiming to ensure that these powerful technologies are developed and utilized in ways that are consistent with human values, respect fundamental rights, and promote overall well-being <sup>(58)</sup>. Key principles often associated with AI ethics include transparency in how AI systems function, fairness in their outcomes, accountability for their actions, the protection of individual privacy, and the explainability of their decisions <sup>(13)</sup>.</p>
-        </div>
-        <div class="term-block">
-          <h4 class="term-title">Bias</h4>
-          <p>In the context of AI, bias refers to systematic distortions that can occur within AI models. These distortions often lead to unfair or discriminatory outcomes. Bias can originate from various sources, including the use of biased or unrepresentative data during the model's training, inherent flaws in the design of the algorithms themselves, or oversights in the development and deployment processes <sup>(1)</sup>. Different types of bias can manifest in AI systems, such as computational or machine bias arising from the model's assumptions or the data, cognitive bias reflecting inaccurate human judgments, or societal bias stemming from systemic prejudices <sup>(4)</sup>. Regardless of its origin, bias in AI can significantly impact the outcomes of AI systems and poses a considerable risk to individual rights and fundamental liberties <sup>(4)</sup>.</p>
-        </div>
-        <div class="term-block">
-          <h4 class="term-title">Fairness (Ethical Context)</h4>
-          <p>Within the ethical considerations of AI, fairness refers to the principle of impartial and just treatment or behavior without any unjust favoritism or discrimination in the way AI systems operate <sup>(1)</sup>. It prioritizes the relatively equal treatment of all individuals or groups affected by an AI system's decisions and actions <sup>(4)</sup>. Achieving fairness in AI means ensuring that an AI system's decisions and outcomes do not disproportionately or adversely impact individuals based on sensitive attributes such as race, gender, religion, or other protected characteristics <sup>(4)</sup>.</p>
-        </div>
-        <div class="term-block">
-          <h4 class="term-title">Interpretability</h4>
-          <p>This refers to the ability to explain or present the reasoning behind a model's decisions and outputs in terms that are easily understandable by humans <sup>(4)</sup>. Unlike explainability, which often focuses on providing an explanation after a decision has been made, interpretability emphasizes the design of AI models in a way that inherently facilitates understanding through their structure, the features they utilize, or the algorithms they employ <sup>(4)</sup>. Interpretable models are often domain-specific and require significant expertise in the relevant field to develop effectively.</p>
-        </div>
-        <div class="term-block">
-          <h4 class="term-title">Robustness</h4>
-          <p>In the context of AI ethics and safety, robustness is an essential attribute of an AI system. It signifies the system's ability to be resilient to various challenges, including security attacks, unexpected changes in its operating environment, and intentional manipulation of its inputs <sup>(4)</sup>. A robust AI system maintains its intended functionality, consistent performance, and a high degree of accuracy even when confronted with altered inputs or under the pressure of security threats <sup>(4)</sup>.</p>
-        </div>
-        <p>Ethical considerations are foundational to the responsible governance of AI. A thorough understanding of terms such as bias, fairness, and interpretability is crucial for ensuring that AI systems are not only technologically advanced but also developed and deployed in a manner that aligns with fundamental societal values and actively avoids the creation or perpetuation of harmful or discriminatory outcomes. AI Governance Professionals must be equipped to identify and effectively address ethical risks, promoting fairness and transparency in the intricate decision-making processes of AI, thereby fostering public trust and ensuring the beneficial use of these powerful technologies.</p>
-
-
-        <h3>6. Glossary of Regulatory and Legal Terms in AI Governance</h3>
-        <div class="term-block">
-          <h4 class="term-title">GDPR (General Data Protection Regulation)</h4>
-          <p>This is a comprehensive data protection and privacy regulation enacted by the European Union. It has a significant impact on the development and application of AI technologies, particularly when these technologies process the personal data of individuals within the EU <sup>(3)</sup>. The GDPR establishes strict requirements for the lawful processing of personal data, including the need for justifiable grounds for data management, adherence to principles of data minimization and purpose limitation, and the implementation of anonymization and pseudonymization techniques where appropriate <sup>(64)</sup>. It also grants individuals a range of rights concerning their personal data, such as the right to access their data, the right to data portability, the right to receive an explanation for decisions made through automated processing, and the right to be forgotten (data erasure) <sup>(64)</sup>. Furthermore, the GDPR places obligations on organizations to ensure accountability, implement data protection by design and by default, and maintain ongoing supervision of compliance <sup>(64)</sup>.</p>
-        </div>
-        <div class="term-block">
-          <h4 class="term-title">CCPA (California Consumer Privacy Act)</h4>
-          <p>This is a landmark data privacy law in the state of California, USA, which aims to provide consumers with greater control over their personal information <sup>(22)</sup>. The CCPA grants consumers various rights, including the right to know what personal information businesses collect about them and how it is used, the right to opt out of the sale or sharing of their personal information, and the right to request the deletion or correction of their data <sup>(71)</sup>. Notably, the California Privacy Protection Agency (CPPA) has been actively developing and proposing regulations that specifically address the use of artificial intelligence and automated decision-making technologies (ADMT) <sup>(23)</sup>. These proposed rules would require businesses using ADMT for significant decisions to provide consumers with pre-use notices detailing the purpose and operation of the technology, offer mechanisms for consumers to opt out of its use, and explain how the ADMT affects the consumer <sup>(23)</sup>. Additionally, the proposed regulations mandate that businesses conduct risk assessments before deploying ADMT in certain contexts, particularly when making significant decisions about consumers or engaging in extensive profiling <sup>(23)</sup>.</p>
-        </div>
-        <div class="term-block">
-          <h4 class="term-title">EU AI Act</h4>
-          <p>Officially known as the Artificial Intelligence Act, this is a groundbreaking law enacted by the European Union to govern the development and utilization of AI systems within its member states <sup>(3)</sup>. The EU AI Act adopts a risk-based approach to regulation, categorizing AI systems into different levels of risk: unacceptable risk (prohibited), high risk (subject to strict obligations), limited risk (requiring specific transparency measures), and minimal or no risk (largely unregulated) <sup>(3)</sup>. The Act imposes various obligations on both providers and deployers of high-risk AI systems, covering aspects such as data governance, technical documentation, transparency requirements, human oversight mechanisms, and robustness and accuracy standards <sup>(67)</sup>. This comprehensive legislation aims to foster innovation in AI while simultaneously safeguarding fundamental rights and ensuring the safety of individuals and the public.</p>
-        </div>
-        <div class="term-block">
-          <h4 class="term-title">NIST AI RMF (AI Risk Management Framework)</h4>
-          <p>This is a voluntary framework developed by the National Institute of Standards and Technology (NIST) in the United States. Its purpose is to provide organizations with a structured set of guidelines to effectively assess and manage the diverse risks associated with the implementation and use of artificial intelligence systems <sup>(3)</sup>. Unlike a legally binding regulation, the NIST AI RMF offers a comprehensive approach to identifying, evaluating, and mitigating AI-related risks across various sectors. The framework provides guidance on a wide array of critical topics, including ensuring transparency in AI systems, establishing clear lines of accountability, promoting fairness and non-discrimination, protecting data privacy and security, and ensuring the overall safety and reliability of AI technologies <sup>(3)</sup>. By adopting the NIST AI RMF, organizations can enhance their ability to develop and deploy AI responsibly, building trust and fostering innovation in a secure and ethical manner.</p>
-        </div>
-        <div class="term-block">
-          <h4 class="term-title">AI Compliance (Regulatory Context)</h4>
-          <p>In a regulatory context, AI compliance refers to the ongoing process of ensuring that all AI-powered systems and applications within an organization adhere to all applicable laws, relevant regulations, established industry standards, and overarching ethical guidelines <sup>(1)</sup>. This involves a multifaceted approach that includes verifying the legal and ethical use of AI technologies, ensuring the proper handling and security of data used in AI training and deployment, preventing the use of AI for discriminatory or manipulative purposes, safeguarding individual privacy in the context of AI applications, and promoting the responsible and beneficial deployment of AI for society as a whole <sup>(7)</sup>. Achieving AI compliance typically requires organizations to establish clear internal policies and procedures, develop comprehensive compliance programs, implement robust monitoring systems to track AI usage and performance, and establish effective AI governance frameworks that guide the responsible development and deployment of these powerful technologies <sup>(7)</sup>.</p>
-        </div>
-        <p>The regulatory landscape for AI governance is rapidly evolving, with significant frameworks like the GDPR, CCPA, and the EU AI Act either in effect or nearing implementation. These legal and regulatory developments, coupled with guidance from standards bodies like NIST, underscore a global recognition of the need for structured oversight of AI technologies. AI Governance Professionals must possess a strong understanding of the key provisions and implications of these frameworks to ensure their organizations achieve and maintain compliance, effectively mitigate potential legal risks, and foster the responsible innovation of AI. The NIST AI RMF, while not a regulation, provides a valuable and widely adopted set of guidelines for managing the broad spectrum of risks associated with AI systems.</p>
-
-        <h4>Table 1: Key AI Governance Frameworks and Their Focus</h4>
-        <table class="maturity-table">
-            <thead>
-                <tr>
-                    <th>Framework</th>
-                    <th>Origin</th>
-                    <th>Focus</th>
-                    <th>Relevant Snippets</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>GDPR</td>
-                    <td>European Union</td>
-                    <td>Data protection and privacy, impacting AI systems processing personal data.</td>
-                    <td><sup>(3)</sup></td>
-                </tr>
-                <tr>
-                    <td>CCPA</td>
-                    <td>California, USA</td>
-                    <td>Consumer privacy rights, with proposed regulations specifically addressing AI and automated decision-making.</td>
-                    <td><sup>(22)</sup></td>
-                </tr>
-                <tr>
-                    <td>EU AI Act</td>
-                    <td>European Union</td>
-                    <td>Risk-based regulation of AI systems, categorizing risks and imposing requirements based on the level of risk.</td>
-                    <td><sup>(3)</sup></td>
-                </tr>
-                <tr>
-                    <td>NIST AI RMF</td>
-                    <td>USA</td>
-                    <td>Voluntary framework providing guidelines for managing risks associated with AI systems, covering safety, fairness, and trustworthiness.</td>
-                    <td><sup>(3)</sup></td>
-                </tr>
-                <tr>
-                    <td>OECD AI Principles</td>
-                    <td>International</td>
-                    <td>Principles emphasizing responsible stewardship of trustworthy AI, including transparency, fairness, and accountability.</td>
-                    <td><sup>(3)</sup></td>
-                </tr>
-                <tr>
-                    <td>Canada's Directive on Automated Decision-Making</td>
-                    <td>Canada</td>
-                    <td>Guidance for the Canadian government's use of AI in decision-making, focusing on human intervention and oversight.</td>
-                    <td><sup>(3)</sup></td>
-                </tr>
-            </tbody>
-        </table>
-
-        <h3>7. Conclusion (Glossary)</h3>
-        <p>The effective governance of artificial intelligence is predicated on a shared and precise understanding of the terminology used across the diverse domains of technology, ethics, and law. This glossary has aimed to provide AI Governance Professionals with a comprehensive resource encompassing key terms relevant to AI safety, fundamental machine learning concepts crucial for oversight, the core principles of AI ethics, and the rapidly evolving landscape of AI-related regulations and legal frameworks. By establishing a common vocabulary, this resource intends to facilitate clearer and more effective communication among professionals from varied backgrounds, ultimately leading to more informed decision-making processes.</p>
-        <p>This glossary serves as a foundational step towards fostering mature and robust AI governance practices. However, the field of AI is inherently dynamic, characterized by continuous technological advancements and an evolving regulatory landscape. Therefore, this glossary should be regarded as a living document, subject to ongoing updates and refinements to remain relevant and valuable for AI Governance Professionals as the field continues to progress. The establishment of a comprehensive and consistently maintained shared vocabulary is essential for navigating the complexities of AI governance and ensuring the responsible and beneficial deployment of artificial intelligence technologies for the betterment of society.</p>
-        <!-- Note: Consider adding a proper footnote section if the numbered citations (1), (3), etc., need full references -->
-      </section>
-
-
-      <!-- Conclusion Section (Using Key Takeaways) -->
-      <section id="conclusion" class="content-text">
-        <h2>Conclusion (Key Takeaways)</h2>
-        <p>This report provided a comprehensive primer on AI Governance, Safety, Trust/Transparency, Responsible AI, and Risk – explaining key legal/regulatory frameworks and technical aspects, tailored to the needs of AI practitioners, compliance officers, executives, and policymakers. As organizations navigate the complex landscape of AI, they must align on terminology and goals (hence the glossary) and collaborate across roles: developers building safe and explainable systems, compliance ensuring laws and ethics are met, executives setting direction and culture, and policymakers creating an environment that rewards responsible innovation. By assessing their maturity in various facets of AI governance and following best practices at each stage, organizations can steadily improve. The ultimate aim is to harness the power of AI in a way that is responsible, trustworthy, and aligned with societal values, thereby unlocking AI’s benefits while managing its risks.</p>
-      </section>
-
-      <!-- Additional Resources Section (Existing Content) -->
+      <!-- Additional Resources Section -->
       <section id="resources" class="content-text">
         <h2>Additional Resources</h2>
         <h3>Organizations and Initiatives</h3>
@@ -1668,25 +1451,331 @@
           <li><a href="https://datatracker.ietf.org/doc/html/draft-soilandreyes-dataset-description-00" target="_blank"
               rel="noopener noreferrer">Dataset Documentation</a></li>
         </ul>
-        <h3>Further Reading</h3>
-        <ul>
-          <li>Mitchell, M., et al. (2019). <em>Model Cards for Model Reporting</em>.</li>
-          <li>Gebru, T., et al. (2021). <em>Datasheets for Datasets</em>.</li>
-          <li>OECD (2019). <em>Recommendation of the Council on Artificial Intelligence</em>.</li>
-          <li>Arrieta, A.B., et al. (2020). <em>Explainable Artificial Intelligence (XAI)</em>.</li>
-        </ul>
       </section>
 
-      <!-- About the Author Section (Existing Content) -->
+      <!-- References Section (Main Body) -->
+      <section id="references" class="content-text">
+          <h2>References (Main Body)</h2>
+          <ol>
+              <li id="ref-1">Osler, Hoskin & Harcourt LLP. "The role of ISO/IEC 42001 in AI governance". [Provide URL if available] <a href="#ref-marker-1" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="ref-2">"Everything you need to know about the NIST AI Risk Management ...". [Provide Full Source/URL] <a href="#ref-marker-2" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="ref-3">MIAI. "Tools for Navigating the EU AI Act: (2) Visualisation Pyramid". [Provide URL if available] <a href="#ref-marker-3" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="ref-4">Visier. "What the GDPR Shows Us About the Future of AI Regulation". [Provide URL if available] <a href="#ref-marker-4" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="ref-5">"The New EU Artificial Intelligence Act: Impact on the Biodiversity Information Community". [Provide Full Source/URL] <a href="#ref-marker-5" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="ref-6">NIST. "AI Risk Management Framework". Available: https://www.nist.gov/itl/ai-risk-management-framework <a href="#ref-marker-6" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="ref-7">Medill Spiegel Research Center. "Robots and the NIST AI Risk Management Framework". [Provide URL if available] <a href="#ref-marker-7" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="ref-8">Thoropass. "Understanding the NIST AI Risk Management Framework: A complete guide". [Provide URL if available] <a href="#ref-marker-8" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="ref-9">GDPR. "Art. 22 GDPR – Automated individual decision-making, including profiling". Available: [Provide Official GDPR URL for Art. 22] <a href="#ref-marker-9" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="ref-10">Cloudflare. "What is the CCPA (California Consumer Privacy Act)?". Available: https://www.cloudflare.com/learning/privacy/what-is-ccpa/ [Verify URL] <a href="#ref-marker-10" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="ref-11">OECD. "AI principles". Available: https://oecd.ai/en/ai-principles <a href="#ref-marker-11" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="ref-12">American National Standards Institute (ANSI). "OECD Updates AI Principles". [Provide URL if available] <a href="#ref-marker-12" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="ref-13">TechTarget. "What Is Artificial Intelligence (AI) Governance?". [Provide URL if available] <a href="#ref-marker-13" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="ref-14">"What is technical AI safety?". [Provide Full Source/URL] <a href="#ref-marker-14" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="ref-15">arXiv:2401.15229. "Evolving AI Risk Management: A Maturity Model based on the NIST AI Risk Management Framework". Available: https://arxiv.org/abs/2401.15229 <a href="#ref-marker-15" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="ref-16">"Accountability (OECD AI Principle)". [Provide Specific Document/Page/URL] <a href="#ref-marker-16" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="ref-17">GSMA. "The GSMA Responsible AI Maturity Roadmap" [PDF]. [Provide URL if available] <a href="#ref-marker-17" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li>Mitchell, M., et al. (2019). <em>Model Cards for Model Reporting</em>. [Provide Full Source/URL if available]</li>
+              <li>Gebru, T., et al. (2021). <em>Datasheets for Datasets</em>. [Provide Full Source/URL if available]</li>
+              <li>OECD (2019). <em>Recommendation of the Council on Artificial Intelligence</em>. [Provide Full Source/URL if available]</li>
+              <li>Arrieta, A.B., et al. (2020). <em>Explainable Artificial Intelligence (XAI)</em>. [Provide Full Source/URL if available]</li>
+              <!-- Note: Items 18-21 are general readings moved here -->
+          </ol>
+      </section>
+
+      <!-- Glossary Section -->
+      <section id="glossary" class="content-text">
+        <h2>Glossary of AI Terms and Definitions</h2>
+
+        <h3>1. Introduction</h3>
+        <p>The rapid proliferation of artificial intelligence (AI) across diverse industries has ushered in an era of unprecedented technological advancement. However, this transformative power necessitates careful oversight and management to ensure its ethical, safe, and responsible deployment. For professionals navigating the complex landscape of AI governance, a clear and consistent understanding of the associated terminology is paramount<sup><a href="#gref-1" id="gref-marker-1" class="endnote-link">[G1]</a></sup>. The language surrounding AI can often feel like a high-speed train, leaving behind those who lack familiarity with its intricate lexicon<sup><a href="#gref-1" id="gref-marker-1" class="endnote-link">[G1]</a></sup>. Terms such as neural networks, explainable AI (XAI), and model drift are frequently used, sometimes without a shared understanding of their precise meanings<sup><a href="#gref-1" id="gref-marker-1" class="endnote-link">[G1]</a></sup>. Furthermore, the terminology within the field is in constant flux, with new concepts and acronyms emerging at a rapid pace, making it challenging for even seasoned professionals to stay abreast of the latest developments<sup><a href="#gref-1" id="gref-marker-1" class="endnote-link">[G1]</a></sup>.</p>
+        <p>Effective AI governance hinges on the ability of professionals from various backgrounds – including technology, law, ethics, and business – to communicate clearly and collaborate effectively<sup><a href="#gref-1" id="gref-marker-1" class="endnote-link">[G1]</a></sup>. A standardized glossary serves as a foundational tool in this endeavor, breaking down complex AI concepts into accessible and practical language<sup><a href="#gref-1" id="gref-marker-1" class="endnote-link">[G1]</a></sup>. This shared vocabulary enables business leaders to better align their strategies with technical teams, allows data science teams to articulate intricate concepts to non-technical stakeholders, and empowers AI enthusiasts and students to build a solid understanding of the field<sup><a href="#gref-1" id="gref-marker-1" class="endnote-link">[G1]</a></sup>. Therefore, this glossary aims to provide AI Governance Professionals with a comprehensive resource, elucidating key terms related to AI safety, fundamental machine learning concepts relevant to governance, and the evolving regulatory landscape<sup><a href="#gref-1" id="gref-marker-1" class="endnote-link">[G1]</a></sup>. By simplifying the complex lexicon of AI, this resource intends to foster confident participation in discussions, enhance understanding of critical issues, and facilitate informed decision-making in the realm of AI governance<sup><a href="#gref-1" id="gref-marker-1" class="endnote-link">[G1]</a></sup>.</p>
+
+        <h3>2. Glossary of Core AI Governance Terms</h3>
+        <div class="term-block">
+          <h4 class="term-title">AI Accountability</h4>
+          <p>This refers to the structured assignment of roles and responsibilities throughout the entire AI lifecycle. It ensures that there is clear ethical oversight, adherence to compliance requirements, and effective mitigation of potential risks associated with AI systems<sup><a href="#gref-1" id="gref-marker-1" class="endnote-link">[G1]</a></sup>. Accountability means that the actions, decisions, and ultimate outcomes of an AI system can be traced back to a specific entity or individuals responsible for its development and deployment<sup><a href="#gref-4" id="gref-marker-4" class="endnote-link">[G4]</a></sup>. This concept extends beyond mere legal responsibility, encompassing the broader ethical and societal implications of AI<sup><a href="#gref-4" id="gref-marker-4" class="endnote-link">[G4]</a></sup>.</p>
+        </div>
+        <div class="term-block">
+          <h4 class="term-title">AI Compliance</h4>
+          <p>This denotes the strict adherence of AI systems to all relevant legal, regulatory, and ethical mandates. It is crucial for ensuring the responsible and risk-mitigated design, development, and deployment of AI technologies<sup><a href="#gref-1" id="gref-marker-1" class="endnote-link">[G1]</a></sup>. AI compliance involves verifying that AI-powered systems do not contravene any laws or regulations and that the data used for training these systems is collected and utilized in a legal and ethical manner<sup><a href="#gref-7" id="gref-marker-7" class="endnote-link">[G7]</a></sup>. It also guarantees that AI systems are not employed for discriminatory or manipulative purposes and that they respect individual privacy and do not cause harm<sup><a href="#gref-7" id="gref-marker-7" class="endnote-link">[G7]</a></sup>.</p>
+        </div>
+        <div class="term-block">
+          <h4 class="term-title">AI Fairness</h4>
+          <p>This principle ensures that AI systems operate without bias, leading to equitable, just, and non-discriminatory outcomes across all their applications<sup><a href="#gref-1" id="gref-marker-1" class="endnote-link">[G1]</a></sup>. It prioritizes the relatively equal treatment of individuals or groups in the decisions and actions of AI systems, ensuring that these decisions do not disproportionately or negatively impact individuals based on sensitive attributes such as race, gender, or religion<sup><a href="#gref-4" id="gref-marker-4" class="endnote-link">[G4]</a></sup>.</p>
+        </div>
+        <div class="term-block">
+          <h4 class="term-title">AI Governance</h4>
+          <p>This encompasses the comprehensive system of policies, controls, and regulations established to ensure that AI is developed, deployed, and managed in an ethical, transparent, and safe manner<sup><a href="#gref-1" id="gref-marker-1" class="endnote-link">[G1]</a></sup>. It involves bringing together diverse stakeholders from data science, engineering, compliance, legal, and business teams to align AI systems with overarching business, legal, and ethical requirements throughout the entire lifecycle of machine learning models<sup><a href="#gref-15" id="gref-marker-15" class="endnote-link">[G15]</a></sup>. Effective AI governance applies rules, processes, and responsibilities to maximize the value derived from automated data products while simultaneously mitigating risks and adhering to legal requirements<sup><a href="#gref-12" id="gref-marker-12" class="endnote-link">[G12]</a></sup>. Ultimately, it directs AI research, development, and application to safeguard safety, promote fairness, and uphold respect for fundamental human rights<sup><a href="#gref-3" id="gref-marker-3" class="endnote-link">[G3]</a></sup>.</p>
+        </div>
+        <div class="term-block">
+          <h4 class="term-title">AI Governance Framework</h4>
+          <p>These are structured models that define the fundamental principles, compliance protocols, and risk management strategies necessary to ensure the ethical and transparent development and deployment of AI<sup><a href="#gref-1" id="gref-marker-1" class="endnote-link">[G1]</a></sup>. These frameworks provide guidance on a wide range of critical topics, including transparency, accountability, fairness, privacy, security, and overall safety<sup><a href="#gref-3" id="gref-marker-3" class="endnote-link">[G3]</a></sup>. Depending on an organization's specific needs and level of maturity in AI adoption, these frameworks can be implemented in informal ways based on organizational values, through ad hoc development of specific policies, or via the establishment of a comprehensive and formal governance structure<sup><a href="#gref-3" id="gref-marker-3" class="endnote-link">[G3]</a></sup>.</p>
+        </div>
+        <div class="term-block">
+          <h4 class="term-title">AI Risk Assessment</h4>
+          <p>This involves a systematic evaluation of potential risks associated with AI systems. These risks can include bias in algorithms, vulnerabilities to security threats, exposure to regulatory non-compliance, and potential operational failures<sup><a href="#gref-1" id="gref-marker-1" class="endnote-link">[G1]</a></sup>. The primary goal of an AI risk assessment is to identify and thoroughly map these potential risks and to subsequently develop effective mitigation strategies to address them<sup><a href="#gref-4" id="gref-marker-4" class="endnote-link">[G4]</a></sup>. For businesses processing consumer personal information, particularly when utilizing automated decision-making technologies, conducting comprehensive risk assessments is a crucial prerequisite<sup><a href="#gref-23" id="gref-marker-23" class="endnote-link">[G23]</a></sup>.</p>
+        </div>
+        <div class="term-block">
+          <h4 class="term-title">AI Transparency</h4>
+          <p>This refers to the ability to thoroughly document, readily access, clearly understand, and effectively explain the functional and architectural properties of an AI system. This includes the intricate processes involved in its decision-making and the nature of its outputs<sup><a href="#gref-1" id="gref-marker-1" class="endnote-link">[G1]</a></sup>. Achieving AI transparency is essential for fostering accountability, building trust among stakeholders, and ensuring compliance with relevant regulatory requirements<sup><a href="#gref-1" id="gref-marker-1" class="endnote-link">[G1]</a></sup>. It necessitates openness regarding the collection, utilization, and sharing of data, as well as the capacity to explain in understandable terms how the AI system arrives at its decisions<sup><a href="#gref-24" id="gref-marker-24" class="endnote-link">[G24]</a></sup>.</p>
+        </div>
+        <div class="term-block">
+          <h4 class="term-title">Responsible AI</h4>
+          <p>This represents a governance-driven approach to the development of AI that places a high priority on fundamental principles such as fairness, transparency, accountability, trust, safety, and overarching ethical integrity<sup><a href="#gref-1" id="gref-marker-1" class="endnote-link">[G1]</a></sup>. It involves actively steering the responsible development, careful deployment, and ethical use of AI technologies throughout their entire lifecycle<sup><a href="#gref-24" id="gref-marker-24" class="endnote-link">[G24]</a></sup>. This approach emphasizes the critical role of human oversight and the paramount importance of aligning AI systems with core human values<sup><a href="#gref-25" id="gref-marker-25" class="endnote-link">[G25]</a></sup>.</p>
+        </div>
+        <div class="term-block">
+          <h4 class="term-title">AI Audit</h4>
+          <p>This is a formal review and thorough assessment of an AI system conducted to verify that it operates as intended and that it fully complies with all relevant laws, applicable regulations, and established standards<sup><a href="#gref-4" id="gref-marker-4" class="endnote-link">[G4]</a></sup>. The primary purpose of an AI audit is to identify and map any potential risks associated with the system and to propose effective strategies for mitigating these risks<sup><a href="#gref-4" id="gref-marker-4" class="endnote-link">[G4]</a></sup>. Regular AI audits are essential for ensuring the continuous adherence of AI systems to evolving regulations and ethical guidelines<sup><a href="#gref-17" id="gref-marker-17" class="endnote-link">[G17]</a></sup>.</p>
+        </div>
+        <div class="term-block">
+          <h4 class="term-title">AI Assurance</h4>
+          <p>This encompasses a comprehensive combination of frameworks, established policies, well-defined processes, and robust controls that are implemented to measure, rigorously evaluate, and actively promote the safety, reliability, and overall trustworthiness of AI systems<sup><a href="#gref-4" id="gref-marker-4" class="endnote-link">[G4]</a></sup>. AI assurance schemes may include various components such as conformity assessments, thorough impact and risk evaluations, independent AI audits, formal certifications, rigorous testing and evaluation protocols, and verification of compliance with pertinent industry standards<sup><a href="#gref-4" id="gref-marker-4" class="endnote-link">[G4]</a></sup>.</p>
+        </div>
+        <p>The definitions of these core AI governance terms reveal a consistent emphasis on the interconnectedness of ethical considerations, legal compliance, and the practicalities of technical implementation. Effective governance in the realm of AI demands a holistic perspective that seamlessly integrates these crucial aspects throughout the entire AI lifecycle. The consistent highlighting of ethical principles, legal obligations, and the need for transparency and accountability across various definitions underscores that AI governance is not merely a checklist of regulatory requirements. Instead, it necessitates a fundamental commitment to the responsible development and deployment of AI technologies. This integrated approach ensures that AI systems are not only legally sound but also ethically justifiable, fostering trust and promoting the overall well-being of individuals and society.</p>
+
+
+        <h3>3. Glossary of AI Safety Terminology</h3>
+        <div class="term-block">
+          <h4 class="term-title">Adversarial Attack</h4>
+          <p>This represents a significant safety and security risk directed at an AI model. It is initiated by malicious actors who deliberately manipulate the model, often by introducing carefully crafted, deceptive input data<sup><a href="#gref-4" id="gref-marker-4" class="endnote-link">[G4]</a></sup>. These attacks are specifically designed to deceive AI systems, causing them to generate incorrect or unintended predictions or to make faulty decisions<sup><a href="#gref-26" id="gref-marker-26" class="endnote-link">[G26]</a></sup>. Adversarial attacks exploit inherent vulnerabilities and limitations within machine learning models, particularly those involving deep neural networks<sup><a href="#gref-26" id="gref-marker-26" class="endnote-link">[G26]</a></sup>. These attacks can be categorized based on the attacker's level of access to the model: white-box attacks occur when the attacker has complete access to the model's architecture and parameters, while black-box attacks are launched when the attacker can only interact with the model through its inputs and outputs<sup><a href="#gref-27" id="gref-marker-27" class="endnote-link">[G27]</a></sup>. Common types of adversarial attacks include evasion attacks, where inputs are modified to cause misclassification; data poisoning, which corrupts training data; inference attacks, aimed at revealing sensitive information; and model extraction, where attackers attempt to replicate the model's functionality<sup><a href="#gref-27" id="gref-marker-27" class="endnote-link">[G27]</a></sup>.</p>
+        </div>
+        <div class="term-block">
+          <h4 class="term-title">Data Poisoning</h4>
+          <p>This is a specific type of cyberattack where malicious individuals or groups intentionally manipulate or corrupt the training data used to develop artificial intelligence and machine learning models<sup><a href="#gref-27" id="gref-marker-27" class="endnote-link">[G27]</a></sup>. By injecting incorrect or biased data points into these training datasets, attackers can subtly or drastically alter a model's behavior, potentially leading to data misclassification or a significant reduction in the overall accuracy and effectiveness of the AI system<sup><a href="#gref-31" id="gref-marker-31" class="endnote-link">[G31]</a></sup>. Data poisoning attacks can be targeted, aiming to manipulate specific outputs of the model, or non-targeted, with the goal of degrading the general robustness and reliability of the model<sup><a href="#gref-31" id="gref-marker-31" class="endnote-link">[G31]</a></sup>. Various techniques are employed in data poisoning, including direct data injection of fabricated data, the introduction of subtle backdoor triggers within the data, and clean-label attacks where poisoned data appears correctly labeled, making detection particularly challenging<sup><a href="#gref-31" id="gref-marker-31" class="endnote-link">[G31]</a></sup>.</p>
+        </div>
+        <div class="term-block">
+          <h4 class="term-title">Model Drift</h4>
+          <p>This phenomenon refers to the gradual degradation of a machine learning model's performance over time. It occurs due to changes in the underlying data patterns or shifts in the relationships between the input variables and the target variable that the model is trying to predict<sup><a href="#gref-1" id="gref-marker-1" class="endnote-link">[G1]</a></sup>. Model drift, also known as model decay, can lead to increasingly inaccurate predictions and flawed decision-making based on the model's outputs<sup><a href="#gref-35" id="gref-marker-35" class="endnote-link">[G35]</a></sup>. Several types of model drift can occur, including concept drift, where the fundamental relationship between inputs and the target changes; data drift (or covariate shift), where the distribution of the input data itself changes; label drift, where the distribution of the target variable shifts; and feature drift, which involves changes in the distribution of individual input features<sup><a href="#gref-35" id="gref-marker-35" class="endnote-link">[G35]</a></sup>. Proactive monitoring and effective mitigation strategies to address model drift are essential components of a robust AI governance framework<sup><a href="#gref-35" id="gref-marker-35" class="endnote-link">[G35]</a></sup>.</p>
+        </div>
+        <p>AI safety constitutes a vital dimension of AI governance. Adversarial attacks and data poisoning represent deliberate and often sophisticated attempts to compromise the integrity and reliability of AI systems. These malicious activities highlight the critical need for robust security measures and vigilant monitoring. Simultaneously, the phenomenon of model drift underscores the inherent challenge of maintaining the performance and accuracy of AI systems in dynamic real-world environments where data distributions and underlying relationships can evolve over time. Recognizing and addressing these safety-related challenges is fundamental for ensuring the trustworthy and responsible deployment of AI technologies.</p>
+
+
+        <h3>4. Glossary of Machine Learning Concepts for AI Governance</h3>
+        <div class="term-block">
+          <h4 class="term-title">Algorithm</h4>
+          <p>In the context of AI and machine learning, an algorithm refers to a well-defined procedure or a set of specific instructions and rules designed to perform a particular task or solve a defined problem using a computer<sup><a href="#gref-4" id="gref-marker-4" class="endnote-link">[G4]</a></sup>. Algorithms form the fundamental logic that underpins the operation of AI and machine learning models, dictating how they process data and generate outputs.</p>
+        </div>
+        <div class="term-block">
+          <h4 class="term-title">Neural Networks</h4>
+          <p>These are a specific type of machine learning model that are particularly prevalent in the field of deep learning. They are structured to mimic the interconnected network of neurons in the human brain, comprising multiple layers of interconnected processing units, including at least one hidden layer<sup><a href="#gref-4" id="gref-marker-4" class="endnote-link">[G4]</a></sup>. This layered architecture enables neural networks to model highly complex, nonlinear relationships and intricate patterns that may exist within large datasets, making them suitable for a wide range of applications such as image recognition and natural language processing.</p>
+        </div>
+        <div class="term-block">
+          <h4 class="term-title">Supervised Learning</h4>
+          <p>This is a significant subset of machine learning where a model is trained using a dataset that includes labeled input data. Each input in the dataset is paired with a corresponding known desired output or target variable<sup><a href="#gref-4" id="gref-marker-4" class="endnote-link">[G4]</a></sup>. The model learns to map the inputs to the outputs based on this labeled training data. Supervised learning is particularly useful for tasks involving classification, where the goal is to assign data points to specific categories, and regression, where the objective is to predict continuous numerical values.</p>
+        </div>
+        <div class="term-block">
+          <h4 class="term-title">Unsupervised Learning</h4>
+          <p>In contrast to supervised learning, unsupervised learning is another key subset of machine learning where a model is trained on an unlabeled dataset. The primary goal here is for the model to discover inherent patterns, structures, or relationships within the data without any explicit guidance from labeled outputs<sup><a href="#gref-4" id="gref-marker-4" class="endnote-link">[G4]</a></sup>. This type of learning is valuable for various techniques such as clustering, where data points are grouped based on similarity; outlier detection, which identifies anomalous data points; dimensionality reduction, which aims to simplify the data by reducing the number of variables; and feature learning, where the model automatically discovers useful features from the data.</p>
+        </div>
+        <div class="term-block">
+          <h4 class="term-title">Explainable AI (XAI)</h4>
+          <p>This refers to the capability of AI models to provide clear and understandable explanations for how they generate their outputs or make decisions. It is a critical aspect of ensuring interpretability, facilitating compliance with regulations, and fostering trust among stakeholders who interact with or are affected by AI systems<sup><a href="#gref-1" id="gref-marker-1" class="endnote-link">[G1]</a></sup>. XAI encompasses a set of processes and methodologies that enable human users to comprehend and have confidence in the results produced by machine learning algorithms<sup><a href="#gref-42" id="gref-marker-42" class="endnote-link">[G42]</a></sup>. It plays a vital role in characterizing the accuracy, fairness, transparency, and overall outcomes of AI-powered decision-making processes, ultimately helping organizations adopt a responsible approach to AI development and deployment<sup><a href="#gref-42" id="gref-marker-42" class="endnote-link">[G42]</a></sup>.</p>
+        </div>
+        <div class="term-block">
+          <h4 class="term-title">Federated Learning</h4>
+          <p>This is a machine learning technique that enables multiple independent entities, often referred to as clients, to collaboratively train a shared model without the need to centralize their data. Instead of transferring raw data to a central server, each participating device or organization trains the model locally using its own data and only shares the updated model parameters<sup><a href="#gref-40" id="gref-marker-40" class="endnote-link">[G40]</a></sup>. This approach prioritizes data privacy and minimization by bringing the model to the data, rather than the other way around<sup><a href="#gref-48" id="gref-marker-48" class="endnote-link">[G48]</a></sup>.</p>
+        </div>
+        <div class="term-block">
+          <h4 class="term-title">Differential Privacy</h4>
+          <p>This is a mathematically rigorous definition that provides a robust framework for developing privacy-preserving technologies. It allows organizations to share valuable information about a dataset by describing statistical patterns of groups within the data while ensuring that all personal information about individual data subjects is withheld<sup><a href="#gref-52" id="gref-marker-52" class="endnote-link">[G52]</a></sup>. Differential privacy works by adding carefully calibrated statistical noise to the results of a query or analysis performed on the dataset. This noise makes it extremely difficult to discern whether any specific individual's data was included in the dataset or to infer any new information about a particular individual based on the analysis<sup><a href="#gref-54" id="gref-marker-54" class="endnote-link">[G54]</a></sup>. The goal is to ensure that the inclusion or exclusion of any single individual's data does not significantly alter the overall conclusions drawn from the analysis<sup><a href="#gref-54" id="gref-marker-54" class="endnote-link">[G54]</a></sup>.</p>
+        </div>
+        <p>A foundational understanding of these key machine learning concepts is increasingly necessary for AI Governance Professionals to effectively oversee and guide the development and deployment of AI systems. Terms like explainable AI, federated learning, and differential privacy are particularly relevant in the context of governance as they directly address critical concerns related to the transparency of AI decision-making, the privacy implications of data usage, and the overall security of AI systems. While a deep technical expertise in machine learning may not be required for all AI governance roles, a working knowledge of these fundamental principles enables professionals to ask informed questions, assess potential risks and benefits, and contribute meaningfully to the establishment of responsible AI practices within their organizations.</p>
+
+
+        <h3>5. Glossary of AI Ethics Terms</h3>
+        <div class="term-block">
+          <h4 class="term-title">AI Ethics</h4>
+          <p>This broad term encompasses a comprehensive set of values, fundamental principles, and practical techniques that employ widely accepted standards of right and wrong to guide moral conduct throughout the entire lifecycle of AI technologies, from their initial development to their eventual use and sale<sup><a href="#gref-1" id="gref-marker-1" class="endnote-link">[G1]</a></sup>. AI ethics addresses the potential moral, societal, and even legal implications that may arise from the deployment of AI systems, aiming to ensure that these powerful technologies are developed and utilized in ways that are consistent with human values, respect fundamental rights, and promote overall well-being<sup><a href="#gref-58" id="gref-marker-58" class="endnote-link">[G58]</a></sup>. Key principles often associated with AI ethics include transparency in how AI systems function, fairness in their outcomes, accountability for their actions, the protection of individual privacy, and the explainability of their decisions<sup><a href="#gref-13" id="gref-marker-13" class="endnote-link">[G13]</a></sup>.</p>
+        </div>
+        <div class="term-block">
+          <h4 class="term-title">Bias</h4>
+          <p>In the context of AI, bias refers to systematic distortions that can occur within AI models. These distortions often lead to unfair or discriminatory outcomes. Bias can originate from various sources, including the use of biased or unrepresentative data during the model's training, inherent flaws in the design of the algorithms themselves, or oversights in the development and deployment processes<sup><a href="#gref-1" id="gref-marker-1" class="endnote-link">[G1]</a></sup>. Different types of bias can manifest in AI systems, such as computational or machine bias arising from the model's assumptions or the data, cognitive bias reflecting inaccurate human judgments, or societal bias stemming from systemic prejudices<sup><a href="#gref-4" id="gref-marker-4" class="endnote-link">[G4]</a></sup>. Regardless of its origin, bias in AI can significantly impact the outcomes of AI systems and poses a considerable risk to individual rights and fundamental liberties<sup><a href="#gref-4" id="gref-marker-4" class="endnote-link">[G4]</a></sup>.</p>
+        </div>
+        <div class="term-block">
+          <h4 class="term-title">Fairness (Ethical Context)</h4>
+          <p>Within the ethical considerations of AI, fairness refers to the principle of impartial and just treatment or behavior without any unjust favoritism or discrimination in the way AI systems operate<sup><a href="#gref-1" id="gref-marker-1" class="endnote-link">[G1]</a></sup>. It prioritizes the relatively equal treatment of all individuals or groups affected by an AI system's decisions and actions<sup><a href="#gref-4" id="gref-marker-4" class="endnote-link">[G4]</a></sup>. Achieving fairness in AI means ensuring that an AI system's decisions and outcomes do not disproportionately or adversely impact individuals based on sensitive attributes such as race, gender, religion, or other protected characteristics<sup><a href="#gref-4" id="gref-marker-4" class="endnote-link">[G4]</a></sup>.</p>
+        </div>
+        <div class="term-block">
+          <h4 class="term-title">Interpretability</h4>
+          <p>This refers to the ability to explain or present the reasoning behind a model's decisions and outputs in terms that are easily understandable by humans<sup><a href="#gref-4" id="gref-marker-4" class="endnote-link">[G4]</a></sup>. Unlike explainability, which often focuses on providing an explanation after a decision has been made, interpretability emphasizes the design of AI models in a way that inherently facilitates understanding through their structure, the features they utilize, or the algorithms they employ<sup><a href="#gref-4" id="gref-marker-4" class="endnote-link">[G4]</a></sup>. Interpretable models are often domain-specific and require significant expertise in the relevant field to develop effectively.</p>
+        </div>
+        <div class="term-block">
+          <h4 class="term-title">Robustness</h4>
+          <p>In the context of AI ethics and safety, robustness is an essential attribute of an AI system. It signifies the system's ability to be resilient to various challenges, including security attacks, unexpected changes in its operating environment, and intentional manipulation of its inputs<sup><a href="#gref-4" id="gref-marker-4" class="endnote-link">[G4]</a></sup>. A robust AI system maintains its intended functionality, consistent performance, and a high degree of accuracy even when confronted with altered inputs or under the pressure of security threats<sup><a href="#gref-4" id="gref-marker-4" class="endnote-link">[G4]</a></sup>.</p>
+        </div>
+        <p>Ethical considerations are foundational to the responsible governance of AI. A thorough understanding of terms such as bias, fairness, and interpretability is crucial for ensuring that AI systems are not only technologically advanced but also developed and deployed in a manner that aligns with fundamental societal values and actively avoids the creation or perpetuation of harmful or discriminatory outcomes. AI Governance Professionals must be equipped to identify and effectively address ethical risks, promoting fairness and transparency in the intricate decision-making processes of AI, thereby fostering public trust and ensuring the beneficial use of these powerful technologies.</p>
+
+
+        <h3>6. Glossary of Regulatory and Legal Terms in AI Governance</h3>
+        <div class="term-block">
+          <h4 class="term-title">GDPR (General Data Protection Regulation)</h4>
+          <p>This is a comprehensive data protection and privacy regulation enacted by the European Union. It has a significant impact on the development and application of AI technologies, particularly when these technologies process the personal data of individuals within the EU<sup><a href="#gref-3" id="gref-marker-3" class="endnote-link">[G3]</a></sup>. The GDPR establishes strict requirements for the lawful processing of personal data, including the need for justifiable grounds for data management, adherence to principles of data minimization and purpose limitation, and the implementation of anonymization and pseudonymization techniques where appropriate<sup><a href="#gref-64" id="gref-marker-64" class="endnote-link">[G64]</a></sup>. It also grants individuals a range of rights concerning their personal data, such as the right to access their data, the right to data portability, the right to receive an explanation for decisions made through automated processing, and the right to be forgotten (data erasure)<sup><a href="#gref-64" id="gref-marker-64" class="endnote-link">[G64]</a></sup>. Furthermore, the GDPR places obligations on organizations to ensure accountability, implement data protection by design and by default, and maintain ongoing supervision of compliance<sup><a href="#gref-64" id="gref-marker-64" class="endnote-link">[G64]</a></sup>.</p>
+        </div>
+        <div class="term-block">
+          <h4 class="term-title">CCPA (California Consumer Privacy Act)</h4>
+          <p>This is a landmark data privacy law in the state of California, USA, which aims to provide consumers with greater control over their personal information<sup><a href="#gref-22" id="gref-marker-22" class="endnote-link">[G22]</a></sup>. The CCPA grants consumers various rights, including the right to know what personal information businesses collect about them and how it is used, the right to opt out of the sale or sharing of their personal information, and the right to request the deletion or correction of their data<sup><a href="#gref-71" id="gref-marker-71" class="endnote-link">[G71]</a></sup>. Notably, the California Privacy Protection Agency (CPPA) has been actively developing and proposing regulations that specifically address the use of artificial intelligence and automated decision-making technologies (ADMT)<sup><a href="#gref-23" id="gref-marker-23" class="endnote-link">[G23]</a></sup>. These proposed rules would require businesses using ADMT for significant decisions to provide consumers with pre-use notices detailing the purpose and operation of the technology, offer mechanisms for consumers to opt out of its use, and explain how the ADMT affects the consumer<sup><a href="#gref-23" id="gref-marker-23" class="endnote-link">[G23]</a></sup>. Additionally, the proposed regulations mandate that businesses conduct risk assessments before deploying ADMT in certain contexts, particularly when making significant decisions about consumers or engaging in extensive profiling<sup><a href="#gref-23" id="gref-marker-23" class="endnote-link">[G23]</a></sup>.</p>
+        </div>
+        <div class="term-block">
+          <h4 class="term-title">EU AI Act</h4>
+          <p>Officially known as the Artificial Intelligence Act, this is a groundbreaking law enacted by the European Union to govern the development and utilization of AI systems within its member states<sup><a href="#gref-3" id="gref-marker-3" class="endnote-link">[G3]</a></sup>. The EU AI Act adopts a risk-based approach to regulation, categorizing AI systems into different levels of risk: unacceptable risk (prohibited), high risk (subject to strict obligations), limited risk (requiring specific transparency measures), and minimal or no risk (largely unregulated)<sup><a href="#gref-3" id="gref-marker-3" class="endnote-link">[G3]</a></sup>. The Act imposes various obligations on both providers and deployers of high-risk AI systems, covering aspects such as data governance, technical documentation, transparency requirements, human oversight mechanisms, and robustness and accuracy standards<sup><a href="#gref-67" id="gref-marker-67" class="endnote-link">[G67]</a></sup>. This comprehensive legislation aims to foster innovation in AI while simultaneously safeguarding fundamental rights and ensuring the safety of individuals and the public.</p>
+        </div>
+        <div class="term-block">
+          <h4 class="term-title">NIST AI RMF (AI Risk Management Framework)</h4>
+          <p>This is a voluntary framework developed by the National Institute of Standards and Technology (NIST) in the United States. Its purpose is to provide organizations with a structured set of guidelines to effectively assess and manage the diverse risks associated with the implementation and use of artificial intelligence systems<sup><a href="#gref-3" id="gref-marker-3" class="endnote-link">[G3]</a></sup>. Unlike a legally binding regulation, the NIST AI RMF offers a comprehensive approach to identifying, evaluating, and mitigating AI-related risks across various sectors. The framework provides guidance on a wide array of critical topics, including ensuring transparency in AI systems, establishing clear lines of accountability, promoting fairness and non-discrimination, protecting data privacy and security, and ensuring the overall safety and reliability of AI technologies<sup><a href="#gref-3" id="gref-marker-3" class="endnote-link">[G3]</a></sup>. By adopting the NIST AI RMF, organizations can enhance their ability to develop and deploy AI responsibly, building trust and fostering innovation in a secure and ethical manner.</p>
+        </div>
+        <div class="term-block">
+          <h4 class="term-title">AI Compliance (Regulatory Context)</h4>
+          <p>In a regulatory context, AI compliance refers to the ongoing process of ensuring that all AI-powered systems and applications within an organization adhere to all applicable laws, relevant regulations, established industry standards, and overarching ethical guidelines<sup><a href="#gref-1" id="gref-marker-1" class="endnote-link">[G1]</a></sup>. This involves a multifaceted approach that includes verifying the legal and ethical use of AI technologies, ensuring the proper handling and security of data used in AI training and deployment, preventing the use of AI for discriminatory or manipulative purposes, safeguarding individual privacy in the context of AI applications, and promoting the responsible and beneficial deployment of AI for society as a whole<sup><a href="#gref-7" id="gref-marker-7" class="endnote-link">[G7]</a></sup>. Achieving AI compliance typically requires organizations to establish clear internal policies and procedures, develop comprehensive compliance programs, implement robust monitoring systems to track AI usage and performance, and establish effective AI governance frameworks that guide the responsible development and deployment of these powerful technologies<sup><a href="#gref-7" id="gref-marker-7" class="endnote-link">[G7]</a></sup>.</p>
+        </div>
+        <p>The regulatory landscape for AI governance is rapidly evolving, with significant frameworks like the GDPR, CCPA, and the EU AI Act either in effect or nearing implementation. These legal and regulatory developments, coupled with guidance from standards bodies like NIST, underscore a global recognition of the need for structured oversight of AI technologies. AI Governance Professionals must possess a strong understanding of the key provisions and implications of these frameworks to ensure their organizations achieve and maintain compliance, effectively mitigate potential legal risks, and foster the responsible innovation of AI. The NIST AI RMF, while not a regulation, provides a valuable and widely adopted set of guidelines for managing the broad spectrum of risks associated with AI systems.</p>
+
+        <h4>Table 1: Key AI Governance Frameworks and Their Focus</h4>
+        <table class="maturity-table">
+            <thead>
+                <tr>
+                    <th>Framework</th>
+                    <th>Origin</th>
+                    <th>Focus</th>
+                    <th>Relevant Glossary Ref.</th> <!-- Clarified heading -->
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>GDPR</td>
+                    <td>European Union</td>
+                    <td>Data protection and privacy, impacting AI systems processing personal data.</td>
+                    <td><sup><a href="#gref-3" id="gref-marker-3t" class="endnote-link">[G3]</a>, <a href="#gref-64" id="gref-marker-64t" class="endnote-link">[G64]</a></sup></td>
+                </tr>
+                <tr>
+                    <td>CCPA</td>
+                    <td>California, USA</td>
+                    <td>Consumer privacy rights, with proposed regulations specifically addressing AI and automated decision-making.</td>
+                    <td><sup><a href="#gref-22" id="gref-marker-22t" class="endnote-link">[G22]</a>, <a href="#gref-71" id="gref-marker-71t" class="endnote-link">[G71]</a>, <a href="#gref-23" id="gref-marker-23t" class="endnote-link">[G23]</a></sup></td>
+                </tr>
+                <tr>
+                    <td>EU AI Act</td>
+                    <td>European Union</td>
+                    <td>Risk-based regulation of AI systems, categorizing risks and imposing requirements based on the level of risk.</td>
+                    <td><sup><a href="#gref-3" id="gref-marker-3t2" class="endnote-link">[G3]</a>, <a href="#gref-67" id="gref-marker-67t" class="endnote-link">[G67]</a></sup></td>
+                </tr>
+                <tr>
+                    <td>NIST AI RMF</td>
+                    <td>USA</td>
+                    <td>Voluntary framework providing guidelines for managing risks associated with AI systems, covering safety, fairness, and trustworthiness.</td>
+                    <td><sup><a href="#gref-3" id="gref-marker-3t3" class="endnote-link">[G3]</a></sup></td>
+                </tr>
+                <tr>
+                    <td>OECD AI Principles</td>
+                    <td>International</td>
+                    <td>Principles emphasizing responsible stewardship of trustworthy AI, including transparency, fairness, and accountability.</td>
+                    <td><sup><a href="#gref-3" id="gref-marker-3t4" class="endnote-link">[G3]</a></sup></td> <!-- Assuming this was intended to map to G3 or related OECD source -->
+                </tr>
+                <tr>
+                    <td>Canada's Directive on Automated Decision-Making</td>
+                    <td>Canada</td>
+                    <td>Guidance for the Canadian government's use of AI in decision-making, focusing on human intervention and oversight.</td>
+                    <td><sup><a href="#gref-3" id="gref-marker-3t5" class="endnote-link">[G3]</a></sup></td> <!-- Assuming this was intended to map to G3 or related Canadian source -->
+                </tr>
+            </tbody>
+        </table>
+        <!-- Note: URLs for table entries need to be verified/added -->
+
+        <h3>7. Conclusion (Glossary)</h3>
+        <p>The effective governance of artificial intelligence is predicated on a shared and precise understanding of the terminology used across the diverse domains of technology, ethics, and law. This glossary has aimed to provide AI Governance Professionals with a comprehensive resource encompassing key terms relevant to AI safety, fundamental machine learning concepts crucial for oversight, the core principles of AI ethics, and the rapidly evolving landscape of AI-related regulations and legal frameworks. By establishing a common vocabulary, this resource intends to facilitate clearer and more effective communication among professionals from varied backgrounds, ultimately leading to more informed decision-making processes.</p>
+        <p>This glossary serves as a foundational step towards fostering mature and robust AI governance practices. However, the field of AI is inherently dynamic, characterized by continuous technological advancements and an evolving regulatory landscape. Therefore, this glossary should be regarded as a living document, subject to ongoing updates and refinements to remain relevant and valuable for AI Governance Professionals as the field continues to progress. The establishment of a comprehensive and consistently maintained shared vocabulary is essential for navigating the complexities of AI governance and ensuring the responsible and beneficial deployment of artificial intelligence technologies for the betterment of society.</p>
+      </section>
+
+       <!-- Glossary References Section -->
+      <section id="glossary-references" class="content-text">
+          <h2>References (Glossary)</h2>
+          <ol>
+              <li id="gref-1">AI Glossary - Lumenova AI, accessed March 13, 2025, https://www.lumenova.ai/ai-glossary/ <a href="#gref-marker-1" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="gref-2">Update to Key Terms for AI Governance - IAPP, accessed March 13, 2025, https://iapp.org/news/a/update-to-key-terms-for-ai-governance <a href="#gref-marker-2" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="gref-3">What is AI Governance? - IBM, accessed March 13, 2025, https://www.ibm.com/think/topics/ai-governance <a href="#gref-marker-3" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="gref-4">Key Terms for AI Governance - IAPP, accessed March 13, 2025, https://iapp.org/resources/article/key-terms-for-ai-governance/ <a href="#gref-marker-4" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="gref-5">Important Key Terms for AI Governance - Ardent Privacy, accessed March 13, 2025, https://www.ardentprivacy.ai/blog/important-key-terms-for-ai-governance/ <a href="#gref-marker-5" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="gref-6">www.tevora.com, accessed March 13, 2025, https://www.tevora.com/resource/what-is-ai-compliance/#:~:text=AI%20regulatory%20compliance%20refers%20to,safe%20use%20of%20AI%20technologies. <a href="#gref-marker-6" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="gref-7">AI Compliance: What It Is and Why You Should Care [2024 update] - EXIN, accessed March 13, 2025, https://www.exin.com/article/ai-compliance-what-it-is-and-why-you-should-care/ <a href="#gref-marker-7" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="gref-8">AI Compliance: What is it & How AI Can Help Regulatory Compliance? - Securiti.ai, accessed March 13, 2025, https://securiti.ai/ai-compliance/ <a href="#gref-marker-8" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="gref-9">What is AI Compliance and Why It Matters For Businesses - Tevora, accessed March 13, 2025, https://www.tevora.com/resource/what-is-ai-compliance/ <a href="#gref-marker-9" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="gref-10">AI Compliance: Meaning, Regulations, Challenges - Scrut Automation, accessed March 13, 2025, https://www.scrut.io/post/ai-compliance <a href="#gref-marker-10" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="gref-11">AI Compliance: Ensuring Responsible and Ethical AI Use, accessed March 13, 2025, https://www.lumenova.ai/ai-glossary/ai-compliance/ <a href="#gref-marker-11" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="gref-12">Artificial intelligence (AI) governance glossary - Collibra, accessed March 13, 2025, https://www.collibra.com/ai-governance-glossary <a href="#gref-marker-12" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="gref-13">AI Ethics & Data Privacy: 2024 Guide - Dialzara, accessed March 13, 2025, https://dialzara.com/blog/ai-ethics-and-data-privacy-2024-guide/ <a href="#gref-marker-13" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="gref-14">What Is AI ethics? The role of ethics in AI - SAP, accessed March 13, 2025, https://www.sap.com/resources/what-is-ai-ethics <a href="#gref-marker-14" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="gref-15">What is AI governance? - Credo AI, accessed March 13, 2025, https://www.credo.ai/glossary/ai-governance <a href="#gref-marker-15" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="gref-16">Part 5: AI governance in our company – who is responsible? - VISCHER, accessed March 13, 2025, https://www.vischer.com/en/knowledge/blog/part-5-ai-governance-in-our-company-who-is-responsible/ <a href="#gref-marker-16" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="gref-17">What Is AI Governance? Jargon-Free & With Examples [2024] - FairNow, accessed March 13, 2025, https://fairnow.ai/what-is-ai-governance/ <a href="#gref-marker-17" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="gref-18">www.ibm.com, accessed March 13, 2025, https://www.ibm.com/think/topics/ai-governance#:~:text=AI%20governance%20frameworks%20direct%20AI,fostering%20innovation%20and%20building%20trust. <a href="#gref-marker-18" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="gref-19">What Is AI Governance? - Palo Alto Networks, accessed March 13, 2025, https://www.paloaltonetworks.com/cyberpedia/ai-governance <a href="#gref-marker-19" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="gref-20">9 Principles of an AI Governance Framework - Duality Tech, accessed March 13, 2025, https://dualitytech.com/blog/ai-governance-framework/ <a href="#gref-marker-20" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="gref-21">Regulating Under Uncertainty: Governance Options for Generative AI - Cyber Policy Center, accessed March 13, 2025, https://cyber.fsi.stanford.edu/content/regulating-under-uncertainty-governance-options-generative-ai <a href="#gref-marker-21" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="gref-22">AI Governance, A Critical Framework for Organizations - GAN Integrity, accessed March 13, 2025, https://www.ganintegrity.com/resources/blog/ai-governance/ <a href="#gref-marker-22" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="gref-23">California's AI Revolution: Proposed CPPA Regulations Target Automated Decision Making, accessed March 13, 2025, https://www.workforcebulletin.com/californias-ai-revolution-proposed-cppa-regulations-target-automated-decision-making <a href="#gref-marker-23" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="gref-24">Glossary of AI terms | NZ Digital government, accessed March 13, 2025, https://www.digital.govt.nz/standards-and-guidance/technology-and-architecture/artificial-intelligence/responsible-ai-guidance-for-the-public-service-genai/glossary-of-ai-terms?source=rss <a href="#gref-marker-24" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="gref-25">Privacy and responsible AI - IAPP, accessed March 13, 2025, https://iapp.org/news/a/privacy-and-responsible-ai <a href="#gref-marker-25" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="gref-26">What Is Adversarial AI in Machine Learning? - Palo Alto Networks, accessed March 13, 2025, https://www.paloaltonetworks.com/cyberpedia/what-are-adversarial-attacks-on-AI-Machine-Learning <a href="#gref-marker-26" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="gref-27">What is Adversarial AI? Uncovering the Risks and Strategies to Mitigate | FPT Software, accessed March 13, 2025, https://fptsoftware.com/resource-center/blogs/what-is-adversarial-ai-uncovering-the-risks-and-strategies-to-mitigate <a href="#gref-marker-27" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="gref-28">Adversarial Machine Learning - CLTC UC Berkeley Center for Long-Term Cybersecurity, accessed March 13, 2025, https://cltc.berkeley.edu/aml/ <a href="#gref-marker-28" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="gref-29">Adversarial Attacks and Perturbations: The Essential Guide | Nightfall AI Security 101, accessed March 13, 2025, https://www.nightfall.ai/ai-security-101/adversarial-attacks-and-perturbations <a href="#gref-marker-29" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="gref-30">Adversarial AI: Understanding and Mitigating the Threat - Sysdig, accessed March 13, 2025, https://sysdig.com/learn-cloud-native/adversarial-ai-understanding-and-mitigating-the-threat/ <a href="#gref-marker-30" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="gref-31">What Is Data Poisoning? | IBM, accessed March 13, 2025, https://www.ibm.com/think/topics/data-poisoning <a href="#gref-marker-31" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="gref-32">What is Data Poisoning? Types & Best Practices - SentinelOne, accessed March 13, 2025, https://www.sentinelone.com/cybersecurity-101/cybersecurity/data-poisoning/ <a href="#gref-marker-32" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="gref-33">Understanding AI Data Poisoning - HiddenLayer, accessed March 13, 2025, https://hiddenlayer.com/innovation-hub/understanding-ai-data-poisoning/ <a href="#gref-marker-33" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="gref-34">Data Poisoning: The Essential Guide | Nightfall AI Security 101, accessed March 13, 2025, https://www.nightfall.ai/ai-security-101/data-poisoning <a href="#gref-marker-34" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="gref-35">What Is Model Drift? - IBM, accessed March 13, 2025, https://www.ibm.com/think/topics/model-drift <a href="#gref-marker-35" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="gref-36">Model Drift - C3 AI, accessed March 13, 2025, https://c3.ai/glossary/data-science/model-drift/ <a href="#gref-marker-36" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="gref-37">Model Drift: Types, Causes and Early Detection - Lumenova AI, accessed March 13, 2025, https://www.lumenova.ai/blog/model-drift-concept-drift-introduction/ <a href="#gref-marker-37" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="gref-38">When AI Goes Astray: Understading Model Drift - ASHP, accessed March 13, 2025, https://www.ashp.org/-/media/assets/pharmacy-practice/resource-centers/Digital-Health-and-Artificial-Intelligence/docs/When-AI-Goes-Astray.pdf <a href="#gref-marker-38" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="gref-39">Glossary of artificial intelligence terms - Brookings Institution, accessed March 13, 2025, https://www.brookings.edu/articles/glossary-of-artificial-intelligence-terms/ <a href="#gref-marker-39" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="gref-40">Machine Learning Glossary - Deepchecks, accessed March 13, 2025, https://www.deepchecks.com/glossary/ <a href="#gref-marker-40" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="gref-41">Machine Learning Glossary - Google for Developers, accessed March 13, 2025, https://developers.google.com/machine-learning/glossary <a href="#gref-marker-41" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="gref-42">www.managementsolutions.com, accessed March 13, 2025, https://www.managementsolutions.com/sites/default/files/minisite/static/22959b0f-b3da-47c8-9d5c-80ec3216552b/iax/pdf/explainable-artificial-intelligence-en-03.pdf <a href="#gref-marker-42" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="gref-43">What is Explainable AI (XAI)? - IBM, accessed March 13, 2025, https://www.ibm.com/think/topics/explainable-ai <a href="#gref-marker-43" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="gref-44">EXPLAINABLE ARTIFICIAL INTELLIGENCE - European Data Protection Supervisor, accessed March 13, 2025, https://www.edps.europa.eu/system/files/2023-11/23-11-16_techdispatch_xai_en.pdf <a href="#gref-marker-44" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="gref-45">What Is Explainable AI (XAI)? - Palo Alto Networks, accessed March 13, 2025, https://www.paloaltonetworks.com/cyberpedia/explainable-ai <a href="#gref-marker-45" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="gref-46">www.edps.europa.eu, accessed March 13, 2025, https://www.edps.europa.eu/press-publications/publications/techsonar/federated-learning#:~:text=Federated%20learning%20is%20a%20relatively,the%20way%20parameters%20are%20shared. <a href="#gref-marker-46" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="gref-47">Federated Learning | European Data Protection Supervisor, accessed March 13, 2025, https://www.edps.europa.eu/press-publications/publications/techsonar/federated-learning_en <a href="#gref-marker-47" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="gref-48">What is federated learning? - Open Data Institute (ODI), accessed March 13, 2025, https://theodi.org/insights/explainers/what-is-federated-learning/ <a href="#gref-marker-48" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="gref-49">Federated learning - Wikipedia, accessed March 13, 2025, https://en.wikipedia.org/wiki/Federated_learning <a href="#gref-marker-49" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="gref-50">Federated Learning in AI: How It Works, Benefits and Challenges | Splunk, accessed March 13, 2025, https://www.splunk.com/en_us/blog/learn/federated-ai.html <a href="#gref-marker-50" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="gref-51">A Step-by-Step Guide to Federated Learning in Computer Vision - V7 Labs, accessed March 13, 2025, https://www.v7labs.com/blog/federated-learning-guide <a href="#gref-marker-51" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="gref-52">dualitytech.com, accessed March 13, 2025, https://dualitytech.com/blog/what-is-differential-privacy/#:~:text=Differential%20Privacy%20is%20a%20mathematical,of%20groups%20within%20the%20dataset. <a href="#gref-marker-52" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="gref-53">Differential Privacy for Privacy-Preserving Data Analysis: An Introduction to our Blog Series, accessed March 13, 2025, https://www.nist.gov/blogs/cybersecurity-insights/differential-privacy-privacy-preserving-data-analysis-introduction-our <a href="#gref-marker-53" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="gref-54">What is Differential Privacy? Definition and FAQs - Gretel.ai, accessed March 13, 2025, https://gretel.ai/technical-glossary/what-is-differential-privacy <a href="#gref-marker-54" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="gref-55">What is Differential Privacy? | Duality Technologies Blog, accessed March 13, 2025, https://dualitytech.com/blog/what-is-differential-privacy/ <a href="#gref-marker-55" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="gref-56">Differential privacy - Wikipedia, accessed March 13, 2025, https://en.wikipedia.org/wiki/Differential_privacy <a href="#gref-marker-56" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="gref-57">Differential Privacy Definition - by shaistha fathima - Medium, accessed March 13, 2025, https://medium.com/@shaistha24/differential-privacy-definition-bbd638106242 <a href="#gref-marker-57" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="gref-58">Privacy and AI Ethics FAQ - Hyperscience, accessed March 13, 2025, https://www.hyperscience.com/privacy-and-ai-ethics-faq/ <a href="#gref-marker-58" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="gref-59">AI Ethics: What It Is, Why It Matters, and More - Coursera, accessed March 13, 2025, https://www.coursera.org/articles/ai-ethics <a href="#gref-marker-59" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="gref-60">Understanding artificial intelligence ethics and safety - The Alan Turing Institute, accessed March 13, 2025, https://www.turing.ac.uk/sites/default/files/2019-08/understanding_artificial_intelligence_ethics_and_safety.pdf <a href="#gref-marker-60" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="gref-61">Fundamentals of AI Ethics - DATAVERSITY, accessed March 13, 2025, https://www.dataversity.net/fundamentals-of-ai-ethics/ <a href="#gref-marker-61" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="gref-62">AI and Social Impact | AI Ethics Class Notes - Fiveable, accessed March 13, 2025, https://library.fiveable.me/artificial-intelligence-and-ethics/unit-7 <a href="#gref-marker-62" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="gref-63">What is AI Ethics? | IBM, accessed March 13, 2025, https://www.ibm.com/think/topics/ai-ethics <a href="#gref-marker-63" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="gref-64">The Intersection of GDPR and AI and 6 Compliance Best Practices | Exabeam, accessed March 13, 2025, https://www.exabeam.com/explainers/gdpr-compliance/the-intersection-of-gdpr-and-ai-and-6-compliance-best-practices/ <a href="#gref-marker-64" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="gref-65">The Role of Data Privacy in AI Governance - KPMG Netherlands, accessed March 13, 2025, https://kpmg.com/nl/en/blogs/home/posts/2024/09/the-role-of-data-privacy-in-ai-governance.html <a href="#gref-marker-65" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="gref-66">Top 10 operational impacts of the EU AI Act﻿ – Leveraging GDPR compliance - IAPP, accessed March 13, 2025, https://iapp.org/resources/article/top-impacts-eu-ai-act-leveraging-gdpr-compliance/ <a href="#gref-marker-66" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="gref-67">Zooming in on AI #15: Regulatory spaghetti and AI how to make sense of the EU GDPR and the EU AI Act - A&O Shearman, accessed March 13, 2025, https://www.aoshearman.com/insights/ao-shearman-on-tech/zooming-in-on-ai-14-regulatory-spaghetti-and-ai-how-to-make-sense-of-the-eu-gdpr-and-the-eu-ai-act <a href="#gref-marker-67" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="gref-68">AI and GDPR Monthly Update Special Edition AI Implementation - Dentons, accessed March 13, 2025, https://www.dentons.com/en/insights/articles/2025/january/28/ai-and-gdpr-monthly-update-special-edition-ai-implementation <a href="#gref-marker-68" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="gref-69">What you need to know about the CCPA draft rules on AI and automated decision-making technology | IBM, accessed March 13, 2025, https://www.ibm.com/think/news/ccpa-ai-automation-regulations <a href="#gref-marker-69" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="gref-70">California's AI Laws Are Here—Is Your Business Ready?, accessed March 13, 2025, https://www.pillsburylaw.com/en/news-and-insights/california-ai-laws.html <a href="#gref-marker-70" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="gref-71">California Consumer Privacy Act (CCPA ) - AI regulation adopted - 2B Advice, accessed March 13, 2025, https://2b-advice.com/en/2024/11/13/california-consumer-privacy-act-ccpa-ki-regulation-adopted/ <a href="#gref-marker-71" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="gref-72">CCPA and the EU AI ACT - California Lawyers Association, accessed March 13, 2025, https://calawyers.org/privacy-law/ccpa-and-the-eu-ai-act/ <a href="#gref-marker-72" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="gref-73">Artificial Intelligence in the States: Emerging Legislation - The Council of State Governments, accessed March 13, 2025, https://csg.org/2023/12/06/artificial-intelligence-in-the-states-emerging-legislation/ <a href="#gref-marker-73" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="gref-74">Credo AI Glossary, accessed March 13, 2025, https://www.credo.ai/glossary <a href="#gref-marker-74" title="Return to text" class="endnote-backlink">↩</a></li>
+          </ol>
+      </section>
+
+
+      <!-- About the Author Section -->
       <section id="about" class="content-text">
         <h2>About the Author</h2>
         <div class="author-grid">
           <div class="author-card">
             <div class="author-image-container">
-              <!-- Ensure image path is relative to index.html if storing locally -->
-              <img src="https://github.com/Khullani/AI-Governance-Handbook/blob/main/Khullani-TechneAI-Founder-AIGovernance%20copy.jpeg"
+              <img src="https://github.com/Khullani/AI-Governance-Handbook/raw/main/Khullani-TechneAI-Founder-AIGovernance%20copy.jpeg"
                 alt="Khullani M. Abdullahi" loading="lazy"
-                onerror="this.onerror=null; this.src='https://github.com/Khullani/AI-Governance-Handbook/blob/main/Khullani-TechneAI-Founder-AIGovernance%20copy.jpeg';" />
+                onerror="this.src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=';" />
             </div>
             <div class="author-info">
               <h3>Khullani M. Abdullahi, J.D.</h3>
@@ -1703,12 +1792,18 @@
           </div>
         </div>
       </section>
+
+       <!-- Conclusion Section (Main Document) -->
+      <section id="conclusion" class="content-text">
+        <h2>Conclusion</h2> <!-- Renamed from "Key Takeaways" -->
+        <p>This handbook has provided a comprehensive primer on AI Governance, Safety, Trust/Transparency, Responsible AI, and Risk – explaining key legal/regulatory frameworks and technical aspects, tailored to the needs of AI practitioners, compliance officers, executives, and policymakers. As organizations navigate the complex landscape of AI, they must align on terminology and goals (hence the glossary) and collaborate across roles: developers building safe and explainable systems, compliance ensuring laws and ethics are met, executives setting direction and culture, and policymakers creating an environment that rewards responsible innovation. By assessing their maturity in various facets of AI governance using the frameworks presented and following best practices at each stage, organizations can steadily improve. The ultimate aim is to harness the power of AI in a way that is responsible, trustworthy, and aligned with societal values, thereby unlocking AI’s benefits while managing its risks.</p>
+      </section>
+
     </main>
   </div>
 
-  <!-- Footer Section (Existing Content) -->
-  <div class="supporting-sections">
-    <footer>
+  <!-- Footer Section -->
+  <footer>
       <div class="footer-container">
         <div class="footer-column">
           <h3>About Techne AI</h3>
@@ -1721,7 +1816,6 @@
               </svg>
             </a>
             <a href="https://twitter.com/techne_ai" target="_blank" rel="noopener noreferrer" aria-label="Twitter Profile">
-                <!-- Using a simple X logo SVG -->
                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                  <path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/>
                </svg>
@@ -1748,14 +1842,13 @@
         </div>
       </div>
       <div class="footer-bottom">
-        <p class="footer-copyright">© 2025 Techne AI. All rights reserved.</p> <!-- Update Year if needed -->
+        <p class="footer-copyright">© 2025 Techne AI. All rights reserved.</p>
         <div class="footer-bottom-links">
           <a href="https://techne.ai/contact" target="_blank" rel="noopener noreferrer">Contact</a>
           <a href="https://techne.ai/sitemap" target="_blank" rel="noopener noreferrer">Sitemap</a>
         </div>
       </div>
     </footer>
-  </div>
 
   <div class="back-to-top" id="backToTop">
     <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
@@ -1786,62 +1879,76 @@
       // Mobile Menu Toggle
       const sidebarTitle = document.querySelector('.sidebar-title');
       const navMenu = document.querySelector('.nav-menu');
-      // Check if elements exist before adding listeners
       if (sidebarTitle && navMenu) {
           sidebarTitle.addEventListener('click', function () {
             navMenu.classList.toggle('active');
-            sidebarTitle.classList.toggle('open'); // Toggle indicator class
+            sidebarTitle.classList.toggle('open');
           });
       }
 
-
-      // Active State for Navigation Links (using Intersection Observer)
-      const sections = document.querySelectorAll('main section[id]'); // Target sections in main with an ID
+      // Active State for Navigation Links (Intersection Observer)
+      const sections = document.querySelectorAll('main section[id]');
       const navLinks = document.querySelectorAll('.nav-link');
 
-      if (sections.length > 0 && navLinks.length > 0) {
+      if (IntersectionObserver && sections.length > 0 && navLinks.length > 0) {
           const observerOptions = {
-              root: null, // relative to document viewport
-              rootMargin: '0px',
-              threshold: 0.3 // Trigger when 30% of the section is visible
+              root: null,
+              rootMargin: '0px 0px -50% 0px', // Trigger when section is in upper half of viewport
+              threshold: 0
           };
 
+          let lastActiveLink = null;
+
           const observer = new IntersectionObserver((entries) => {
-                let intersectingSectionId = null;
+                let latestIntersectingSectionId = null;
 
                 entries.forEach(entry => {
-                    // Find the highest section currently intersecting significantly
-                    if (entry.isIntersecting && entry.intersectionRatio >= 0.3) {
-                         // Prioritize sections higher up on the page if multiple are intersecting
-                         if (intersectingSectionId === null || entry.target.offsetTop < document.getElementById(intersectingSectionId).offsetTop) {
-                            intersectingSectionId = entry.target.id;
-                         }
+                    if (entry.isIntersecting) {
+                        if (latestIntersectingSectionId === null || entry.target.offsetTop < document.getElementById(latestIntersectingSectionId).offsetTop) {
+                             latestIntersectingSectionId = entry.target.id;
+                        }
                     }
                 });
 
-                navLinks.forEach(link => {
-                    link.classList.remove('active');
-                    // Check if href exists and matches an intersecting section
-                    const href = link.getAttribute('href');
-                    if (href && href.substring(1) === intersectingSectionId) {
-                        link.classList.add('active');
-                    }
-                });
-
-                // Fallback: If no section is intersecting enough, highlight the first link if at top
-                 if (intersectingSectionId === null && window.pageYOffset < 200) {
+                if (latestIntersectingSectionId) {
+                    navLinks.forEach(link => {
+                        link.classList.remove('active');
+                        const href = link.getAttribute('href');
+                        if (href && href.substring(1) === latestIntersectingSectionId) {
+                            link.classList.add('active');
+                            lastActiveLink = link;
+                        }
+                    });
+                } else if (window.scrollY === 0) {
                      navLinks.forEach(link => link.classList.remove('active'));
-                     if (navLinks[0]) { // Ensure the first link exists
-                        navLinks[0].classList.add('active');
+                     if (navLinks[0]) {
+                         navLinks[0].classList.add('active');
+                         lastActiveLink = navLinks[0];
                      }
-                 }
+                } else {
+                    navLinks.forEach(link => {
+                        link.classList.remove('active');
+                    });
+                    if (lastActiveLink) {
+                        lastActiveLink.classList.add('active');
+                    }
+                    else if (navLinks.length > 0) {
+                        navLinks[0].classList.add('active');
+                    }
+                }
 
           }, observerOptions);
 
           sections.forEach(section => {
             observer.observe(section);
           });
-      } // end if sections/navlinks exist
+
+           if (window.scrollY === 0 && navLinks[0]) {
+               navLinks[0].classList.add('active');
+               lastActiveLink = navLinks[0];
+           }
+
+      }
 
     }); // End DOMContentLoaded
   </script>
