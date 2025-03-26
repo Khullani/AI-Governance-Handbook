@@ -185,6 +185,7 @@
       padding: 1rem 1.5rem;
       color: var(--black);
       transition: all 0.3s ease;
+      font-size: 0.95rem; /* Slightly increase size for readability */
     }
 
     .nav-link:hover {
@@ -194,6 +195,8 @@
     .nav-link.active {
       background-color: var(--white);
       font-weight: 500;
+      border-left: 3px solid var(--primary-color); /* Highlight active link */
+      padding-left: calc(1.5rem - 3px); /* Adjust padding */
     }
 
     .nav-link span.number {
@@ -222,6 +225,8 @@
     .content-header {
       text-align: center;
       margin-bottom: 3rem;
+      border-bottom: 1px solid var(--light-gray);
+      padding-bottom: 2rem;
     }
 
     .content-title {
@@ -233,7 +238,7 @@
     }
 
     .authors {
-      margin-bottom: 2rem;
+      margin-bottom: 0; /* Reduce margin */
       color: var(--medium-gray);
     }
 
@@ -503,7 +508,7 @@
     }
     #references li, #glossary-references li {
       margin-bottom: 1rem;
-      padding-left: 2.5em;
+      padding-left: 3em; /* Adjust indent for number */
       position: relative;
       line-height: 1.5;
     }
@@ -516,6 +521,9 @@
         top: 0;
         font-weight: bold;
         color: var(--primary-color);
+        width: 2.5em; /* Ensure space for number */
+        text-align: right;
+        padding-right: 0.5em;
     }
     /* Glossary References numbering */
      #glossary-references li::before {
@@ -526,18 +534,20 @@
         top: 0;
         font-weight: bold;
         color: var(--primary-color);
+        width: 2.5em; /* Ensure space for number */
+        text-align: right;
+        padding-right: 0.5em;
     }
 
     /* Backlink styling */
-    #references li a.endnote-backlink,
-    #glossary-references li a.endnote-backlink {
+    a.endnote-backlink {
         margin-left: 0.5em;
         text-decoration: none;
         color: var(--secondary-color);
         font-weight: bold;
+        font-size: 0.9em;
     }
-     #references li a.endnote-backlink:hover,
-     #glossary-references li a.endnote-backlink:hover {
+     a.endnote-backlink:hover {
         text-decoration: underline;
     }
 
@@ -714,8 +724,8 @@
       .author-card { flex-direction: column; align-items: center; text-align: center; }
       .author-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; }
       .author-links a { margin-right: 0; }
-      #references li, #glossary-references li { padding-left: 2em; } /* Adjust indent for mobile */
-      #references li::before, #glossary-references li::before { left: 0.2em; } /* Adjust number position */
+      #references li, #glossary-references li { padding-left: 2.5em; } /* Adjust indent for mobile */
+      #references li::before, #glossary-references li::before { left: 0.2em; width: 2em; text-align: right; padding-right: 0.3em;} /* Adjust number position */
     }
   </style>
 </head>
@@ -741,6 +751,7 @@
       <div class="sidebar-title">Contents</div>
       <nav>
         <ul class="nav-menu">
+          <!-- Added Title Link -->
           <li class="nav-item"><a href="#introduction" class="nav-link">AI Governance Handbook</a></li>
           <li class="nav-item"><a href="#introduction" class="nav-link">Introduction</a></li>
           <li class="nav-item"><a href="#legal-frameworks" class="nav-link">Legal & Regulatory Frameworks</a></li>
@@ -778,10 +789,10 @@
         <p>AI systems must comply with an evolving landscape of laws, regulations, and standards designed to address their unique risks. Key frameworks include international standards (ISO/IEC), national and regional laws (like the EU AI Act), and industry guidelines. Below we analyze some of the most relevant governance frameworks:</p>
 
         <h3>ISO/IEC 42001 (AI Management System Standard)</h3>
-        <p>Published in December 2023, ISO/IEC 42001 is the first global standard for AI management systems<sup><a href="#ref-1" id="ref-marker-1" class="endnote-link">[1]</a></sup>. It provides a certifiable framework for organizations to establish and continuously improve their AI governance processes<sup><a href="#ref-1" id="ref-marker-1" class="endnote-link">[1]</a></sup>. This standard is akin to ISO 9001 (quality management) or ISO 27001 (information security), but tailored to AI. ISO 42001 focuses on ethics, transparency, accountability, bias mitigation, safety, and privacy – covering the essential elements of trustworthy AI development and deployment<sup><a href="#ref-1" id="ref-marker-1" class="endnote-link">[1]</a></sup>. By implementing ISO 42001, organizations create an internal governance system ensuring AI projects are managed responsibly. The standard calls for defining an AI governance policy, senior leadership commitment, risk management processes, resource allocation for AI oversight, and operational controls for responsible AI throughout the AI lifecycle<sup><a href="#ref-1" id="ref-marker-1" class="endnote-link">[1]</a></sup><sup><a href="#ref-1" id="ref-marker-1" class="endnote-link">[1]</a></sup>. Importantly, ISO 42001 is sector-agnostic and for organizations of all sizes, providing a holistic approach to manage AI-related risks and opportunities across an entire organization<sup><a href="#ref-1" id="ref-marker-1" class="endnote-link">[1]</a></sup><sup><a href="#ref-1" id="ref-marker-1" class="endnote-link">[1]</a></sup>. Achieving ISO 42001 compliance can also demonstrate to regulators and customers that an organization adheres to recognized AI governance best practices.</p>
+        <p>Published in December 2023, ISO/IEC 42001 is the first global standard for AI management systems<sup><a href="#ref-1" id="ref-marker-1" class="endnote-link">[1]</a></sup>. It provides a certifiable framework for organizations to establish and continuously improve their AI governance processes<sup><a href="#ref-1" id="ref-marker-1" class="endnote-link">[1]</a></sup>. This standard is akin to ISO 9001 (quality management) or ISO 27001 (information security), but tailored to AI. ISO 42001 focuses on ethics, transparency, accountability, bias mitigation, safety, and privacy – covering the essential elements of trustworthy AI development and deployment<sup><a href="#ref-1" id="ref-marker-1" class="endnote-link">[1]</a></sup>. By implementing ISO 42001, organizations create an internal governance system ensuring AI projects are managed responsibly. The standard calls for defining an AI governance policy, senior leadership commitment, risk management processes, resource allocation for AI oversight, and operational controls for responsible AI throughout the AI lifecycle<sup><a href="#ref-1" id="ref-marker-1" class="endnote-link">[1]</a></sup>. Importantly, ISO 42001 is sector-agnostic and for organizations of all sizes, providing a holistic approach to manage AI-related risks and opportunities across an entire organization<sup><a href="#ref-1" id="ref-marker-1" class="endnote-link">[1]</a></sup>. Achieving ISO 42001 compliance can also demonstrate to regulators and customers that an organization adheres to recognized AI governance best practices.</p>
 
         <h3>ISO/IEC 23894 (AI Risk Management)</h3>
-        <p>ISO/IEC 23894 is a companion standard providing detailed guidance on managing AI risks<sup><a href="#ref-1" id="ref-marker-1" class="endnote-link">[1]</a></sup>. It essentially adapts the generic risk management principles of ISO 31000 to the AI context<sup><a href="#ref-2" id="ref-marker-2" class="endnote-link">[2]</a></sup>. ISO 23894 guides organizations in integrating AI risk assessment into their processes – identifying risks across the AI lifecycle (from data collection and model training to deployment), evaluating their severity, and treating them with appropriate controls<sup><a href="#ref-1" id="ref-marker-1" class="endnote-link">[1]</a></sup>. For example, it covers processes to detect and mitigate bias or security vulnerabilities in AI models. Together, ISO 23894 (risk management) and ISO 42001 (management system) form a coherent toolkit: one establishes the governance structure, and the other provides risk-specific procedures. These ISO standards are international and voluntary, but they are likely to become baselines for compliance as regulators and customers increasingly expect organizations to follow them for AI governance consistency<sup><a href="#ref-1" id="ref-marker-1" class="endnote-link">[1]</a></sup><sup><a href="#ref-1" id="ref-marker-1" class="endnote-link">[1]</a></sup>.</p>
+        <p>ISO/IEC 23894 is a companion standard providing detailed guidance on managing AI risks<sup><a href="#ref-1" id="ref-marker-1" class="endnote-link">[1]</a></sup>. It essentially adapts the generic risk management principles of ISO 31000 to the AI context<sup><a href="#ref-2" id="ref-marker-2" class="endnote-link">[2]</a></sup>. ISO 23894 guides organizations in integrating AI risk assessment into their processes – identifying risks across the AI lifecycle (from data collection and model training to deployment), evaluating their severity, and treating them with appropriate controls<sup><a href="#ref-1" id="ref-marker-1" class="endnote-link">[1]</a></sup>. For example, it covers processes to detect and mitigate bias or security vulnerabilities in AI models. Together, ISO 23894 (risk management) and ISO 42001 (management system) form a coherent toolkit: one establishes the governance structure, and the other provides risk-specific procedures. These ISO standards are international and voluntary, but they are likely to become baselines for compliance as regulators and customers increasingly expect organizations to follow them for AI governance consistency<sup><a href="#ref-1" id="ref-marker-1" class="endnote-link">[1]</a></sup>.</p>
 
         <h3>EU AI Act</h3>
         <p>The European Union’s AI Act (likely entering force in 2025–2026) is a landmark regulation taking a risk-based approach to AI oversight<sup><a href="#ref-1" id="ref-marker-1" class="endnote-link">[1]</a></sup>. It will be the first comprehensive AI law globally. The Act categorizes AI systems into four risk levels with corresponding requirements<sup><a href="#ref-1" id="ref-marker-1" class="endnote-link">[1]</a></sup>:</p>
@@ -791,7 +802,7 @@
             <li><strong>Limited risk:</strong> AI systems requiring transparency obligations, like notifying users they are interacting with AI chatbots.</li>
             <li><strong>Minimal risk:</strong> Most AI, which have few obligations.</li>
         </ul>
-        <p>The map of risk tiers means that higher-risk AI applications must meet robust criteria for data quality, documentation, human oversight, transparency, accuracy, and cybersecurity before they can be deployed<sup><a href="#ref-1" id="ref-marker-1" class="endnote-link">[1]</a></sup>. For example, a high-risk AI system in recruitment must undergo testing to ensure it does not unlawfully discriminate, and its provider must implement risk management and log-keeping. The Act was finalized in 2024 and is expected to become enforceable after a transition period<sup><a href="#ref-3" id="ref-marker-3" class="endnote-link">[3]</a></sup><sup><a href="#ref-3" id="ref-marker-3" class="endnote-link">[3]</a></sup>. Companies worldwide will need to comply when operating in the EU market, similar to how GDPR set a global standard for data privacy. The EU AI Act represents a “landmark regulatory milestone” that will require organizations to treat AI governance seriously, performing AI impact assessments and possibly redesigning systems to meet the Act’s criteria<sup><a href="#ref-3" id="ref-marker-3" class="endnote-link">[3]</a></sup><sup><a href="#ref-3" id="ref-marker-3" class="endnote-link">[3]</a></sup>. It also establishes an EU AI Office for oversight. Notably, the AI Act complements existing laws like GDPR (for privacy) – AI systems that process personal data must obey both. For instance, the Act’s transparency and fairness requirements reinforce GDPR’s principles of data protection and “the right not to be subject to solely automated decisions” under GDPR Article 22<sup><a href="#ref-4" id="ref-marker-4" class="endnote-link">[4]</a></sup><sup><a href="#ref-4" id="ref-marker-4" class="endnote-link">[4]</a></sup>.</p>
+        <p>The map of risk tiers means that higher-risk AI applications must meet robust criteria for data quality, documentation, human oversight, transparency, accuracy, and cybersecurity before they can be deployed<sup><a href="#ref-1" id="ref-marker-1" class="endnote-link">[1]</a></sup>. For example, a high-risk AI system in recruitment must undergo testing to ensure it does not unlawfully discriminate, and its provider must implement risk management and log-keeping. The Act was finalized in 2024 and is expected to become enforceable after a transition period<sup><a href="#ref-3" id="ref-marker-3" class="endnote-link">[3]</a></sup>. Companies worldwide will need to comply when operating in the EU market, similar to how GDPR set a global standard for data privacy. The EU AI Act represents a “landmark regulatory milestone” that will require organizations to treat AI governance seriously, performing AI impact assessments and possibly redesigning systems to meet the Act’s criteria<sup><a href="#ref-3" id="ref-marker-3" class="endnote-link">[3]</a></sup>. It also establishes an EU AI Office for oversight. Notably, the AI Act complements existing laws like GDPR (for privacy) – AI systems that process personal data must obey both. For instance, the Act’s transparency and fairness requirements reinforce GDPR’s principles of data protection and “the right not to be subject to solely automated decisions” under GDPR Article 22<sup><a href="#ref-4" id="ref-marker-4" class="endnote-link">[4]</a></sup>.</p>
 
         <div class="figure">
           <img src="https://github.com/Khullani/AI-Governance-Handbook/raw/main/EUAIActRiskClassification.png"
@@ -801,12 +812,12 @@
         </div>
 
         <h3>NIST AI Risk Management Framework (RMF)</h3>
-        <p>In the United States, a prominent non-regulatory framework is the NIST AI RMF 1.0, published in January 2023. Developed through a multi-stakeholder process, the NIST AI RMF is a voluntary guidance for organizations to manage AI risks and promote trustworthy AI<sup><a href="#ref-6" id="ref-marker-6" class="endnote-link">[6]</a></sup><sup><a href="#ref-6" id="ref-marker-6" class="endnote-link">[6]</a></sup>. It provides a structured approach organized into four core functions: Govern, Map, Measure, and Manage.</p>
+        <p>In the United States, a prominent non-regulatory framework is the NIST AI RMF 1.0, published in January 2023. Developed through a multi-stakeholder process, the NIST AI RMF is a voluntary guidance for organizations to manage AI risks and promote trustworthy AI<sup><a href="#ref-6" id="ref-marker-6" class="endnote-link">[6]</a></sup>. It provides a structured approach organized into four core functions: Govern, Map, Measure, and Manage.</p>
         <ul>
           <li><strong>Govern:</strong> Establish organizational governance processes to oversee AI risk management (cultivating a culture of risk awareness, accountability, and adherence to trustworthiness principles at all levels)<sup><a href="#ref-7" id="ref-marker-7" class="endnote-link">[7]</a></sup>. Governance is a cross-cutting function that informs all others.</li>
           <li><strong>Map:</strong> Contextualize and identify risks – i.e. understand the AI system’s purpose, scope, and environment to recognize what risks might arise and who might be affected.</li>
-          <li><strong>Measure:</strong> Analyze, assess, and monitor AI risks – for example, measure the performance of mitigations, track metrics like bias or robustness, and audit the AI system to gauge if risk controls are effective<sup><a href="#ref-8" id="ref-marker-8" class="endnote-link">[8]</a></sup><sup><a href="#ref-8" id="ref-marker-8" class="endnote-link">[8]</a></sup>.</li>
-          <li><strong>Manage:</strong> Mitigate and respond – implement controls to address identified risks (e.g. retraining a model on more diverse data to reduce bias, or enforcing human review for certain AI decisions), and have processes to respond to incidents or adapt the AI system as its context changes<sup><a href="#ref-8" id="ref-marker-8" class="endnote-link">[8]</a></sup><sup><a href="#ref-8" id="ref-marker-8" class="endnote-link">[8]</a></sup>.</li>
+          <li><strong>Measure:</strong> Analyze, assess, and monitor AI risks – for example, measure the performance of mitigations, track metrics like bias or robustness, and audit the AI system to gauge if risk controls are effective<sup><a href="#ref-8" id="ref-marker-8" class="endnote-link">[8]</a></sup>.</li>
+          <li><strong>Manage:</strong> Mitigate and respond – implement controls to address identified risks (e.g. retraining a model on more diverse data to reduce bias, or enforcing human review for certain AI decisions), and have processes to respond to incidents or adapt the AI system as its context changes<sup><a href="#ref-8" id="ref-marker-8" class="endnote-link">[8]</a></sup>.</li>
         </ul>
         <p>These functions operate in a continuous, iterative cycle (much like the cybersecurity framework’s identify/protect/detect/respond/recover). The NIST framework is technology-neutral and use-case agnostic, meaning it can be applied to any AI system to improve its trustworthiness. It emphasizes stakeholder engagement, transparency, fairness, and other “qualities of trustworthy AI” as cross-cutting principles. While not law, the NIST AI RMF has been influential globally – for example, companies might use it as a basis for internal AI policies, and it aligns with ISO 23894’s risk management approach<sup><a href="#ref-2" id="ref-marker-2" class="endnote-link">[2]</a></sup><sup><a href="#ref-1" id="ref-marker-1" class="endnote-link">[1]</a></sup>. In practice, an organization using the NIST AI RMF would document the context of each AI application (Map), perform risk assessments and impact evaluations (Measure), apply safeguards and controls (Manage), and have an overarching governance program to tie these together (Govern). NIST has also released a companion AI RMF Playbook with actionable guidance and an AI RMF Crosswalk mapping its recommendations to other standards<sup><a href="#ref-6" id="ref-marker-6" class="endnote-link">[6]</a></sup>. The goal is to help organizations “incorporate trustworthiness considerations into the design, development, use, and evaluation” of AI systems<sup><a href="#ref-6" id="ref-marker-6" class="endnote-link">[6]</a></sup>, thereby reducing risks and harms.</p>
 
@@ -818,15 +829,15 @@
         </div>
 
         <h3>Privacy and Data Protection Laws (GDPR, CCPA, etc.)</h3>
-        <p>Data is the lifeblood of AI, so privacy laws are highly relevant to AI governance. The EU’s General Data Protection Regulation (GDPR) imposes strict requirements on processing personal data, which many AI systems do (for instance, AI analyzing user behavior or personal attributes). GDPR mandates principles like data minimization, purpose limitation, and fairness in data processing<sup><a href="#ref-4" id="ref-marker-4" class="endnote-link">[4]</a></sup>. It also provides individuals rights that affect AI – notably the right not to be subject to solely automated decisions with significant effects (Article 22 GDPR) in certain cases, or at least the right to human review and an explanation<sup><a href="#ref-9" id="ref-marker-9" class="endnote-link">[9]</a></sup><sup><a href="#ref-9" id="ref-marker-9" class="endnote-link">[9]</a></sup>. This means if a company uses an AI algorithm alone to decide something like a loan approval, an EU consumer may challenge it and request human intervention. AI governance programs must therefore incorporate GDPR compliance: ensuring lawful basis for AI data processing, conducting Data Protection Impact Assessments when deploying high-risk AI, and enabling transparency and recourse for individuals. GDPR’s emphasis on accountability requires organizations to be able to demonstrate compliance – in context of AI, this entails documenting how models were trained, how data was obtained and secured, and what measures prevent privacy violations<sup><a href="#ref-4" id="ref-marker-4" class="endnote-link">[4]</a></sup>. Additionally, GDPR’s fines for non-compliance (up to 4% of global turnover) make privacy a board-level risk.</p>
-        <p>In the US, while there is no federal GDPR equivalent, state laws like the California Consumer Privacy Act (CCPA) grant consumers rights over personal information. The CCPA (amended by CPRA) gives California residents the right to know, delete, and opt-out of the sale of their personal data<sup><a href="#ref-10" id="ref-marker-10" class="endnote-link">[10]</a></sup>, among other rights (like correct inaccurate data and not be discriminated against for exercising privacy rights)<sup><a href="#ref-10" id="ref-marker-10" class="endnote-link">[10]</a></sup><sup><a href="#ref-10" id="ref-marker-10" class="endnote-link">[10]</a></sup>. For AI, this means any models using California residents’ data need processes to delete that data upon request and to stop selling or sharing it if the consumer opts out. CCPA also requires transparency in privacy policies about data usage which extends to AI-driven data uses. Further, sector-specific privacy rules may apply (e.g. HIPAA for health data used in AI medical diagnostics, which mandates strict safeguards for Protected Health Information).</p>
+        <p>Data is the lifeblood of AI, so privacy laws are highly relevant to AI governance. The EU’s General Data Protection Regulation (GDPR) imposes strict requirements on processing personal data, which many AI systems do (for instance, AI analyzing user behavior or personal attributes). GDPR mandates principles like data minimization, purpose limitation, and fairness in data processing<sup><a href="#ref-4" id="ref-marker-4" class="endnote-link">[4]</a></sup>. It also provides individuals rights that affect AI – notably the right not to be subject to solely automated decisions with significant effects (Article 22 GDPR) in certain cases, or at least the right to human review and an explanation<sup><a href="#ref-9" id="ref-marker-9" class="endnote-link">[9]</a></sup>. This means if a company uses an AI algorithm alone to decide something like a loan approval, an EU consumer may challenge it and request human intervention. AI governance programs must therefore incorporate GDPR compliance: ensuring lawful basis for AI data processing, conducting Data Protection Impact Assessments when deploying high-risk AI, and enabling transparency and recourse for individuals. GDPR’s emphasis on accountability requires organizations to be able to demonstrate compliance – in context of AI, this entails documenting how models were trained, how data was obtained and secured, and what measures prevent privacy violations<sup><a href="#ref-4" id="ref-marker-4" class="endnote-link">[4]</a></sup>. Additionally, GDPR’s fines for non-compliance (up to 4% of global turnover) make privacy a board-level risk.</p>
+        <p>In the US, while there is no federal GDPR equivalent, state laws like the California Consumer Privacy Act (CCPA) grant consumers rights over personal information. The CCPA (amended by CPRA) gives California residents the right to know, delete, and opt-out of the sale of their personal data<sup><a href="#ref-10" id="ref-marker-10" class="endnote-link">[10]</a></sup>, among other rights (like correct inaccurate data and not be discriminated against for exercising privacy rights)<sup><a href="#ref-10" id="ref-marker-10" class="endnote-link">[10]</a></sup>. For AI, this means any models using California residents’ data need processes to delete that data upon request and to stop selling or sharing it if the consumer opts out. CCPA also requires transparency in privacy policies about data usage which extends to AI-driven data uses. Further, sector-specific privacy rules may apply (e.g. HIPAA for health data used in AI medical diagnostics, which mandates strict safeguards for Protected Health Information).</p>
 
         <h3>Security and AI-Specific Regulations</h3>
         <p>Beyond privacy, AI governance intersects with cybersecurity and domain-specific regulations. AI systems must be secured against breaches and adversarial attacks (which is part of AI safety). Laws like the EU’s Network and Information Security (NIS2) Directive or various national cybersecurity laws require organizations to protect systems (including AI) from cyber threats – failing to do so can cause data leaks or model manipulation. Moreover, industries have their own AI-related guidance. For example, the FDA in the US is developing regulatory guidance for AI/ML-based medical devices, requiring algorithm transparency and Good Machine Learning Practice for safety and effectiveness. In finance, regulators (like banking authorities) are examining algorithms for fairness and stability – the Federal Reserve’s SR 11-7 guidance on model risk management, while older, is now being interpreted to include AI models (requiring rigorous validation and audit of models that affect financial decisions). The EU’s draft AI Act explicitly covers AI in credit scoring, insurance, employment, etc. as high-risk, linking to existing financial regulations. Meanwhile, sectoral standards (like ISO 26262 for automotive functional safety) are relevant when AI is used in that sector (e.g. self-driving car AI must meet both AI governance standards and functional safety standards).</p>
 
         <h3>Ethical Frameworks and Global Principles</h3>
-        <p>Apart from hard law and formal standards, numerous ethical AI frameworks guide governance. The OECD AI Principles (2019) – adopted by 40+ countries – articulate high-level tenets: inclusive growth, human-centered values and fairness, transparency and explainability, robustness and safety, and accountability for AI<sup><a href="#ref-11" id="ref-marker-11" class="endnote-link">[11]</a></sup><sup><a href="#ref-12" id="ref-marker-12" class="endnote-link">[12]</a></sup>. These principles have informed regulations and corporate codes of conduct worldwide. Similarly, the UNESCO Recommendation on AI Ethics (2021) provides a global ethical framework emphasizing human dignity, environmental well-being, gender equality, and peaceful use of AI. While these are not directly enforceable, they shape policymaker and public expectations, and organizations often voluntarily align with them to demonstrate commitment to responsible AI. For example, a company might commit to the OECD principle of robustness by establishing rigorous testing and validation before deploying AI, or to accountability by providing appeal mechanisms for AI decisions. In the U.S., the White House’s Blueprint for an AI Bill of Rights (2022) lists principles echoing these themes (safe and effective systems, algorithmic discrimination protection, data privacy, notice & explanation, and human alternatives)<sup><a href="#ref-13" id="ref-marker-13" class="endnote-link">[13]</a></sup><sup><a href="#ref-13" id="ref-marker-13" class="endnote-link">[13]</a></sup>. Even though it’s guidance, it sets a benchmark for what citizens should expect from AI – and thus what companies should strive to implement.</p>
-        <p>In summary, the regulatory environment for AI is multifaceted: companies must navigate international standards (ISO/IEC), follow region-specific laws (like the EU AI Act’s risk-based rules and data protection laws such as GDPR/CCPA), and heed industry-specific requirements. Compliance will require cross-functional effort: lawyers and compliance officers to interpret laws, data scientists and engineers to implement technical controls, and executives to integrate these requirements into corporate governance. Many organizations are adopting AI governance frameworks that “ensure consistency and coherence” amidst this patchwork<sup><a href="#ref-1" id="ref-marker-1" class="endnote-link">[1]</a></sup><sup><a href="#ref-1" id="ref-marker-1" class="endnote-link">[1]</a></sup>, often using standards like NIST and ISO as foundational, then layering on the specific legal obligations for their industry and markets.</p>
+        <p>Apart from hard law and formal standards, numerous ethical AI frameworks guide governance. The OECD AI Principles (2019) – adopted by 40+ countries – articulate high-level tenets: inclusive growth, human-centered values and fairness, transparency and explainability, robustness and safety, and accountability for AI<sup><a href="#ref-11" id="ref-marker-11" class="endnote-link">[11]</a></sup><sup><a href="#ref-12" id="ref-marker-12" class="endnote-link">[12]</a></sup>. These principles have informed regulations and corporate codes of conduct worldwide. Similarly, the UNESCO Recommendation on AI Ethics (2021) provides a global ethical framework emphasizing human dignity, environmental well-being, gender equality, and peaceful use of AI. While these are not directly enforceable, they shape policymaker and public expectations, and organizations often voluntarily align with them to demonstrate commitment to responsible AI. For example, a company might commit to the OECD principle of robustness by establishing rigorous testing and validation before deploying AI, or to accountability by providing appeal mechanisms for AI decisions. In the U.S., the White House’s Blueprint for an AI Bill of Rights (2022) lists principles echoing these themes (safe and effective systems, algorithmic discrimination protection, data privacy, notice & explanation, and human alternatives)<sup><a href="#ref-13" id="ref-marker-13" class="endnote-link">[13]</a></sup>. Even though it’s guidance, it sets a benchmark for what citizens should expect from AI – and thus what companies should strive to implement.</p>
+        <p>In summary, the regulatory environment for AI is multifaceted: companies must navigate international standards (ISO/IEC), follow region-specific laws (like the EU AI Act’s risk-based rules and data protection laws such as GDPR/CCPA), and heed industry-specific requirements. Compliance will require cross-functional effort: lawyers and compliance officers to interpret laws, data scientists and engineers to implement technical controls, and executives to integrate these requirements into corporate governance. Many organizations are adopting AI governance frameworks that “ensure consistency and coherence” amidst this patchwork<sup><a href="#ref-1" id="ref-marker-1" class="endnote-link">[1]</a></sup>, often using standards like NIST and ISO as foundational, then layering on the specific legal obligations for their industry and markets.</p>
       </section>
 
       <!-- Privacy, Data, and Security Section -->
@@ -1427,6 +1438,38 @@
         <p>In implementing maturity models, organizations should also consider dependency between them: e.g. improving Responsible AI maturity might require improving Governance maturity since governance provides the oversight for ethics. In practice, progress in one area often drives progress in others. A holistic approach (perhaps an overall AI Capability Maturity model combining elements of all) can be developed, but dissecting by domain as we did allows focus on specific competencies and specialized teams (compliance team vs engineering team) to take ownership.</p>
       </section>
 
+       <!-- Main Conclusion Section -->
+      <section id="conclusion" class="content-text">
+        <h2>Conclusion</h2>
+        <p>This handbook has provided a comprehensive primer on AI Governance, Safety, Trust/Transparency, Responsible AI, and Risk – explaining key legal/regulatory frameworks and technical aspects, tailored to the needs of AI practitioners, compliance officers, executives, and policymakers. As organizations navigate the complex landscape of AI, they must align on terminology and goals (hence the glossary) and collaborate across roles: developers building safe and explainable systems, compliance ensuring laws and ethics are met, executives setting direction and culture, and policymakers creating an environment that rewards responsible innovation. By assessing their maturity in various facets of AI governance using the frameworks presented and following best practices at each stage, organizations can steadily improve. The ultimate aim is to harness the power of AI in a way that is responsible, trustworthy, and aligned with societal values, thereby unlocking AI’s benefits while managing its risks.</p>
+      </section>
+
+       <!-- About the Author Section -->
+      <section id="about" class="content-text">
+        <h2>About the Author</h2>
+        <div class="author-grid">
+          <div class="author-card">
+            <div class="author-image-container">
+              <img src="https://github.com/Khullani/AI-Governance-Handbook/raw/main/Khullani-TechneAI-Founder-AIGovernance%20copy.jpeg"
+                alt="Khullani M. Abdullahi" loading="lazy"
+                onerror="this.src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=';" />
+            </div>
+            <div class="author-info">
+              <h3>Khullani M. Abdullahi, J.D.</h3>
+              <p class="author-title">Founder of Techne AI</p>
+              <p class="author-bio">Khullani M. Abdullahi specializes in AI governance, compliance, and ethics. With a
+                background in law and technology, Khullani helps organizations navigate the complex landscape of AI regulation
+                and responsible implementation.</p>
+              <div class="author-links">
+                <a href="https://www.linkedin.com/in/khullani/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                <a href="https://techne.ai" target="_blank" rel="noopener noreferrer">Website</a>
+                <a href="https://insights.techne.ai/" target="_blank" rel="noopener noreferrer">Newsletter</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <!-- Additional Resources Section -->
       <section id="resources" class="content-text">
         <h2>Additional Resources</h2>
@@ -1458,28 +1501,27 @@
       <section id="references" class="content-text">
           <h2>References (Main Body)</h2>
           <ol>
-              <li id="ref-1">Osler, Hoskin & Harcourt LLP. "The role of ISO/IEC 42001 in AI governance". [Provide URL if available] <a href="#ref-marker-1" title="Return to text" class="endnote-backlink">↩</a></li>
-              <li id="ref-2">"Everything you need to know about the NIST AI Risk Management ...". [Provide Full Source/URL] <a href="#ref-marker-2" title="Return to text" class="endnote-backlink">↩</a></li>
-              <li id="ref-3">MIAI. "Tools for Navigating the EU AI Act: (2) Visualisation Pyramid". [Provide URL if available] <a href="#ref-marker-3" title="Return to text" class="endnote-backlink">↩</a></li>
-              <li id="ref-4">Visier. "What the GDPR Shows Us About the Future of AI Regulation". [Provide URL if available] <a href="#ref-marker-4" title="Return to text" class="endnote-backlink">↩</a></li>
-              <li id="ref-5">"The New EU Artificial Intelligence Act: Impact on the Biodiversity Information Community". [Provide Full Source/URL] <a href="#ref-marker-5" title="Return to text" class="endnote-backlink">↩</a></li>
-              <li id="ref-6">NIST. "AI Risk Management Framework". Available: https://www.nist.gov/itl/ai-risk-management-framework <a href="#ref-marker-6" title="Return to text" class="endnote-backlink">↩</a></li>
-              <li id="ref-7">Medill Spiegel Research Center. "Robots and the NIST AI Risk Management Framework". [Provide URL if available] <a href="#ref-marker-7" title="Return to text" class="endnote-backlink">↩</a></li>
-              <li id="ref-8">Thoropass. "Understanding the NIST AI Risk Management Framework: A complete guide". [Provide URL if available] <a href="#ref-marker-8" title="Return to text" class="endnote-backlink">↩</a></li>
-              <li id="ref-9">GDPR. "Art. 22 GDPR – Automated individual decision-making, including profiling". Available: [Provide Official GDPR URL for Art. 22] <a href="#ref-marker-9" title="Return to text" class="endnote-backlink">↩</a></li>
-              <li id="ref-10">Cloudflare. "What is the CCPA (California Consumer Privacy Act)?". Available: https://www.cloudflare.com/learning/privacy/what-is-ccpa/ [Verify URL] <a href="#ref-marker-10" title="Return to text" class="endnote-backlink">↩</a></li>
-              <li id="ref-11">OECD. "AI principles". Available: https://oecd.ai/en/ai-principles <a href="#ref-marker-11" title="Return to text" class="endnote-backlink">↩</a></li>
-              <li id="ref-12">American National Standards Institute (ANSI). "OECD Updates AI Principles". [Provide URL if available] <a href="#ref-marker-12" title="Return to text" class="endnote-backlink">↩</a></li>
-              <li id="ref-13">TechTarget. "What Is Artificial Intelligence (AI) Governance?". [Provide URL if available] <a href="#ref-marker-13" title="Return to text" class="endnote-backlink">↩</a></li>
-              <li id="ref-14">"What is technical AI safety?". [Provide Full Source/URL] <a href="#ref-marker-14" title="Return to text" class="endnote-backlink">↩</a></li>
-              <li id="ref-15">arXiv:2401.15229. "Evolving AI Risk Management: A Maturity Model based on the NIST AI Risk Management Framework". Available: https://arxiv.org/abs/2401.15229 <a href="#ref-marker-15" title="Return to text" class="endnote-backlink">↩</a></li>
-              <li id="ref-16">"Accountability (OECD AI Principle)". [Provide Specific Document/Page/URL] <a href="#ref-marker-16" title="Return to text" class="endnote-backlink">↩</a></li>
-              <li id="ref-17">GSMA. "The GSMA Responsible AI Maturity Roadmap" [PDF]. [Provide URL if available] <a href="#ref-marker-17" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="ref-1">Osler, Hoskin & Harcourt LLP. "The role of ISO/IEC 42001 in AI governance". Retrieved from https://www.osler.com/en/insights/updates/the-role-of-iso-iec-42001-in-ai-governance/ <a href="#ref-marker-1" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="ref-2">Trustible. "Everything you need to know about the NIST AI Risk Management Framework". Retrieved from https://www.trustible.ai/post/nist-ai-rmf-faq <a href="#ref-marker-2" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="ref-3">MIAI, Grenoble Alpes. "Tools for Navigating the EU AI Act: (2) Visualisation Pyramid". Retrieved from https://ai-regulation.com/visualisation-pyramid/ <a href="#ref-marker-3" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="ref-4">Visier. "What the GDPR Shows Us About the Future of AI Regulation". Retrieved from https://www.visier.com/blog/what-the-gdpr-shows-us-about-the-future-of-ai-regulation/ <a href="#ref-marker-4" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="ref-5">"The New EU Artificial Intelligence Act: Impact on the Biodiversity Information Community". Biodiversity Information Science and Standards. Retrieved from https://biss.pensoft.net/article/135924/ <a href="#ref-marker-5" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="ref-6">NIST. "AI Risk Management Framework". Retrieved from https://www.nist.gov/itl/ai-risk-management-framework <a href="#ref-marker-6" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="ref-7">Medill Spiegel Research Center. "Robots and the NIST AI Risk Management Framework". Retrieved from https://spiegel.medill.northwestern.edu/?p=4577 <a href="#ref-marker-7" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="ref-8">Thoropass. "Understanding the NIST AI Risk Management Framework: A complete guide". Retrieved from https://thoropass.com/blog/compliance/nist-ai-rmf/ <a href="#ref-marker-8" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="ref-9">GDPR. "Art. 22 GDPR – Automated individual decision-making, including profiling". Retrieved from [Provide Official GDPR URL for Art. 22 - e.g., https://gdpr-info.eu/art-22-gdpr/] <a href="#ref-marker-9" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="ref-10">Cloudflare. "What is the CCPA (California Consumer Privacy Act)?". Retrieved from https://www.cloudflare.com/learning/privacy/what-is-ccpa/ <a href="#ref-marker-10" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="ref-11">OECD. "AI principles". Retrieved from https://oecd.ai/en/ai-principles <a href="#ref-marker-11" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="ref-12">American National Standards Institute (ANSI). "OECD Updates AI Principles". Retrieved from https://ansi.org/standards-news/all-news/2024/05/5-9-24-oecd-updates-ai-principles <a href="#ref-marker-12" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="ref-13">TechTarget. "What Is Artificial Intelligence (AI) Governance?". Retrieved from https://www.techtarget.com/searchenterpriseai/definition/AI-governance <a href="#ref-marker-13" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="ref-14">Rose, G. "What is technical AI safety?". Retrieved from https://rosegenele.com/2024/07/23/what-is-technical-ai-safety/ <a href="#ref-marker-14" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="ref-15">Sánchez, I., et al. (2024). "Evolving AI Risk Management: A Maturity Model based on the NIST AI Risk Management Framework". arXiv:2401.15229. Retrieved from https://arxiv.org/abs/2401.15229 <a href="#ref-marker-15" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="ref-16">OECD. "Accountability (OECD AI Principle)". Retrieved from https://oecd.ai/en/dashboards/ai-principles/P9 <a href="#ref-marker-16" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="ref-17">GSMA. "The GSMA Responsible AI Maturity Roadmap" [PDF]. Retrieved from https://www.gsma.com/solutions-and-impact/connectivity-for-good/external-affairs/wp-content/uploads/2024/09/GSMA-ai4i_The-GSMA-Responsible-AI-Maturity-Roadmap_v8.pdf <a href="#ref-marker-17" title="Return to text" class="endnote-backlink">↩</a></li>
               <li>Mitchell, M., et al. (2019). <em>Model Cards for Model Reporting</em>. [Provide Full Source/URL if available]</li>
               <li>Gebru, T., et al. (2021). <em>Datasheets for Datasets</em>. [Provide Full Source/URL if available]</li>
               <li>OECD (2019). <em>Recommendation of the Council on Artificial Intelligence</em>. [Provide Full Source/URL if available]</li>
               <li>Arrieta, A.B., et al. (2020). <em>Explainable Artificial Intelligence (XAI)</em>. [Provide Full Source/URL if available]</li>
-              <!-- Note: Items 18-21 are general readings moved here -->
           </ol>
       </section>
 
@@ -1637,7 +1679,7 @@
                     <th>Framework</th>
                     <th>Origin</th>
                     <th>Focus</th>
-                    <th>Relevant Glossary Ref.</th> <!-- Clarified heading -->
+                    <th>Relevant Glossary Ref.</th>
                 </tr>
             </thead>
             <tbody>
@@ -1669,17 +1711,16 @@
                     <td>OECD AI Principles</td>
                     <td>International</td>
                     <td>Principles emphasizing responsible stewardship of trustworthy AI, including transparency, fairness, and accountability.</td>
-                    <td><sup><a href="#gref-3" id="gref-marker-3t4" class="endnote-link">[G3]</a></sup></td> <!-- Assuming this was intended to map to G3 or related OECD source -->
+                    <td><sup><a href="#gref-3" id="gref-marker-3t4" class="endnote-link">[G3]</a></sup></td> <!-- Verify mapping -->
                 </tr>
                 <tr>
                     <td>Canada's Directive on Automated Decision-Making</td>
                     <td>Canada</td>
                     <td>Guidance for the Canadian government's use of AI in decision-making, focusing on human intervention and oversight.</td>
-                    <td><sup><a href="#gref-3" id="gref-marker-3t5" class="endnote-link">[G3]</a></sup></td> <!-- Assuming this was intended to map to G3 or related Canadian source -->
+                    <td><sup><a href="#gref-3" id="gref-marker-3t5" class="endnote-link">[G3]</a></sup></td> <!-- Verify mapping -->
                 </tr>
             </tbody>
         </table>
-        <!-- Note: URLs for table entries need to be verified/added -->
 
         <h3>7. Conclusion (Glossary)</h3>
         <p>The effective governance of artificial intelligence is predicated on a shared and precise understanding of the terminology used across the diverse domains of technology, ethics, and law. This glossary has aimed to provide AI Governance Professionals with a comprehensive resource encompassing key terms relevant to AI safety, fundamental machine learning concepts crucial for oversight, the core principles of AI ethics, and the rapidly evolving landscape of AI-related regulations and legal frameworks. By establishing a common vocabulary, this resource intends to facilitate clearer and more effective communication among professionals from varied backgrounds, ultimately leading to more informed decision-making processes.</p>
@@ -1727,29 +1768,29 @@
               <li id="gref-35">What Is Model Drift? - IBM, accessed March 13, 2025, https://www.ibm.com/think/topics/model-drift <a href="#gref-marker-35" title="Return to text" class="endnote-backlink">↩</a></li>
               <li id="gref-36">Model Drift - C3 AI, accessed March 13, 2025, https://c3.ai/glossary/data-science/model-drift/ <a href="#gref-marker-36" title="Return to text" class="endnote-backlink">↩</a></li>
               <li id="gref-37">Model Drift: Types, Causes and Early Detection - Lumenova AI, accessed March 13, 2025, https://www.lumenova.ai/blog/model-drift-concept-drift-introduction/ <a href="#gref-marker-37" title="Return to text" class="endnote-backlink">↩</a></li>
-              <li id="gref-38">When AI Goes Astray: Understading Model Drift - ASHP, accessed March 13, 2025, https://www.ashp.org/-/media/assets/pharmacy-practice/resource-centers/Digital-Health-and-Artificial-Intelligence/docs/When-AI-Goes-Astray.pdf <a href="#gref-marker-38" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="gref-38">When AI Goes Astray: Understading Model Drift - ASHP [PDF], accessed March 13, 2025, https://www.ashp.org/-/media/assets/pharmacy-practice/resource-centers/Digital-Health-and-Artificial-Intelligence/docs/When-AI-Goes-Astray.pdf <a href="#gref-marker-38" title="Return to text" class="endnote-backlink">↩</a></li>
               <li id="gref-39">Glossary of artificial intelligence terms - Brookings Institution, accessed March 13, 2025, https://www.brookings.edu/articles/glossary-of-artificial-intelligence-terms/ <a href="#gref-marker-39" title="Return to text" class="endnote-backlink">↩</a></li>
               <li id="gref-40">Machine Learning Glossary - Deepchecks, accessed March 13, 2025, https://www.deepchecks.com/glossary/ <a href="#gref-marker-40" title="Return to text" class="endnote-backlink">↩</a></li>
               <li id="gref-41">Machine Learning Glossary - Google for Developers, accessed March 13, 2025, https://developers.google.com/machine-learning/glossary <a href="#gref-marker-41" title="Return to text" class="endnote-backlink">↩</a></li>
-              <li id="gref-42">www.managementsolutions.com, accessed March 13, 2025, https://www.managementsolutions.com/sites/default/files/minisite/static/22959b0f-b3da-47c8-9d5c-80ec3216552b/iax/pdf/explainable-artificial-intelligence-en-03.pdf <a href="#gref-marker-42" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="gref-42">Explainable Artificial Intelligence (XAI) - Management Solutions [PDF], accessed March 13, 2025, https://www.managementsolutions.com/sites/default/files/minisite/static/22959b0f-b3da-47c8-9d5c-80ec3216552b/iax/pdf/explainable-artificial-intelligence-en-03.pdf <a href="#gref-marker-42" title="Return to text" class="endnote-backlink">↩</a></li>
               <li id="gref-43">What is Explainable AI (XAI)? - IBM, accessed March 13, 2025, https://www.ibm.com/think/topics/explainable-ai <a href="#gref-marker-43" title="Return to text" class="endnote-backlink">↩</a></li>
-              <li id="gref-44">EXPLAINABLE ARTIFICIAL INTELLIGENCE - European Data Protection Supervisor, accessed March 13, 2025, https://www.edps.europa.eu/system/files/2023-11/23-11-16_techdispatch_xai_en.pdf <a href="#gref-marker-44" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="gref-44">EXPLAINABLE ARTIFICIAL INTELLIGENCE - European Data Protection Supervisor [PDF], accessed March 13, 2025, https://www.edps.europa.eu/system/files/2023-11/23-11-16_techdispatch_xai_en.pdf <a href="#gref-marker-44" title="Return to text" class="endnote-backlink">↩</a></li>
               <li id="gref-45">What Is Explainable AI (XAI)? - Palo Alto Networks, accessed March 13, 2025, https://www.paloaltonetworks.com/cyberpedia/explainable-ai <a href="#gref-marker-45" title="Return to text" class="endnote-backlink">↩</a></li>
-              <li id="gref-46">www.edps.europa.eu, accessed March 13, 2025, https://www.edps.europa.eu/press-publications/publications/techsonar/federated-learning#:~:text=Federated%20learning%20is%20a%20relatively,the%20way%20parameters%20are%20shared. <a href="#gref-marker-46" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="gref-46">Federated learning - European Data Protection Supervisor, accessed March 13, 2025, https://www.edps.europa.eu/press-publications/publications/techsonar/federated-learning <a href="#gref-marker-46" title="Return to text" class="endnote-backlink">↩</a></li>
               <li id="gref-47">Federated Learning | European Data Protection Supervisor, accessed March 13, 2025, https://www.edps.europa.eu/press-publications/publications/techsonar/federated-learning_en <a href="#gref-marker-47" title="Return to text" class="endnote-backlink">↩</a></li>
               <li id="gref-48">What is federated learning? - Open Data Institute (ODI), accessed March 13, 2025, https://theodi.org/insights/explainers/what-is-federated-learning/ <a href="#gref-marker-48" title="Return to text" class="endnote-backlink">↩</a></li>
               <li id="gref-49">Federated learning - Wikipedia, accessed March 13, 2025, https://en.wikipedia.org/wiki/Federated_learning <a href="#gref-marker-49" title="Return to text" class="endnote-backlink">↩</a></li>
               <li id="gref-50">Federated Learning in AI: How It Works, Benefits and Challenges | Splunk, accessed March 13, 2025, https://www.splunk.com/en_us/blog/learn/federated-ai.html <a href="#gref-marker-50" title="Return to text" class="endnote-backlink">↩</a></li>
               <li id="gref-51">A Step-by-Step Guide to Federated Learning in Computer Vision - V7 Labs, accessed March 13, 2025, https://www.v7labs.com/blog/federated-learning-guide <a href="#gref-marker-51" title="Return to text" class="endnote-backlink">↩</a></li>
-              <li id="gref-52">dualitytech.com, accessed March 13, 2025, https://dualitytech.com/blog/what-is-differential-privacy/#:~:text=Differential%20Privacy%20is%20a%20mathematical,of%20groups%20within%20the%20dataset. <a href="#gref-marker-52" title="Return to text" class="endnote-backlink">↩</a></li>
-              <li id="gref-53">Differential Privacy for Privacy-Preserving Data Analysis: An Introduction to our Blog Series, accessed March 13, 2025, https://www.nist.gov/blogs/cybersecurity-insights/differential-privacy-privacy-preserving-data-analysis-introduction-our <a href="#gref-marker-53" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="gref-52">What is Differential Privacy? | Duality Technologies Blog, accessed March 13, 2025, https://dualitytech.com/blog/what-is-differential-privacy/ <a href="#gref-marker-52" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="gref-53">Differential Privacy for Privacy-Preserving Data Analysis: An Introduction to our Blog Series - NIST, accessed March 13, 2025, https://www.nist.gov/blogs/cybersecurity-insights/differential-privacy-privacy-preserving-data-analysis-introduction-our <a href="#gref-marker-53" title="Return to text" class="endnote-backlink">↩</a></li>
               <li id="gref-54">What is Differential Privacy? Definition and FAQs - Gretel.ai, accessed March 13, 2025, https://gretel.ai/technical-glossary/what-is-differential-privacy <a href="#gref-marker-54" title="Return to text" class="endnote-backlink">↩</a></li>
-              <li id="gref-55">What is Differential Privacy? | Duality Technologies Blog, accessed March 13, 2025, https://dualitytech.com/blog/what-is-differential-privacy/ <a href="#gref-marker-55" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="gref-55">What is Differential Privacy? | Duality Technologies Blog (Duplicate of G52?), accessed March 13, 2025, https://dualitytech.com/blog/what-is-differential-privacy/ <a href="#gref-marker-55" title="Return to text" class="endnote-backlink">↩</a></li>
               <li id="gref-56">Differential privacy - Wikipedia, accessed March 13, 2025, https://en.wikipedia.org/wiki/Differential_privacy <a href="#gref-marker-56" title="Return to text" class="endnote-backlink">↩</a></li>
               <li id="gref-57">Differential Privacy Definition - by shaistha fathima - Medium, accessed March 13, 2025, https://medium.com/@shaistha24/differential-privacy-definition-bbd638106242 <a href="#gref-marker-57" title="Return to text" class="endnote-backlink">↩</a></li>
               <li id="gref-58">Privacy and AI Ethics FAQ - Hyperscience, accessed March 13, 2025, https://www.hyperscience.com/privacy-and-ai-ethics-faq/ <a href="#gref-marker-58" title="Return to text" class="endnote-backlink">↩</a></li>
               <li id="gref-59">AI Ethics: What It Is, Why It Matters, and More - Coursera, accessed March 13, 2025, https://www.coursera.org/articles/ai-ethics <a href="#gref-marker-59" title="Return to text" class="endnote-backlink">↩</a></li>
-              <li id="gref-60">Understanding artificial intelligence ethics and safety - The Alan Turing Institute, accessed March 13, 2025, https://www.turing.ac.uk/sites/default/files/2019-08/understanding_artificial_intelligence_ethics_and_safety.pdf <a href="#gref-marker-60" title="Return to text" class="endnote-backlink">↩</a></li>
+              <li id="gref-60">Understanding artificial intelligence ethics and safety - The Alan Turing Institute [PDF], accessed March 13, 2025, https://www.turing.ac.uk/sites/default/files/2019-08/understanding_artificial_intelligence_ethics_and_safety.pdf <a href="#gref-marker-60" title="Return to text" class="endnote-backlink">↩</a></li>
               <li id="gref-61">Fundamentals of AI Ethics - DATAVERSITY, accessed March 13, 2025, https://www.dataversity.net/fundamentals-of-ai-ethics/ <a href="#gref-marker-61" title="Return to text" class="endnote-backlink">↩</a></li>
               <li id="gref-62">AI and Social Impact | AI Ethics Class Notes - Fiveable, accessed March 13, 2025, https://library.fiveable.me/artificial-intelligence-and-ethics/unit-7 <a href="#gref-marker-62" title="Return to text" class="endnote-backlink">↩</a></li>
               <li id="gref-63">What is AI Ethics? | IBM, accessed March 13, 2025, https://www.ibm.com/think/topics/ai-ethics <a href="#gref-marker-63" title="Return to text" class="endnote-backlink">↩</a></li>
@@ -1765,39 +1806,6 @@
               <li id="gref-73">Artificial Intelligence in the States: Emerging Legislation - The Council of State Governments, accessed March 13, 2025, https://csg.org/2023/12/06/artificial-intelligence-in-the-states-emerging-legislation/ <a href="#gref-marker-73" title="Return to text" class="endnote-backlink">↩</a></li>
               <li id="gref-74">Credo AI Glossary, accessed March 13, 2025, https://www.credo.ai/glossary <a href="#gref-marker-74" title="Return to text" class="endnote-backlink">↩</a></li>
           </ol>
-      </section>
-
-
-      <!-- About the Author Section -->
-      <section id="about" class="content-text">
-        <h2>About the Author</h2>
-        <div class="author-grid">
-          <div class="author-card">
-            <div class="author-image-container">
-              <img src="https://github.com/Khullani/AI-Governance-Handbook/raw/main/Khullani-TechneAI-Founder-AIGovernance%20copy.jpeg"
-                alt="Khullani M. Abdullahi" loading="lazy"
-                onerror="this.src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=';" />
-            </div>
-            <div class="author-info">
-              <h3>Khullani M. Abdullahi, J.D.</h3>
-              <p class="author-title">Founder of Techne AI</p>
-              <p class="author-bio">Khullani M. Abdullahi specializes in AI governance, compliance, and ethics. With a
-                background in law and technology, Khullani helps organizations navigate the complex landscape of AI regulation
-                and responsible implementation.</p>
-              <div class="author-links">
-                <a href="https://www.linkedin.com/in/khullani/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-                <a href="https://techne.ai" target="_blank" rel="noopener noreferrer">Website</a>
-                <a href="https://insights.techne.ai/" target="_blank" rel="noopener noreferrer">Newsletter</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-       <!-- Conclusion Section (Main Document) -->
-      <section id="conclusion" class="content-text">
-        <h2>Conclusion</h2> <!-- Renamed from "Key Takeaways" -->
-        <p>This handbook has provided a comprehensive primer on AI Governance, Safety, Trust/Transparency, Responsible AI, and Risk – explaining key legal/regulatory frameworks and technical aspects, tailored to the needs of AI practitioners, compliance officers, executives, and policymakers. As organizations navigate the complex landscape of AI, they must align on terminology and goals (hence the glossary) and collaborate across roles: developers building safe and explainable systems, compliance ensuring laws and ethics are met, executives setting direction and culture, and policymakers creating an environment that rewards responsible innovation. By assessing their maturity in various facets of AI governance using the frameworks presented and following best practices at each stage, organizations can steadily improve. The ultimate aim is to harness the power of AI in a way that is responsible, trustworthy, and aligned with societal values, thereby unlocking AI’s benefits while managing its risks.</p>
       </section>
 
     </main>
@@ -1920,20 +1928,20 @@
                             lastActiveLink = link;
                         }
                     });
-                } else if (window.scrollY === 0) {
+                } else if (window.scrollY === 0 && navLinks.length > 0) {
+                     // Special case: Scrolled to top, activate first link (Handbook title)
                      navLinks.forEach(link => link.classList.remove('active'));
-                     if (navLinks[0]) {
-                         navLinks[0].classList.add('active');
-                         lastActiveLink = navLinks[0];
-                     }
+                     navLinks[0].classList.add('active'); // Assuming Handbook Title is first
+                     lastActiveLink = navLinks[0];
                 } else {
+                    // Keep last active link if nothing else is intersecting
                     navLinks.forEach(link => {
                         link.classList.remove('active');
                     });
                     if (lastActiveLink) {
                         lastActiveLink.classList.add('active');
                     }
-                    else if (navLinks.length > 0) {
+                    else if (navLinks.length > 0) { // Fallback if needed
                         navLinks[0].classList.add('active');
                     }
                 }
@@ -1944,10 +1952,34 @@
             observer.observe(section);
           });
 
-           if (window.scrollY === 0 && navLinks[0]) {
-               navLinks[0].classList.add('active');
-               lastActiveLink = navLinks[0];
-           }
+          // Initial check for first link
+          if (window.scrollY < 50 && navLinks[0]) { // Check if near top
+              navLinks[0].classList.add('active');
+              lastActiveLink = navLinks[0];
+          } else {
+               // Find the current section on load if not at top
+                let currentSectionId = null;
+                for (let i = sections.length - 1; i >= 0; i--) {
+                    const section = sections[i];
+                    if (section.offsetTop <= window.scrollY + 100) { // Check if top of section is above threshold
+                        currentSectionId = section.id;
+                        break;
+                    }
+                }
+                if (currentSectionId) {
+                     navLinks.forEach(link => {
+                        link.classList.remove('active');
+                         const href = link.getAttribute('href');
+                        if (href && href.substring(1) === currentSectionId) {
+                            link.classList.add('active');
+                            lastActiveLink = link;
+                        }
+                     });
+                } else if (navLinks[0]) { // Fallback to first link if no section found
+                     navLinks[0].classList.add('active');
+                     lastActiveLink = navLinks[0];
+                }
+          }
 
       }
 
