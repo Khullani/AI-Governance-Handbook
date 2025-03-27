@@ -741,18 +741,19 @@
       <div class="sidebar-title">Contents</div>
       <nav>
         <ul class="nav-menu">
+          <!-- Order matches the <section> tags in <main> -->
           <li class="nav-item"><a href="#introduction" class="nav-link">AI Governance Handbook</a></li>
           <li class="nav-item"><a href="#introduction" class="nav-link">Introduction</a></li>
           <li class="nav-item"><a href="#legal-frameworks" class="nav-link">Legal & Regulatory Frameworks</a></li>
           <li class="nav-item"><a href="#privacy-security" class="nav-link">Privacy, Data & Security</a></li>
           <li class="nav-item"><a href="#technical-safety" class="nav-link">Technical Aspects of AI Safety</a></li>
           <li class="nav-item"><a href="#audience-guidance" class="nav-link">Audience Guidance</a></li>
-          <li class="nav-item"><a href="#maturity-models" class="nav-link">AI Maturity Models</a></li>
+          <li class="nav-item"><a href="#maturity-models" class="nav-link">AI Maturity Stages</a></li> {/* Updated text slightly */}
           <li class="nav-item"><a href="#glossary" class="nav-link">Glossary</a></li>
+          <li class="nav-item"><a href="#conclusion" class="nav-link">Looking Forward (Conclusion)</a></li> {/* Clarified link text */}
+          <li class="nav-item"><a href="#about" class="nav-link">About the Author</a></li>
           <li class="nav-item"><a href="#resources" class="nav-link">Additional Resources</a></li>
           <li class="nav-item"><a href="#references" class="nav-link">References</a></li>
-          <li class="nav-item"><a href="#about" class="nav-link">About the Author</a></li>
-          <li class="nav-item"><a href="#conclusion" class="nav-link">Conclusion</a></li>
         </ul>
       </nav>
     </aside>
@@ -767,7 +768,7 @@
         <div class="content-text">
             <h2>Introduction</h2>
             <p>Artificial Intelligence (AI) is transforming industries and society, but its rapid adoption raises concerns about ethics, safety, and compliance. AI Governance refers to the frameworks and processes ensuring AI is developed and used responsibly and in alignment with laws and values. This primer provides a comprehensive overview of AI Governance, AI Safety, Trustworthy AI, Responsible AI practices, and risk management. It is structured by audience – offering tailored insights for AI practitioners, compliance officers, executives, and policymakers – to address their specific concerns.</p>
-            <p>This primer will dig into key legal and regulatory frameworks (such as ISO/IEC 23894 and 42001, the EU AI Act, NIST AI RMF, GDPR, CCPA, etc.), privacy and security standards, and technical aspects of AI safety. We also provide a glossary clarifying core concepts and present six AI Maturity Curve frameworks (each with seven stages) for Governance, Safety, Trust & Transparency, Responsible AI, Risk Management, and Compliance. Visual frameworks and best practices at each maturity stage are included to help organizations benchmark and improve their AI governance efforts.</p>
+            <p>This primer will dig into key legal and regulatory frameworks (such as ISO/IEC 23894 and 42001, the EU AI Act, NIST AI RMF, GDPR, CCPA, etc.), privacy and security standards, and technical aspects of AI safety. We also provide a glossary clarifying core concepts and present six AI Maturity Stages frameworks (each with seven stages) for Governance, Safety, Trust & Transparency, Responsible AI, Risk Management, and Compliance. Visual frameworks and best practices at each maturity stage are included to help organizations benchmark and improve their AI governance efforts.</p>
         </div>
       </section>
 
@@ -827,7 +828,7 @@
 
         <h3>Ethical Frameworks and Global Principles</h3>
         <p>Apart from hard law and formal standards, numerous ethical AI frameworks guide governance. The OECD AI Principles (2019) – adopted by 40+ countries – articulate high-level tenets: inclusive growth, human-centered values and fairness, transparency and explainability, robustness and safety, and accountability for AI<sup><a href="#ref-11" id="ref-marker-11" class="endnote-link">[11]</a></sup><sup><a href="#ref-12" id="ref-marker-12" class="endnote-link">[12]</a></sup>. These principles have informed regulations and corporate codes of conduct worldwide. Similarly, the UNESCO Recommendation on AI Ethics (2021) provides a global ethical framework emphasizing human dignity, environmental well-being, gender equality, and peaceful use of AI. While these are not directly enforceable, they shape policymaker and public expectations, and organizations often voluntarily align with them to demonstrate commitment to responsible AI. For example, a company might commit to the OECD principle of robustness by establishing rigorous testing and validation before deploying AI, or to accountability by providing appeal mechanisms for AI decisions. In the U.S., the White House’s Blueprint for an AI Bill of Rights (2022) lists principles echoing these themes (safe and effective systems, algorithmic discrimination protection, data privacy, notice & explanation, and human alternatives)<sup><a href="#ref-13" id="ref-marker-13" class="endnote-link">[13]</a></sup>. Even though it’s guidance, it sets a benchmark for what citizens should expect from AI – and thus what companies should strive to implement.</p>
-        <p>In summary, the regulatory environment for AI is multifaceted: companies must navigate international standards (ISO/IEC), follow region-specific laws (like the EU AI Act’s risk-based rules and data protection laws such as GDPR/CCPA), and heed industry-specific requirements. Compliance will require cross-functional effort: lawyers and compliance officers to interpret laws, data scientists and engineers to implement technical controls, and executives to integrate these requirements into corporate governance. Many organizations are adopting AI governance frameworks that “ensure consistency and coherence” amidst this patchwork<sup><a href="#ref-1" id="ref-marker-1" class="endnote-link">[1]</a></sup>, often using standards like NIST and ISO as foundational, then layering on the specific legal obligations for their industry and markets.</p>
+        <p>The regulatory environment for AI is multifaceted: companies must navigate international standards (ISO/IEC), follow region-specific laws (like the EU AI Act’s risk-based rules and data protection laws such as GDPR/CCPA), and heed industry-specific requirements. Compliance will require cross-functional effort: lawyers and compliance officers to interpret laws, data scientists and engineers to implement technical controls, and executives to integrate these requirements into corporate governance. Many organizations are adopting AI governance frameworks that “ensure consistency and coherence” amidst this patchwork<sup><a href="#ref-1" id="ref-marker-1" class="endnote-link">[1]</a></sup>, often using standards like NIST and ISO as foundational, then layering on the specific legal obligations for their industry and markets.</p>
       </section>
 
       <!-- Privacy, Data, and Security Section -->
@@ -917,7 +918,7 @@
                 <li><strong>Collaboration with Compliance:</strong> Practitioners should view compliance and risk teams as partners, not adversaries. By engaging early with compliance officers or legal advisors, they can get clarity on constraints (e.g. “this model falls under high-risk AI per EU AI Act, so we need to implement X, Y, Z documentation and get a conformity assessment”). This prevents rework and ensures the product will be launchable in target markets. For instance, if a developer knows upfront that an AI tool will need to explain its decisions to users to meet a regulation, they can build in that functionality from the start.</li>
                 <li><strong>Mindset and Culture:</strong> Practitioners benefit from cultivating a “safety culture” akin to DevSecOps where security is everyone’s job – here, ethical AI is everyone’s job. They should feel ownership of not just delivering a working model, but delivering a responsible model. This might involve speaking up if they notice an AI use case that could be harmful or if data is biased. Organizations can support this with training (e.g. on fairness in AI) and by not solely incentivizing speed and accuracy, but also quality in ethical terms.</li>
               </ul>
-              <p>In summary, AI practitioners ensure that the code and models they produce have governance considerations “baked in,” addressing trust, safety, and compliance requirements from the ground up.</p>
+              <p>AI practitioners ensure that the code and models they produce have governance considerations “baked in,” addressing trust, safety, and compliance requirements from the ground up.</p>
             </div>
           </div>
 
@@ -941,7 +942,7 @@
 
               <h4>Key Concerns:</h4>
               <p>Compliance officers are ultimately concerned about legal liability, regulatory sanctions, and reputational risk. They aim to prevent non-compliance fines by being proactive and enforcing thorough risk assessments. Bridging the gap between compliance requirements and technical implementation is a key challenge.</p>
-              <p>In summary, compliance officers serve as the guardians of ethical and lawful AI use in the organization. They establish guardrails and perform checks, ensuring the company’s AI initiatives do not run afoul of regulations and ethical norms.</p>
+              <p>Compliance officers serve as the guardians of ethical and lawful AI use in the organization. They establish guardrails and perform checks, ensuring the company’s AI initiatives do not run afoul of regulations and ethical norms.</p>
             </div>
           </div>
 
@@ -964,7 +965,7 @@
                 <li><strong>Opportunity and Innovation:</strong> Leaders see responsible AI as a market differentiator and incorporate “Trustworthy AI” into branding, potentially sponsoring innovation in governance tools.</li>
               </ul>
               <p>Executives also consider broader societal impacts and alignment with CSR/ESG commitments.</p>
-              <p>In summary, executives need to champion AI governance as an integral part of doing business in the AI era. They ensure the alignment of people, processes, and technology for responsible AI, viewing it as essential for long-term success and trust.</p>
+              <p>Executives need to champion AI governance as an integral part of doing business in the AI era. They ensure the alignment of people, processes, and technology for responsible AI, viewing it as essential for long-term success and trust.</p>
             </div>
           </div>
 
@@ -986,7 +987,7 @@
               </ul>
               <h4>Concerns:</h4>
               <p>Primary concerns include preventing harm, preserving fundamental rights (privacy, non-discrimination), ensuring national security, and maintaining AI transparency and accountability<sup><a href="#ref-16" id="ref-marker-16" class="endnote-link">[16]</a></sup>. They also balance these with fostering innovation, avoiding over-regulation that might stifle progress.</p>
-              <p>In conclusion, policymakers and regulators create the external requirements and incentives for AI governance, addressing macro-level issues to protect public interest and create a level playing field.</p>
+              <p>Policymakers and regulators create the external requirements and incentives for AI governance, addressing macro-level issues to protect public interest and create a level playing field.</p>
             </div>
           </div>
         </div>
@@ -994,18 +995,18 @@
 
       <!-- AI Maturity Models Section -->
       <section id="maturity-models" class="content-text">
-        <h2>AI Maturity Curve Frameworks (Seven-Stage Progression)</h2>
-        <p>To help organizations assess and improve their AI governance and responsible AI practices, we present six AI Maturity Curve frameworks. Each is a seven-stage model describing the progression from rudimentary or non-existent capabilities to highly advanced and integrated capabilities in a specific area of AI governance. The areas are: AI Governance, AI Safety, AI Trust & Transparency, Responsible AI, AI Risk Management, and AI Compliance. Organizations can evaluate which stage best describes them in each area and identify steps to advance to higher maturity. Each stage includes key characteristics, assessment criteria, best practices to implement, and typical challenges to overcome. While the details differ for each area, a common theme is moving from an ad-hoc, reactive approach toward a proactive, optimized, and continuously improving approach.</p>
+        <h2>AI Maturity Stages Frameworks (Seven-Stage Progression)</h2>
+        <p>To help organizations assess and improve their AI governance and responsible AI practices, we present six AI Maturity Stages frameworks. Each is a seven-stage model describing the progression from rudimentary or non-existent capabilities to highly advanced and integrated capabilities in a specific area of AI governance. The areas are: AI Governance, AI Safety, AI Trust & Transparency, Responsible AI, AI Risk Management, and AI Compliance. Organizations can evaluate which stage best describes them in each area and identify steps to advance to higher maturity. Each stage includes key characteristics, assessment criteria, best practices to implement, and typical challenges to overcome. While the details differ for each area, a common theme is moving from an ad-hoc, reactive approach toward a proactive, optimized, and continuously improving approach.</p>
 
-        <p>Below, we outline each maturity curve and its seven stages:</p>
+        <p>Below, we outline each maturity Stages and its seven stages:</p>
         <div class="figure">
           <img src="https://github.com/Khullani/AI-Governance-Handbook/raw/main/Al%20Governance%20Maturity%20Stages.png"
-            alt="AI Maturity Governance Curve"
+            alt="AI Maturity Governance Stages"
             onerror="this.src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=';" />
           <p class="figure-caption">Figure: 7 States of AI Governance Maturity.</p>
         </div>
 
-        <h3>1. AI Governance Maturity Curve (Organizational AI Governance Capability)</h3>
+        <h3>1. AI Governance Maturity Stages (Organizational AI Governance Capability)</h3>
             <details>
                 <summary><h4>Stage 1: Ad Hoc & Chaotic</h4></summary>
                 <div class="maturity-details">
@@ -1063,7 +1064,7 @@
             <details>
                 <summary><h4>Stage 7: Transformative & Industry Leader</h4></summary>
                 <div class="maturity-details">
-                    <p>The organization’s AI governance is world-class and gives it a competitive and reputational edge. It not only manages risks but innovates through governance. The company might help shape regulations and standards because it’s ahead of the curve. AI governance at this level can enable things like entering new markets quickly because regulators trust the company’s processes. The company might release responsible AI tools or frameworks for others (thought leadership).</p>
+                    <p>The organization’s AI governance is world-class and gives it a competitive and reputational edge. It not only manages risks but innovates through governance. The company might help shape regulations and standards because it’s ahead of the Stages. AI governance at this level can enable things like entering new markets quickly because regulators trust the company’s processes. The company might release responsible AI tools or frameworks for others (thought leadership).</p>
                     <p><strong>Assessment:</strong> The organization is cited as a model for Responsible AI in its industry. Zero major incidents in recent history, and strong trust from customers and regulators. Possibly the company sits on regulatory advisory boards or standard bodies.</p>
                     <p><strong>Challenge:</strong> Continuous leadership – maintaining this position requires effort and resources. Also, sharing practices might diminish competitive advantage, but leading firms realize raising the industry standard is beneficial overall.</p>
                     <p><strong>Best Practice:</strong> Embrace transparency – publish AI ethics reports, open source certain tools (for fairness, explainability). Mentor other organizations or subsidiaries in adopting similar governance. At this stage, governance is not seen as a cost, but as an enabler of bold AI-driven strategies because stakeholders’ trust lowers barriers.</p>
@@ -1075,7 +1076,7 @@
         <h3>2. AI Safety Maturity Stages (Technical Safety & Reliability of AI Systems)</h3>
                <div class="figure">
           <img src="https://github.com/Khullani/AI-Governance-Handbook/raw/main/Al%20Safety%20Maturity%20Stages.png"
-            alt="AI Safety Safety Maturity Curve Stages"
+            alt="AI Safety Safety Maturity Stages Stages"
             onerror="this.src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=';" />
           <p class="figure-caption">Figure: AI Safety Maturity Stages </p>
         </div>
@@ -1145,7 +1146,7 @@
         <p>Using this maturity model, an organization can evaluate how well it currently handles AI safety. For example, a fintech startup might realize they’re at Stage 2 (only reacting when models behave badly) and set a goal to reach Stage 4 by implementing proactive risk assessments and more rigorous testing in the next year. Each step up in maturity significantly reduces the likelihood of catastrophic failures and builds trust in the AI systems both internally and with clients/regulators.</p>
 
 
-        <h3>3. AI Trust & Transparency Maturity Curve (Building Stakeholder Trust and Providing Transparency)</h3>
+        <h3>3. AI Trust & Transparency Maturity Stages (Building Stakeholder Trust and Providing Transparency)</h3>
                <div class="figure">
           <img src="https://github.com/Khullani/AI-Governance-Handbook/raw/main/Journey%20to%20AI%20Transparency%20Leadership.png"
             alt="AI Trust and Transparency Maturity Stages (Journey to Leadership)"
@@ -1215,7 +1216,7 @@
                     <p><strong>Best Practice:</strong> Lead or join collaborations on new interpretability research. Influence standards (like IEEE’s work on transparency in AI) to embed what’s been learned. Use the trust capital as an asset – e.g. enter partnerships that require high trust (like government contracts) since your transparency track record gives an edge.</p>
                 </div>
             </details>
-        <p>This maturity curve helps in assessing how well an organization fosters trust through transparency and engagement. For example, a social media company deploying AI for content filtering might realize it’s at Stage 2 (just basic disclaimers) but facing public distrust. They could aim for Stage 4 by implementing user-visible explanations for why a post was taken down and providing a way to appeal or get more info. As they climb stages, they should see trust metrics improve – which can correlate with user satisfaction and loyalty.</p>
+        <p>This maturity Stages helps in assessing how well an organization fosters trust through transparency and engagement. For example, a social media company deploying AI for content filtering might realize it’s at Stage 2 (just basic disclaimers) but facing public distrust. They could aim for Stage 4 by implementing user-visible explanations for why a post was taken down and providing a way to appeal or get more info. As they climb stages, they should see trust metrics improve – which can correlate with user satisfaction and loyalty.</p>
 
 
         <h3>4. Responsible AI Maturity Stages (Ethical and Social Responsibility in AI Use)</h3>
@@ -1364,7 +1365,7 @@
         <p>Using this model, an organization can measure maturity by seeing how formalized and effective their AI risk processes are. A bank might find they are at Stage 4 (they have assessments and controls, integrated in model risk management) but want to reach Stage 6 with more quantitative rigor due to regulatory expectations. A startup might be Stage 2 and need to move to 3 and 4 quickly as they scale to enterprise clients who demand evidence of risk controls.</p>
 
 
-        <h3>6. AI Compliance Maturity Curve (Adherence to External Regulations & Standards)</h3>
+        <h3>6. AI Compliance Maturity Stages (Adherence to External Regulations & Standards)</h3>
                <div class="figure">
           <img src="https://github.com/Khullani/AI-Governance-Handbook/raw/main/AIComplianceProgramMaturity.png"
             alt="AI Compliance Program Maturity Stages"
