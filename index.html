@@ -1420,17 +1420,6 @@
 
         <h4>Best Practices and Challenges Recap:</h4>
         <p>At each stage, we noted best practices and challenges. Common best practices to progress include: gaining leadership buy-in, implementing training and awareness, adopting standards or frameworks to guide improvements, investing in tools for automation (especially to scale governance and monitoring), engaging stakeholders (users, regulators, third parties) for feedback, and fostering a culture that values these aspects (so it’s not seen as hindrance but part of quality). Challenges often revolve around resource constraints, potential slowdowns of innovation, need for expertise, and change management (people following new processes).</p>
-
-        <h4>Visual Frameworks:</h4>
-        <p>One way to visualize these maturity curves is by using a seven-step ladder or pyramid, where each step corresponds to a stage with a brief descriptor (from Initial to Optimizing). For instance, a ladder for AI Governance could label steps as: 1) None, 2) Ad hoc, 3) Aware, 4) Defined, 5) Managed, 6) Integrated, 7) Transformative. Similar ladders/pyramids can be drawn for each domain. These visuals help communicate to stakeholders that maturity is a journey – you climb stages progressively. Often, color codes (red for low maturity to green for high) highlight the improvement.</p>
-
-         <div class="figure">
-          <img src="https://github.com/Khullani/AI-Governance-Handbook/raw/main/Al%20Governance%20Maturity%20Stages.png"
-            alt="AI Governance Maturity Stages"
-            onerror="this.src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=';" />
-          <p class="figure-caption">AI Governance Maturity Stages</p>
-        </div>
-
         <p>In implementing maturity models, organizations should also consider dependency between them: e.g. improving Responsible AI maturity might require improving Governance maturity since governance provides the oversight for ethics. In practice, progress in one area often drives progress in others. A holistic approach (perhaps an overall AI Capability Maturity model combining elements of all) can be developed, but dissecting by domain as we did allows focus on specific competencies and specialized teams (compliance team vs engineering team) to take ownership.</p>
       </section>
 
@@ -1485,13 +1474,11 @@
             <h4 class="term-title">Supervised machine learning</h4>
             <p>machine learning (3.3.5) that makes only use of labelled data during training (3.3.15)
             <span class="iso-citation">(Source: ISO/IEC 22989:2022, 3.3.12)</span></p>
-             <p><em>Note: The original glossary definition referred to 'Supervised Learning'. ISO defines 'Supervised machine learning'.</em></p>
         </div>
         <div class="term-block">
             <h4 class="term-title">Unsupervised machine learning</h4>
             <p>machine learning (3.3.5) that makes only use of unlabelled data during training (3.3.15)
             <span class="iso-citation">(Source: ISO/IEC 22989:2022, 3.3.17)</span></p>
-             <p><em>Note: The original glossary definition referred to 'Unsupervised Learning'. ISO defines 'Unsupervised machine learning'.</em></p>
         </div>
         <div class="term-block">
             <h4 class="term-title">Bias</h4>
@@ -1503,7 +1490,6 @@
             <h4 class="term-title">Robustness</h4>
              <p>ability of a system to maintain its level of performance under any circumstances
             <span class="iso-citation">(Source: ISO/IEC 22989:2022, 3.5.12)</span></p>
-            <p><em>Note: The glossary previously contained a similar definition; this is the specific ISO definition.</em></p>
         </div>
          <div class="term-block">
             <h4 class="term-title">Transparency</h4>
@@ -1511,7 +1497,6 @@
             <span class="iso-citation">(Source: ISO/IEC 22989:2022, 3.5.15)</span></p>
             <p><em>Note 1 to entry: Appropriate information for system transparency can include aspects such as features, performance, limitations, components, procedures, measures, design goals, design choices and assumptions, data sources and labelling protocols.</em></p>
             <p><em>Note 2 to entry: Inappropriate disclosure of some aspects of a system can violate security, privacy or confidentiality requirements.</em></p>
-             <p><em>Note: The glossary previously contained a definition for 'AI Transparency'. ISO defines 'Transparency' in the context of a system and an organization (3.5.14). The system definition (3.5.15) is used here.</em></p>
         </div>
         <div class="term-block">
             <h4 class="term-title">Accountability</h4>
@@ -1519,7 +1504,6 @@
             <span class="iso-citation">(Source: ISO/IEC 22989:2022, 3.5.2, referencing ISO/IEC 38500:2015, 2.3)</span></p>
              <p><em>Note 1 to entry: Accountability relates to an allocated responsibility. The responsibility can be based on regulation or agreement or through assignment as part of delegation.</em></p>
              <p><em>Note 2 to entry: Accountability involves a person or entity being accountable for something to another person or entity, through particular means and according to particular criteria.</em></p>
-             <p><em>Note: The glossary previously contained a definition for 'AI Accountability'. ISO defines 'Accountability' generally, citing ISO 38500.</em></p>
         </div>
 
 
@@ -1527,119 +1511,97 @@
         <div class="term-block">
           <h4 class="term-title">AI Compliance</h4>
           <p>This denotes the strict adherence of AI systems to all relevant legal, regulatory, and ethical mandates. It is crucial for ensuring the responsible and risk-mitigated design, development, and deployment of AI technologies. AI compliance involves verifying that AI-powered systems do not contravene any laws or regulations and that the data used for training these systems is collected and utilized in a legal and ethical manner. It also guarantees that AI systems are not employed for discriminatory or manipulative purposes and that they respect individual privacy and do not cause harm.</p>
-           <p><em>[Note: Definition retained from original glossary; not explicitly defined in ISO/IEC 22989:2022 Clause 3.]</em></p>
         </div>
         <div class="term-block">
           <h4 class="term-title">AI Fairness</h4>
           <p>This principle ensures that AI systems operate without bias, leading to equitable, just, and non-discriminatory outcomes across all their applications. It prioritizes the relatively equal treatment of individuals or groups in the decisions and actions of AI systems, ensuring that these decisions do not disproportionately or negatively impact individuals based on sensitive attributes such as race, gender, or religion.</p>
-           <p><em>[Note: Definition retained from original glossary; not explicitly defined in ISO/IEC 22989:2022 Clause 3, though related concepts are discussed.]</em></p>
         </div>
         <div class="term-block">
           <h4 class="term-title">AI Governance</h4>
           <p>This encompasses the comprehensive system of policies, controls, and regulations established to ensure that AI is developed, deployed, and managed in an ethical, transparent, and safe manner. It involves bringing together diverse stakeholders from data science, engineering, compliance, legal, and business teams to align AI systems with overarching business, legal, and ethical requirements throughout the entire lifecycle of machine learning models. Effective AI governance applies rules, processes, and responsibilities to maximize the value derived from automated data products while simultaneously mitigating risks and adhering to legal requirements. Ultimately, it directs AI research, development, and application to safeguard safety, promote fairness, and uphold respect for fundamental human rights.</p>
-           <p><em>[Note: Definition retained from original glossary; not explicitly defined in ISO/IEC 22989:2022 Clause 3.]</em></p>
         </div>
         <div class="term-block">
           <h4 class="term-title">AI Governance Framework</h4>
           <p>These are structured models that define the fundamental principles, compliance protocols, and risk management strategies necessary to ensure the ethical and transparent development and deployment of AI. These frameworks provide guidance on a wide range of critical topics, including transparency, accountability, fairness, privacy, security, and overall safety. Depending on an organization's specific needs and level of maturity in AI adoption, these frameworks can be implemented in informal ways based on organizational values, through ad hoc development of specific policies, or via the establishment of a comprehensive and formal governance structure.</p>
-           <p><em>[Note: Definition retained from original glossary; not explicitly defined in ISO/IEC 22989:2022 Clause 3.]</em></p>
         </div>
         <div class="term-block">
           <h4 class="term-title">AI Risk Assessment</h4>
           <p>This involves a systematic evaluation of potential risks associated with AI systems. These risks can include bias in algorithms, vulnerabilities to security threats, exposure to regulatory non-compliance, and potential operational failures. The primary goal of an AI risk assessment is to identify and thoroughly map these potential risks and to subsequently develop effective mitigation strategies to address them. For businesses processing consumer personal information, particularly when utilizing automated decision-making technologies, conducting comprehensive risk assessments is a crucial prerequisite.</p>
-           <p><em>[Note: Definition retained from original glossary; ISO/IEC 22989:2022 defines 'risk' (3.5.11) and refers to ISO/IEC 23894 for risk management.]</em></p>
         </div>
          <div class="term-block">
           <h4 class="term-title">Responsible AI</h4>
           <p>This represents a governance-driven approach to the development of AI that places a high priority on fundamental principles such as fairness, transparency, accountability, trust, safety, and overarching ethical integrity. It involves actively steering the responsible development, careful deployment, and ethical use of AI technologies throughout their entire lifecycle. This approach emphasizes the critical role of human oversight and the paramount importance of aligning AI systems with core human values.</p>
-           <p><em>[Note: Definition retained from original glossary; not explicitly defined in ISO/IEC 22989:2022 Clause 3.]</em></p>
         </div>
         <div class="term-block">
           <h4 class="term-title">AI Audit</h4>
           <p>This is a formal review and thorough assessment of an AI system conducted to verify that it operates as intended and that it fully complies with all relevant laws, applicable regulations, and established standards. The primary purpose of an AI audit is to identify and map any potential risks associated with the system and to propose effective strategies for mitigating these risks. Regular AI audits are essential for ensuring the continuous adherence of AI systems to evolving regulations and ethical guidelines.</p>
-           <p><em>[Note: Definition retained from original glossary; not explicitly defined in ISO/IEC 22989:2022 Clause 3.]</em></p>
         </div>
         <div class="term-block">
           <h4 class="term-title">AI Assurance</h4>
           <p>This encompasses a comprehensive combination of frameworks, established policies, well-defined processes, and robust controls that are implemented to measure, rigorously evaluate, and actively promote the safety, reliability, and overall trustworthiness of AI systems. AI assurance schemes may include various components such as conformity assessments, thorough impact and risk evaluations, independent AI audits, formal certifications, rigorous testing and evaluation protocols, and verification of compliance with pertinent industry standards.</p>
-           <p><em>[Note: Definition retained from original glossary; not explicitly defined in ISO/IEC 22989:2022 Clause 3.]</em></p>
         </div>
         <div class="term-block">
           <h4 class="term-title">Adversarial Attack</h4>
           <p>This represents a significant safety and security risk directed at an AI model. It is initiated by malicious actors who deliberately manipulate the model, often by introducing carefully crafted, deceptive input data. These attacks are specifically designed to deceive AI systems, causing them to generate incorrect or unintended predictions or to make faulty decisions. Adversarial attacks exploit inherent vulnerabilities and limitations within machine learning models, particularly those involving deep neural networks. These attacks can be categorized based on the attacker's level of access to the model: white-box attacks occur when the attacker has complete access to the model's architecture and parameters, while black-box attacks are launched when the attacker can only interact with the model through its inputs and outputs. Common types of adversarial attacks include evasion attacks, where inputs are modified to cause misclassification; data poisoning, which corrupts training data; inference attacks, aimed at revealing sensitive information; and model extraction, where attackers attempt to replicate the model's functionality.</p>
-           <p><em>[Note: Definition retained from original glossary; not explicitly defined in ISO/IEC 22989:2022 Clause 3.]</em></p>
         </div>
         <div class="term-block">
           <h4 class="term-title">Data Poisoning</h4>
           <p>This is a specific type of cyberattack where malicious individuals or groups intentionally manipulate or corrupt the training data used to develop artificial intelligence and machine learning models. By injecting incorrect or biased data points into these training datasets, attackers can subtly or drastically alter a model's behavior, potentially leading to data misclassification or a significant reduction in the overall accuracy and effectiveness of the AI system. Data poisoning attacks can be targeted, aiming to manipulate specific outputs of the model, or non-targeted, with the goal of degrading the general robustness and reliability of the model. Various techniques are employed in data poisoning, including direct data injection of fabricated data, the introduction of subtle backdoor triggers within the data, and clean-label attacks where poisoned data appears correctly labeled, making detection particularly challenging.</p>
-           <p><em>[Note: Definition retained from original glossary; not explicitly defined in ISO/IEC 22989:2022 Clause 3.]</em></p>
         </div>
         <div class="term-block">
           <h4 class="term-title">Model Drift</h4>
           <p>This phenomenon refers to the gradual degradation of a machine learning model's performance over time. It occurs due to changes in the underlying data patterns or shifts in the relationships between the input variables and the target variable that the model is trying to predict. Model drift, also known as model decay, can lead to increasingly inaccurate predictions and flawed decision-making based on the model's outputs. Several types of model drift can occur, including concept drift, where the fundamental relationship between inputs and the target changes; data drift (or covariate shift), where the distribution of the input data itself changes; label drift, where the distribution of the target variable shifts; and feature drift, which involves changes in the distribution of individual input features. Proactive monitoring and effective mitigation strategies to address model drift are essential components of a robust AI governance framework.</p>
-           <p><em>[Note: Definition retained from original glossary; not explicitly defined in ISO/IEC 22989:2022 Clause 3, though related concepts are discussed.]</em></p>
         </div>
         <div class="term-block">
           <h4 class="term-title">Algorithm</h4>
           <p>In the context of AI and machine learning, an algorithm refers to a well-defined procedure or a set of specific instructions and rules designed to perform a particular task or solve a defined problem using a computer.</p>
-           <p><em>[Note: General definition retained from original glossary. ISO/IEC 22989:2022 defines 'machine learning algorithm' specifically (3.3.6).]</em></p>
         </div>
         <div class="term-block">
           <h4 class="term-title">Federated Learning</h4>
           <p>This is a machine learning technique that enables multiple independent entities, often referred to as clients, to collaboratively train a shared model without the need to centralize their data. Instead of transferring raw data to a central server, each participating device or organization trains the model locally using its own data and only shares the updated model parameters. This approach prioritizes data privacy and minimization by bringing the model to the data, rather than the other way around.</p>
-           <p><em>[Note: Definition retained from original glossary; not explicitly defined in ISO/IEC 22989:2022 Clause 3.]</em></p>
         </div>
         <div class="term-block">
           <h4 class="term-title">Differential Privacy</h4>
           <p>This is a mathematically rigorous definition that provides a robust framework for developing privacy-preserving technologies. It allows organizations to share valuable information about a dataset by describing statistical patterns of groups within the data while ensuring that all personal information about individual data subjects is withheld. Differential privacy works by adding carefully calibrated statistical noise to the results of a query or analysis performed on the dataset. This noise makes it extremely difficult to discern whether any specific individual's data was included in the dataset or to infer any new information about a particular individual based on the analysis. The goal is to ensure that the inclusion or exclusion of any single individual's data does not significantly alter the overall conclusions drawn from the analysis.</p>
-           <p><em>[Note: Definition retained from original glossary; not explicitly defined in ISO/IEC 22989:2022 Clause 3.]</em></p>
         </div>
         <div class="term-block">
           <h4 class="term-title">AI Ethics</h4>
           <p>This broad term encompasses a comprehensive set of values, fundamental principles, and practical techniques that employ widely accepted standards of right and wrong to guide moral conduct throughout the entire lifecycle of AI technologies, from their initial development to their eventual use and sale. AI ethics addresses the potential moral, societal, and even legal implications that may arise from the deployment of AI systems, aiming to ensure that these powerful technologies are developed and utilized in ways that are consistent with human values, respect fundamental rights, and promote overall well-being. Key principles often associated with AI ethics include transparency in how AI systems function, fairness in their outcomes, accountability for their actions, the protection of individual privacy, and the explainability of their decisions.</p>
-           <p><em>[Note: Definition retained from original glossary; not explicitly defined in ISO/IEC 22989:2022 Clause 3.]</em></p>
         </div>
         <div class="term-block">
           <h4 class="term-title">Fairness (Ethical Context)</h4>
           <p>Within the ethical considerations of AI, fairness refers to the principle of impartial and just treatment or behavior without any unjust favoritism or discrimination in the way AI systems operate. It prioritizes the relatively equal treatment of all individuals or groups affected by an AI system's decisions and actions. Achieving fairness in AI means ensuring that an AI system's decisions and outcomes do not disproportionately or adversely impact individuals based on sensitive attributes such as race, gender, religion, or other protected characteristics.</p>
-           <p><em>[Note: Definition retained from original glossary; not explicitly defined in ISO/IEC 22989:2022 Clause 3.]</em></p>
         </div>
         <div class="term-block">
           <h4 class="term-title">Interpretability</h4>
           <p>This refers to the ability to explain or present the reasoning behind a model's decisions and outputs in terms that are easily understandable by humans. Unlike explainability, which often focuses on providing an explanation after a decision has been made, interpretability emphasizes the design of AI models in a way that inherently facilitates understanding through their structure, the features they utilize, or the algorithms they employ. Interpretable models are often domain-specific and require significant expertise in the relevant field to develop effectively.</p>
-           <p><em>[Note: Definition retained from original glossary; related to 'explainability' (3.5.7) in ISO/IEC 22989:2022 but not identical.]</em></p>
         </div>
         <div class="term-block">
           <h4 class="term-title">GDPR (General Data Protection Regulation)</h4>
           <p>This is a comprehensive data protection and privacy regulation enacted by the European Union. It has a significant impact on the development and application of AI technologies, particularly when these technologies process the personal data of individuals within the EU. The GDPR establishes strict requirements for the lawful processing of personal data, including the need for justifiable grounds for data management, adherence to principles of data minimization and purpose limitation, and the implementation of anonymization and pseudonymization techniques where appropriate. It also grants individuals a range of rights concerning their personal data, such as the right to access their data, the right to data portability, the right to receive an explanation for decisions made through automated processing, and the right to be forgotten (data erasure). Furthermore, the GDPR places obligations on organizations to ensure accountability, implement data protection by design and by default, and maintain ongoing supervision of compliance.</p>
-           <p><em>[Note: Definition retained from original glossary; not defined in ISO/IEC 22989:2022.]</em></p>
         </div>
         <div class="term-block">
           <h4 class="term-title">CCPA (California Consumer Privacy Act)</h4>
           <p>This is a landmark data privacy law in the state of California, USA, which aims to provide consumers with greater control over their personal information. The CCPA grants consumers various rights, including the right to know what personal information businesses collect about them and how it is used, the right to opt out of the sale or sharing of their personal information, and the right to request the deletion or correction of their data. Notably, the California Privacy Protection Agency (CPPA) has been actively developing and proposing regulations that specifically address the use of artificial intelligence and automated decision-making technologies (ADMT). These proposed rules would require businesses using ADMT for significant decisions to provide consumers with pre-use notices detailing the purpose and operation of the technology, offer mechanisms for consumers to opt out of its use, and explain how the ADMT affects the consumer. Additionally, the proposed regulations mandate that businesses conduct risk assessments before deploying ADMT in certain contexts, particularly when making significant decisions about consumers or engaging in extensive profiling.</p>
-           <p><em>[Note: Definition retained from original glossary; not defined in ISO/IEC 22989:2022.]</em></p>
         </div>
         <div class="term-block">
           <h4 class="term-title">EU AI Act</h4>
           <p>Officially known as the Artificial Intelligence Act, this is a groundbreaking law enacted by the European Union to govern the development and utilization of AI systems within its member states. The EU AI Act adopts a risk-based approach to regulation, categorizing AI systems into different levels of risk: unacceptable risk (prohibited), high risk (subject to strict obligations), limited risk (requiring specific transparency measures), and minimal or no risk (largely unregulated). The Act imposes various obligations on both providers and deployers of high-risk AI systems, covering aspects such as data governance, technical documentation, transparency requirements, human oversight mechanisms, and robustness and accuracy standards. This comprehensive legislation aims to foster innovation in AI while simultaneously safeguarding fundamental rights and ensuring the safety of individuals and the public.</p>
-           <p><em>[Note: Definition retained from original glossary; not defined in ISO/IEC 22989:2022.]</em></p>
         </div>
         <div class="term-block">
           <h4 class="term-title">NIST AI RMF (AI Risk Management Framework)</h4>
           <p>This is a voluntary framework developed by the National Institute of Standards and Technology (NIST) in the United States. Its purpose is to provide organizations with a structured set of guidelines to effectively assess and manage the diverse risks associated with the implementation and use of artificial intelligence systems. Unlike a legally binding regulation, the NIST AI RMF offers a comprehensive approach to identifying, evaluating, and mitigating AI-related risks across various sectors. The framework provides guidance on a wide array of critical topics, including ensuring transparency in AI systems, establishing clear lines of accountability, promoting fairness and non-discrimination, protecting data privacy and security, and ensuring the overall safety and reliability of AI technologies. By adopting the NIST AI RMF, organizations can enhance their ability to develop and deploy AI responsibly, building trust and fostering innovation in a secure and ethical manner.</p>
-           <p><em>[Note: Definition retained from original glossary; not defined in ISO/IEC 22989:2022.]</em></p>
         </div>
         <div class="term-block">
           <h4 class="term-title">AI Compliance (Regulatory Context)</h4>
           <p>In a regulatory context, AI compliance refers to the ongoing process of ensuring that all AI-powered systems and applications within an organization adhere to all applicable laws, relevant regulations, established industry standards, and overarching ethical guidelines. This involves a multifaceted approach that includes verifying the legal and ethical use of AI technologies, ensuring the proper handling and security of data used in AI training and deployment, preventing the use of AI for discriminatory or manipulative purposes, safeguarding individual privacy in the context of AI applications, and promoting the responsible and beneficial deployment of AI for society as a whole. Achieving AI compliance typically requires organizations to establish clear internal policies and procedures, develop comprehensive compliance programs, implement robust monitoring systems to track AI usage and performance, and establish effective AI governance frameworks that guide the responsible development and deployment of these powerful technologies.</p>
-           <p><em>[Note: Definition retained from original glossary; not explicitly defined in ISO/IEC 22989:2022 Clause 3.]</em></p>
         </div>
       </section>
 
       <!-- Main Conclusion Section -->
       <section id="conclusion" class="content-text">
-        <h2>Conclusion</h2>
-        <p>This handbook has provided a comprehensive primer on AI Governance, Safety, Trust/Transparency, Responsible AI, and Risk – explaining key legal/regulatory frameworks and technical aspects, tailored to the needs of AI practitioners, compliance officers, executives, and policymakers. As organizations navigate the complex landscape of AI, they must align on terminology and goals (hence the glossary) and collaborate across roles: developers building safe and explainable systems, compliance ensuring laws and ethics are met, executives setting direction and culture, and policymakers creating an environment that rewards responsible innovation. By assessing their maturity in various facets of AI governance using the frameworks presented and following best practices at each stage, organizations can steadily improve. The ultimate aim is to harness the power of AI in a way that is responsible, trustworthy, and aligned with societal values, thereby unlocking AI’s benefits while managing its risks.</p>
+        <h2>Looking Forward</h2>
+        <p>This handbook has provided a comprehensive primer on AI Governance, Safety, Trust/Transparency, Responsible AI, and Risk – explaining key legal/regulatory frameworks and technical aspects tailored to the needs of AI practitioners, compliance officers, executives, and policymakers. As organizations navigate the complex landscape of AI, they must align on terminology and goals (hence the glossary) and collaborate across roles: developers building safe and explainable systems, compliance ensuring laws and ethics are met, executives setting direction and culture, and policymakers creating an environment that rewards responsible innovation. By assessing their maturity in various facets of AI governance using the frameworks presented and following best practices at each stage, organizations can steadily improve. The ultimate aim is to harness the power of AI in a way that is responsible, trustworthy, and aligned with societal values, thereby unlocking AI’s benefits while managing its risks. Nonetheless, a lot remains to be determined. Companies should use the need to build AI governance functions and capabilities as an opportunity to upskill, enable, and extend the knowledge of their current employees. Like cybersecurity, governance can involve teams regardless of their roles or job titles.</p>
       </section>
 
        <!-- About the Author Section -->
